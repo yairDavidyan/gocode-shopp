@@ -5,7 +5,7 @@ import './Style.css';
 
 function App() {
 
-  const products= [
+  const product= [
     {
       "id": 1,
       "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -166,10 +166,11 @@ function App() {
       "category": "women clothing",
       "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg"
     }
-]
+  ]
+
   return (
     <div><ProductFilter />
-      <Products products = {products}/>
+      <Products products = {product}/>
     </div>
   );
 }
