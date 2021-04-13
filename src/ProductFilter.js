@@ -1,4 +1,4 @@
-import './App.css';
+import './productFilter.css';
 
 
 function ProductFilter() {

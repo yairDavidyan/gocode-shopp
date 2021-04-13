@@ -1,15 +1,14 @@
 import ProductCard from './ProductCard.js';
-import './App.css';
+import './products.css';
 
+function Products(props) {
 
-function Prodacts() {
+  const { products } = props;
   return (
  <section className="Products">
-     <ProductCard/><ProductCard/><ProductCard/>
-     <ProductCard/><ProductCard/><ProductCard/>
-     <ProductCard/><ProductCard/><ProductCard/><ProductCard/>
+      {products.map(product => <ProductCard key={product.id} productCard={product} />)}
  </section> 
   );
 }
 
-export default Prodacts;
+export default Products;

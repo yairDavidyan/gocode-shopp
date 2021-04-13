@@ -1,22 +1,21 @@
 import './ProductCard.js';
-import './App.css';
+import './productCard.css';
 
 
-function ProductCard() {
-    
-  async function title() {
-    let res = await fetch("https://fakestoreapi.com/products");
-
-    let json = await res.json();
-
-    console.log(json);
-  }
-  title();
-  const listItems = json.map((number) =>
-    <li>{number}</li>
-  );
+function ProductCard(props) {
+  const { productCard } = props;
   return (
-    <ul>{listItems}</ul>
+    <div className="product-card">
+    <div className="product-image">
+        <img src={productCard.image}
+          alt={productCard.title} title={productCard.description} />
+    </div>
+    <div className="product-info">
+    <h5>{productCard.title}</h5>
+    <h6>{productCard.price}</h6>
+    </div>
+  </div>
   );
 }
+
 export default ProductCard;
