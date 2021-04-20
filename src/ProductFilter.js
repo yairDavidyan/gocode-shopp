@@ -10,6 +10,7 @@ function ProductFilter({ categories ,changeDisplay}) {
       <div className="collection-sort">
         <label>Filter by:</label>
           <select onChange={(e)=>changeDisplay(e.target.value)}>
+           <option value="all products">All</option>
           <option value="men clothing">{categories[0]}</option>
           <option value="jewelery">{categories[1]}</option>
           <option value="electronics">{categories[2]}</option>

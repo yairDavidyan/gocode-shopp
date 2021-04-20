@@ -2,7 +2,7 @@ import './ProductCard.js';
 import './productCard.css';
 
 
-function ProductCard({id,title,price,image,description}) {
+function ProductCard({title,price,image,description}) {
 
   return (
     <div className="product-card">

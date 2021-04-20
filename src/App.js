@@ -4,7 +4,6 @@ import Products from './Products.js';
 import './Style.css';
 import { useState } from 'react';
 
-
 function App() {
 
   let products = [
@@ -204,10 +203,15 @@ function App() {
   }, {});
   const categories = Object.keys(groupBy(products, 'category'));
   
-  function changeDisplay( ) {
-  const filterProducts = products.filter(prod=> prod.category === categories )
-  products = filterProducts.slice();
-  setProducts(filterProducts);
+  function changeDisplay(category) {
+  
+    if (category === "all products") {
+      setProducts([...products]);
+    } else {
+      setProducts(
+        products.filter(prod => prod.category === category)
+      );
+    }
   }
   
   return (
