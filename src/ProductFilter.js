@@ -1,7 +1,7 @@
 import './productFilter.css';
 
+function ProductFilter({ categories ,changeDisplay}) {
 
-function ProductFilter() {
   return (
     <nav className="ProductFilter">
     <h1>Jackets</h1>
@@ -9,15 +9,11 @@ function ProductFilter() {
     <div className="sort">
       <div className="collection-sort">
         <label>Filter by:</label>
-        <select>
-          <option value="/">All Jackets</option>
-          <option value="/">2016</option>
-          <option value="/">jacket</option>
-          <option value="/">Jackets</option>
-          <option value="/">layers</option>
-          <option value="/">Obermeyer</option>
-          <option value="/">Roxy</option>
-          <option value="/">womens</option>
+          <select onChange={(e)=>changeDisplay(e.target.value)}>
+          <option value="men clothing">{categories[0]}</option>
+          <option value="jewelery">{categories[1]}</option>
+          <option value="electronics">{categories[2]}</option>
+          <option value="women clothing">{categories[3]}</option>
         </select>
       </div>
 
