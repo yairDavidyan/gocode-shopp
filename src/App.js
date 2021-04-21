@@ -1,7 +1,6 @@
 import './App.css';
-import ProductFilter from './ProductFilter.js';
-import Products from './Products.js';
-import './Style.css';
+import ProductFilter from './components/ProductFilter.js';
+import Products from './components/Products.js';
 import { useState } from 'react';
 
 function App() {
