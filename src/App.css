@@ -150,8 +150,8 @@ table {
 
 body {
   margin: 0 auto;
-  width: 90%;
-  max-width: 1240px;
+  width: 95%;
+  max-width: 1350px;
   font-family: "Roboto", sans-serif;
   background-color: #f6f6f6;
 }
@@ -173,6 +173,14 @@ h6 {
   color: #666;
   font-size: 14px;
 }
+.shoppingCart {
+  color: black;
+  font-size: 25px;
+  text-align: center;
+  height: 70px;
+  background-color: rgb(216, 206, 206);
+  border: 2px solid black;
+}
 
 /* Product Layout */
 
@@ -193,4 +201,47 @@ h6 {
 
 .collection-sort:first-child {
   padding-right: 20px;
+}
+.divContainer {
+  display: flex;
+}
+.lds-circle {
+  display: inline-block;
+  transform: translateZ(1px);
+}
+.lds-circle > div {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  background: rgb(202, 46, 46);
+  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.cardShop {
+  background-color: rgb(230 230 230);
+  height: 600px;
+  /* overflow: auto; */
+  min-width: 450px;
+  max-width: 500px;
+  margin-right: 14px;
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+@keyframes lds-circle {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
 }

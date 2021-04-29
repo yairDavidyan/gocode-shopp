@@ -8,7 +8,7 @@ function ProductFilter({ categories ,changeDisplay}) {
 
     <div className="sort">
       <div className="collection-sort">
-        <label>Filter by:</label>
+        <label className="lableApp">Filter by:</label>
           <select onChange={(e)=>changeDisplay(e.target.value)}>
            <option value="all products">All</option>
             {categories.map(categories => <option value={categories}>{categories}</option>)}
@@ -16,7 +16,7 @@ function ProductFilter({ categories ,changeDisplay}) {
         </div>
         
       <div className="collection-sort">
-        <label>Sort by:</label>
+        <label className="lableApp">Sort by:</label>
         <select>
           <option value="/">Featured</option>
           <option value="/">Best Selling</option>

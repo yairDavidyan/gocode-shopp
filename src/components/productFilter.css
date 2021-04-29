@@ -11,7 +11,7 @@
     align-self: flex-start;
   }
 }
-label {
+.lableApp {
   color: #666;
   font-size: 10px;
   font-weight: 500;
