@@ -38,7 +38,7 @@ const categories = Object.keys(groupBy(products, 'category'));
       <div>
         <Header categories={categories} changeDisplay={changeDisplay} />
           <div className="divContainer" >
-                <div >
+                <div>
                   <Cart/>
                 </div>
                 {isShown && <Load />}

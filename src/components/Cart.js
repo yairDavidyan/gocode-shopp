@@ -29,7 +29,7 @@ function Cart() {
   // }
     return (
       <>
-       
+       <div style={{    position: 'sticky'  ,top: '20px'}}>
         <span style={{ fontSize: '35px' ,color: '#4f6dc2'}}>Shopping Cart</span>
         
         <div className="shopping-cart">
@@ -67,7 +67,7 @@ function Cart() {
             
           </div>
           
-          <div>
+          <div className="containerTotal">
                     
         
                         <div className="totals">
@@ -93,6 +93,7 @@ function Cart() {
               <button className="checkout">payment</button>
           </div>
 
+          </div>
           </div>
             </>
     );

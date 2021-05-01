@@ -96,6 +96,9 @@ label {
 .column-labels {
   margin: -15px 15px 0px 0px;
 }
+.containerTotal {
+  padding-right: 15px;
+}
 .product .product-image {
   text-align: center;
 }
