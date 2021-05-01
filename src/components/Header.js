@@ -1,10 +1,10 @@
-import './productFilter.css';
+import './header.css';
 
-function ProductFilter({ categories ,changeDisplay}) {
+function Header({ categories ,changeDisplay}) {
 
   return (
     <nav className="ProductFilter">
-    <h1>Jackets</h1>
+    <h1 className="HeaderH1">on line <br/> shopping</h1>
 
     <div className="sort">
       <div className="collection-sort">
@@ -34,4 +34,4 @@ function ProductFilter({ categories ,changeDisplay}) {
   );
 }
 
-export default ProductFilter;
+export default Header;

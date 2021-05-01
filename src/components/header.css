@@ -11,6 +11,18 @@
     align-self: flex-start;
   }
 }
+
+.HeaderH1 {
+  font-size: 35px;
+  display: flex;
+  justify-content: left;
+  font-family: cursive;
+  color: #050872;
+  background: -webkit-linear-gradient(rgb(243, 8, 8), rgb(10, 10, 10));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 1px 30px;
+}
 .lableApp {
   color: #666;
   font-size: 10px;
@@ -21,6 +33,15 @@
 .ProductFilter {
   display: flex;
   padding: 30px 0;
+  height: 78px;
+  border: 1px solid #e8e6e6;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #e8e6e6;
+  border-bottom-width: 1px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .sort {

@@ -3,36 +3,33 @@ import CartContext from "./CartContext";
 import './Cart.css'
 
 function Cart() {
-
-
   const { items } = useContext(CartContext);
-  const { setItems } = useContext(CartContext);
-  const { setCount } = useContext(CartContext);
+  // const { count, setItems } = useContext(CartContext);
   
 
-  function del(prev, product) {
-    
-    // setCount(parev => console.log("fdfsd"));
-    var removeIndex = prev.map(item => item.id)
-    .indexOf(product.id);
-    return prev.splice(removeIndex, 1);
-}
+  // function del(prev, product) {
 
-  function deleteCart(product) {
    
-    setItems(prev => {
-      return prev.map(item =>
-          //Looking for the item to delete
-        item.id === product.id ?
-          del(prev, product)
-          :item
+  //   var removeIndex = prev.map(item => item.id)
+  //     .indexOf(product.id);
+  //   return prev.splice(removeIndex, 1);
+  // }
+
+  // function deleteCart(product) {
+  //   setItems(prev => {
+  //     return prev.map(item =>
+  //         //Looking for the item to delete
+  //       item.id === product.id ?
+  //         del(prev, product)
+  //         :item
           
-        );
-      }
-    );
-  }
+  //       );
+  //     }
+  //   );
+  // }
     return (
-        <>
+      <>
+       
         <span style={{ fontSize: '35px' ,color: '#4f6dc2'}}>Shopping Cart</span>
         
         <div className="shopping-cart">
@@ -42,9 +39,10 @@ function Cart() {
             <label className="product-details">Product</label>
             <label className="product-price">Price</label>
             <label className="product-quantity">Quantity</label>
-            <label className="product-removal">Remove</label>
+            {/* <label className="product-removal">Remove</label> */}
             <label className="product-line-price">Total</label>
           </div>
+          <div className="cardShop">
         
                     {items.map((el) =>
                         <div className="product">
@@ -59,16 +57,20 @@ function Cart() {
                             <div className="product-quantity">
                                 <input  type="number" value={el.amount} min="1" />
                             </div>
-                            <div className="product-removal">
+                            {/* <div className="product-removal">
                                 <button onClick={()=>deleteCart(el)} className="remove-product">
                                     Remove
                             </button>
-                            </div>
+                            </div> */}
                             <div className="product-line-price">{el.price * el.amount}</div>
-                        </div>)}
+                      </div>)}
+            
+          </div>
+          
+          <div>
                     
         
-          <div className="totals">
+                        <div className="totals">
             {/* <div class="totals-item">
               <label>Subtotal</label>
               <div class="totals-value" id="cart-subtotal">71.97</div>
@@ -89,6 +91,8 @@ function Cart() {
             </div>
           </div>
               <button className="checkout">payment</button>
+          </div>
+
           </div>
             </>
     );

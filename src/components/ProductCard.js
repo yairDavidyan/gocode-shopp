@@ -5,8 +5,8 @@ import CartContext from "./CartContext";
 function ProductCard({title, price, image, description, product }) {
   
   const { setItems } = useContext(CartContext);
-  const [ count, setCount ] = useState(0);
-
+  const [count, setCount] = useState(0);
+  
   function addCart()
   {
     setCount(prev=> prev + 1);

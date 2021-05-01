@@ -8,15 +8,15 @@
 }
 .product-details {
   float: left;
-  width: 37%;
+  width: 40%;
 }
 .product-price {
   float: left;
-  width: 12%;
+  width: 15%;
 }
 .product-quantity {
   float: left;
-  width: 10%;
+  width: 13%;
 }
 .product-removal {
   float: left;
@@ -75,8 +75,7 @@ h1 {
 label {
   color: #aaa;
 }
-.shopping-cart {
-}
+
 /* Column headers */
 .column-labels label {
   padding-bottom: 10px;
@@ -94,6 +93,9 @@ label {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
+.column-labels {
+  margin: -15px 15px 0px 0px;
+}
 .product .product-image {
   text-align: center;
 }
@@ -101,16 +103,16 @@ label {
   width: 100px;
 }
 .product .product-details .product-title {
-  margin-right: 20px;
+  margin-right: 15px;
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-  margin-left: 5px;
+  margin-left: 19px;
 }
 .product .product-details .product-description {
-  margin: 5px 20px 0px 6px;
-  line-height: 1.2em;
+  margin: 5px 3px 0px 18px;
+  line-height: 1.1em;
   color: #634ece;
   text-align: justify;
-  font-size: 10px;
+  font-size: 9px;
 }
 .product .product-quantity input {
   width: 40px;
@@ -148,6 +150,15 @@ label {
 }
 .totals .totals-item-total {
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+.cardShop {
+  height: 400px;
+  overflow: auto;
+  min-width: 450px;
+  max-width: 500px;
+  margin-right: 14px;
+  padding-right: 6px;
+  padding-left: 6px;
 }
 
 .checkout {

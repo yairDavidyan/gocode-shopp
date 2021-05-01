@@ -218,16 +218,6 @@ h6 {
   background: rgb(202, 46, 46);
   animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
-.cardShop {
-  background-color: rgb(230 230 230);
-  height: 600px;
-  /* overflow: auto; */
-  min-width: 450px;
-  max-width: 500px;
-  margin-right: 14px;
-  padding-right: 6px;
-  padding-left: 6px;
-}
 
 @keyframes lds-circle {
   0%,
