@@ -93,6 +93,13 @@ label {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
+.cartFixed {
+  margin-right: 17px;
+  background-color: #e8e6e6;
+  border-radius: 9px;
+  position: sticky;
+  top: 20px;
+}
 .column-labels {
   margin: -15px 15px 0px 0px;
 }
@@ -153,6 +160,7 @@ label {
 }
 .totals .totals-item-total {
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  margin-top: 10px;
 }
 .cardShop {
   height: 400px;

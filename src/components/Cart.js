@@ -29,8 +29,8 @@ function Cart() {
   // }
     return (
       <>
-       <div style={{    position: 'sticky'  ,top: '20px'}}>
-        <span style={{ fontSize: '35px' ,color: '#4f6dc2'}}>Shopping Cart</span>
+       <div className="cartFixed">
+        <span style={{ fontSize: '23px' ,color: 'rgb(126 127 130)' ,marginLeft :'40px'}}>Shopping Cart</span>
         
         <div className="shopping-cart">
         
@@ -89,9 +89,12 @@ function Cart() {
                 {items.reduce((acc, curr) => acc + curr.price * curr.amount, 0).toFixed(2)}
               </div>
             </div>
-          </div>
-              <button className="checkout">payment</button>
-          </div>
+              </div>
+              <div style={{borderBottom: '3px solid #eee'}}>
+                <button style={{ marginBottom: '15px' }} className="checkout">payment</button>
+                </div>
+              </div>
+              
 
           </div>
           </div>

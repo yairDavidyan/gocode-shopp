@@ -24,6 +24,9 @@
   border-radius: 999px;
   position: relative;
 }
+.product-info .hh6::before {
+  content: "$";
+}
 .minus-button {
   border: 2px solid rgb(245, 212, 212);
   background-color: #fff;
