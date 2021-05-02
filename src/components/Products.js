@@ -13,7 +13,8 @@ function Products({products}) {
           description={product.description}
           category={product.category}
           price={product.price}
-          product={product}   
+          product={product}
+          amount={product.amount}
         />
       ))}
     </section> 

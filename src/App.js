@@ -19,7 +19,7 @@ const groupBy = (xs, key) => xs.reduce((rv, x) => {
   (rv[x[key]] = true || []);
   return rv;
 }, {});
-
+console.log(items);
 const categories = Object.keys(groupBy(products, 'category'));
 
   useEffect(() => {
@@ -32,9 +32,9 @@ const categories = Object.keys(groupBy(products, 'category'));
   function changeDisplay(category) {
     setFilter(products.filter(el=> (el.category === category) ||(category === "all products")));
   }
-  
+
   return (
-    <CartContext.Provider value={{items ,setItems,isShown,setShown,setCount,filterList}}>
+    <CartContext.Provider value={{filterList,items,setFilter ,setItems,isShown,setShown,setCount,filterList}}>
       <div>
         <Header categories={categories} changeDisplay={changeDisplay} />
           <div className="divContainer" >

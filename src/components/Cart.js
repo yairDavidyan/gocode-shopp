@@ -4,7 +4,18 @@ import './Cart.css'
 
 function Cart() {
   const { items } = useContext(CartContext);
-  // const { count, setItems } = useContext(CartContext);
+   const { count, setItems } = useContext(CartContext);
+
+
+  function amountChange(val,e) {
+    
+    setItems(prev => {return prev.map(item =>
+          item.id === val.id 
+            ? { ...item, amount: +e.target.value }
+            : item
+        );
+    });
+  }
   
 
   // function del(prev, product) {
@@ -55,7 +66,7 @@ function Cart() {
                             </div>
                             <div className="product-price">{el.price}</div>
                             <div className="product-quantity">
-                                <input  type="number" value={el.amount} min="1" />
+                                <input onChange={(e)=>amountChange(el,e)}  type="number" value={el.amount} min="1" />
                             </div>
                             {/* <div className="product-removal">
                                 <button onClick={()=>deleteCart(el)} className="remove-product">

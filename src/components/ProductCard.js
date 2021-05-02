@@ -2,14 +2,26 @@ import './productCard.css';
 import { useContext, useState } from 'react';
 import CartContext from "./CartContext";
 
-function ProductCard({title, price, image, description, product }) {
+function ProductCard({title, price, image, description, product,amount }) {
   
-  const { setItems } = useContext(CartContext);
+  const { setItems ,setFilter } = useContext(CartContext);
   const [count, setCount] = useState(0);
+
+  
   
   function addCart()
   {
-    setCount(prev=> prev + 1);
+    // setFilter(prev => {
+
+      
+    //   return prev.map(item =>
+    //     item.id === product.id
+    //       ? { ...item,amount: item.amount }
+    //       :item
+    //       );
+    // });
+    setCount(prev => prev + 1);
+
     setItems(prev => {
       const isFound = prev.find(item => item.id === product.id);
 
