@@ -1,5 +1,5 @@
 .lds-circle {
-  display: inline-block;
+  /* display: inline-block; */
   transform: translateZ(1px);
 }
 .lds-circle > div {

@@ -11,7 +11,6 @@ import Load from './components/Load';
 function App() {
   const [products, setProducts] = useState([]);
   const [filterList, setFilter] = useState([]);
-    const [ count, setCount ] = useState(0);
   const [isShown, setShown] = useState(true);
   const [items, setItems] = useState([]);
   
@@ -19,8 +18,8 @@ const groupBy = (xs, key) => xs.reduce((rv, x) => {
   (rv[x[key]] = true || []);
   return rv;
 }, {});
-console.log(items);
 const categories = Object.keys(groupBy(products, 'category'));
+
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -32,9 +31,8 @@ const categories = Object.keys(groupBy(products, 'category'));
   function changeDisplay(category) {
     setFilter(products.filter(el=> (el.category === category) ||(category === "all products")));
   }
-
   return (
-    <CartContext.Provider value={{filterList,items,setFilter ,setItems,isShown,setShown,setCount,filterList}}>
+    <CartContext.Provider value={{items,setFilter,setItems,isShown,setShown,filterList}}>
       <div>
         <Header categories={categories} changeDisplay={changeDisplay} />
           <div className="divContainer" >
@@ -46,7 +44,6 @@ const categories = Object.keys(groupBy(products, 'category'));
             </div>
         </div>
       </CartContext.Provider>
-   
   );
 }
 export default App;

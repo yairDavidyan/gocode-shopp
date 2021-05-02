@@ -4,15 +4,28 @@ import './Cart.css'
 
 function Cart() {
   const { items } = useContext(CartContext);
-   const { count, setItems } = useContext(CartContext);
+   const { setItems ,setFilter} = useContext(CartContext);
 
+  function del(array,val) {
+    setFilter(prev => {
+      return prev.map((el) =>
+        el.id === val.id ?
+          { ...el, amount:0 }
+        :el
+        );
+      });
+
+    var removeIndex = array.map(item => item.id).indexOf(val.id);
+    return array.splice(removeIndex, 1);
+}
 
   function amountChange(val,e) {
-    
     setItems(prev => {return prev.map(item =>
-          item.id === val.id 
-            ? { ...item, amount: +e.target.value }
-            : item
+      item.id === val.id
+        ? e.target.value > 0
+          ? { ...item, amount: +e.target.value }
+          : del(prev, val)  
+        :  item
         );
     });
   }
@@ -66,7 +79,7 @@ function Cart() {
                             </div>
                             <div className="product-price">{el.price}</div>
                             <div className="product-quantity">
-                                <input onChange={(e)=>amountChange(el,e)}  type="number" value={el.amount} min="1" />
+                                <input onChange={(e)=>amountChange(el,e)}  type="number" value={el.amount} min="0" />
                             </div>
                             {/* <div className="product-removal">
                                 <button onClick={()=>deleteCart(el)} className="remove-product">
@@ -113,5 +126,4 @@ function Cart() {
     );
             
 }
-
 export default Cart;

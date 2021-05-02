@@ -5,7 +5,6 @@ function Header({ categories ,changeDisplay}) {
   return (
     <nav className="ProductFilter">
     <h1 className="HeaderH1">on line <br/> shopping</h1>
-
     <div className="sort">
       <div className="collection-sort">
         <label className="lableApp">Filter by:</label>

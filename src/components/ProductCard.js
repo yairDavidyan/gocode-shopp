@@ -1,32 +1,31 @@
 import './productCard.css';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CartContext from "./CartContext";
 
 function ProductCard({title, price, image, description, product,amount }) {
   
   const { setItems ,setFilter } = useContext(CartContext);
-  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setFilter(prev => {
+      return prev.map((el) =>
+        el.id ?
+          { ...el, amount: 0 }
+          : el
+      );
+    });
+  }, []);
 
-  
-  
-  function addCart()
-  {
-    // setFilter(prev => {
-
-      
-    //   return prev.map(item =>
-    //     item.id === product.id
-    //       ? { ...item,amount: item.amount }
-    //       :item
-    //       );
-    // });
-    setCount(prev => prev + 1);
-
+  function addCart() {
+    setFilter(prev => { return prev.map(item =>
+        item.id === product.id
+          ?{...item, amount: item.amount +1}              
+          :item
+          );
+    });
     setItems(prev => {
       const isFound = prev.find(item => item.id === product.id);
-
       if (isFound) {
-        return prev.map(item =>
+          return prev.map(item =>
           item.id === product.id
             ? { ...item, amount: item.amount + 1 }
             : item
@@ -36,17 +35,17 @@ function ProductCard({title, price, image, description, product,amount }) {
     });
   }
 
-  function del(prev,product) {
-    var removeIndex = prev.map(item => item.id)
-    .indexOf(product.id);
-    return prev.splice(removeIndex, 1);
-}
-
   function deleteCart() {
-    setCount(prev => prev !== 0 ? prev - 1 : prev = 0);
-   
+        
+    setFilter(prev => { return prev.map(item =>
+         item.id === product.id
+          ?product.amount > 0
+            ?{ ...item, amount: item.amount - 1 }
+          : item
+        :item
+           );
+     });
     setItems(prev => {
-
       return prev.map(item =>
           //Looking for the item to delete
         item.id === product.id ?
@@ -60,7 +59,10 @@ function ProductCard({title, price, image, description, product,amount }) {
     );
   }
 
-
+  function del(prev,product) {
+    var removeIndex = prev.map(item => item.id).indexOf(product.id);
+    return prev.splice(removeIndex, 1);
+}
   return (
     <div className="product-card">
         <div className="productImage">
@@ -71,7 +73,7 @@ function ProductCard({title, price, image, description, product,amount }) {
         <h6 className="hh6">{price}</h6>
         <div className="plusMinus" style={{display:'flex'}}>
           <button className="minus-button" onClick={deleteCart} >-</button>
-          <h3 style={{ margin: '12px 15px 13px 16px'}}>{count}</h3>
+          <h3 style={{ margin: '12px 15px 13px 16px'}}>{amount}</h3>
           <button className="plus-button" onClick={addCart}>+</button>
         </div>
       </div>
