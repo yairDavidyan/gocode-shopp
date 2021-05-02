@@ -15,6 +15,8 @@ function ProductCard({title, price, image, description, product,amount }) {
     });
   }, []);
 
+
+
   function addCart() {
     setFilter(prev => { return prev.map(item =>
         item.id === product.id
@@ -35,8 +37,9 @@ function ProductCard({title, price, image, description, product,amount }) {
     });
   }
 
+
+
   function deleteCart() {
-        
     setFilter(prev => { return prev.map(item =>
          item.id === product.id
           ?product.amount > 0
@@ -52,17 +55,12 @@ function ProductCard({title, price, image, description, product,amount }) {
              item.amount > 1  ?
             { ...item, amount: item.amount - 1 }
             //Deletes the item from the cart
-              : del(prev,product)
+              : prev.splice(prev.map(item => item.id).indexOf(product.id), 1)
             :item
         );
       }
     );
   }
-
-  function del(prev,product) {
-    var removeIndex = prev.map(item => item.id).indexOf(product.id);
-    return prev.splice(removeIndex, 1);
-}
   return (
     <div className="product-card">
         <div className="productImage">

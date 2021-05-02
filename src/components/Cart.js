@@ -3,54 +3,26 @@ import CartContext from "./CartContext";
 import './Cart.css'
 
 function Cart() {
-  const { items } = useContext(CartContext);
-   const { setItems ,setFilter} = useContext(CartContext);
-
-  function del(array,val) {
-    setFilter(prev => {
-      return prev.map((el) =>
-        el.id === val.id ?
-          { ...el, amount:0 }
-        :el
-        );
-      });
-
-    var removeIndex = array.map(item => item.id).indexOf(val.id);
-    return array.splice(removeIndex, 1);
-}
+   const { setItems ,setFilter,items} = useContext(CartContext);
 
   function amountChange(val,e) {
     setItems(prev => {return prev.map(item =>
       item.id === val.id
         ? e.target.value > 0
           ? { ...item, amount: +e.target.value }
-          : del(prev, val)  
+          : prev.splice(prev.map(item => item.id).indexOf(val.id), 1)  
         :  item
         );
     });
+    setFilter(prev => {
+      return prev.map((el) =>
+        el.id === val.id ?
+          { ...el, amount: val.amount-1 }
+        :el
+        );
+      });
   }
   
-
-  // function del(prev, product) {
-
-   
-  //   var removeIndex = prev.map(item => item.id)
-  //     .indexOf(product.id);
-  //   return prev.splice(removeIndex, 1);
-  // }
-
-  // function deleteCart(product) {
-  //   setItems(prev => {
-  //     return prev.map(item =>
-  //         //Looking for the item to delete
-  //       item.id === product.id ?
-  //         del(prev, product)
-  //         :item
-          
-  //       );
-  //     }
-  //   );
-  // }
     return (
       <>
        <div className="cartFixed">
