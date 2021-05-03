@@ -5,15 +5,6 @@ import CartContext from "./CartContext";
 function ProductCard({title, price, image, description, product,amount }) {
   const [bool, setBool] = useState(true);
   const {setItems ,setProducts } = useContext(CartContext);
-  useEffect(() => {
-    setProducts(prev => {
-      return prev.map((el) =>
-        el.id ?
-          { ...el, amount: 0 }
-          : el
-      );
-    });
-  }, []);
 
   function addCart() {
     setProducts(prev => { return prev.map(item =>
@@ -35,7 +26,6 @@ function ProductCard({title, price, image, description, product,amount }) {
     });
 
   }
-
 
 
   function deleteCart() {

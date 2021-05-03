@@ -19,6 +19,13 @@ function App() {
     fetch('https://fakestoreapi.com/products')
       .then(response => response.json())
       .then(data => (setProducts(data)))
+      .then(data=> setProducts(data => {
+        return data.map((el) =>
+          el.id ?
+            { ...el, amount: 0 }
+            : el
+        );
+      }))
       .then(setShown(false))
   }, []);
   
