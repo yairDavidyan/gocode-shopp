@@ -3,10 +3,10 @@ import { useContext, useEffect, useState } from 'react';
 import CartContext from "./CartContext";
 
 function ProductCard({title, price, image, description, product,amount }) {
-  
-  const { setItems ,setFilter } = useContext(CartContext);
+  const [bool, setBool] = useState(true);
+  const {setItems ,setProducts } = useContext(CartContext);
   useEffect(() => {
-    setFilter(prev => {
+    setProducts(prev => {
       return prev.map((el) =>
         el.id ?
           { ...el, amount: 0 }
@@ -15,10 +15,8 @@ function ProductCard({title, price, image, description, product,amount }) {
     });
   }, []);
 
-
-
   function addCart() {
-    setFilter(prev => { return prev.map(item =>
+    setProducts(prev => { return prev.map(item =>
         item.id === product.id
           ?{...item, amount: item.amount +1}              
           :item
@@ -35,15 +33,16 @@ function ProductCard({title, price, image, description, product,amount }) {
       }
       return [...prev, { ...product, amount: 1 }];
     });
+
   }
 
 
 
   function deleteCart() {
-    setFilter(prev => { return prev.map(item =>
+    setProducts(prev => { return prev.map(item =>
          item.id === product.id
           ?product.amount > 0
-            ?{ ...item, amount: item.amount - 1 }
+            ?{ ...item, amount: item.amount - 1 }  
           : item
         :item
            );
@@ -60,6 +59,7 @@ function ProductCard({title, price, image, description, product,amount }) {
         );
       }
     );
+    
   }
   return (
     <div className="product-card">
@@ -70,7 +70,7 @@ function ProductCard({title, price, image, description, product,amount }) {
           <h5>{title}</h5>
         <h6 className="hh6">{price}</h6>
         <div className="plusMinus" style={{display:'flex'}}>
-          <button className="minus-button" onClick={deleteCart} >-</button>
+          <button disabled={!bool} className="minus-button" onClick={deleteCart} >-</button>
           <h3 style={{ margin: '12px 15px 13px 16px'}}>{amount}</h3>
           <button className="plus-button" onClick={addCart}>+</button>
         </div>

@@ -3,7 +3,7 @@ import CartContext from "./CartContext";
 import './Cart.css'
 
 function Cart() {
-   const { setItems ,setFilter,items} = useContext(CartContext);
+   const {setItems ,setProducts,items} = useContext(CartContext);
 
   function amountChange(val,e) {
     setItems(prev => {return prev.map(item =>
@@ -14,15 +14,16 @@ function Cart() {
         :  item
         );
     });
-    setFilter(prev => {
+    setProducts(prev => {
       return prev.map((el) =>
         el.id === val.id ?
           { ...el, amount: val.amount-1 }
         :el
         );
-      });
-  }
+    });
   
+  }
+
     return (
       <>
        <div className="cartFixed">
@@ -65,12 +66,13 @@ function Cart() {
           
           <div className="containerTotal">
                     
-        
-                        <div className="totals">
-            {/* <div class="totals-item">
-              <label>Subtotal</label>
-              <div class="totals-value" id="cart-subtotal">71.97</div>
-            </div> */}
+            <div className="totals">
+            <div class="totals-item">
+              <label>Quantity</label>
+                  <div style={{float: 'right'}} class="" id="cart-subtotal">
+                  {items.reduce((total, curr) => total + curr.amount , 0)}
+                  </div>
+            </div>
             {/* <div class="totals-item">
               <label>Tax (5%)</label>
               <div class="totals-value" id="cart-tax">3.60</div>
@@ -82,7 +84,7 @@ function Cart() {
             <div className="totals-item totals-item-total">
               <label>Grand Total</label>
               <div className="totals-value" id="cart-total">
-                {items.reduce((acc, curr) => acc + curr.price * curr.amount, 0).toFixed(2)}
+                {items.reduce((total, curr) => total + curr.price * curr.amount, 0).toFixed(2)}
               </div>
             </div>
               </div>
@@ -90,7 +92,6 @@ function Cart() {
                 <button style={{ marginBottom: '15px' }} className="checkout">payment</button>
                 </div>
               </div>
-              
 
           </div>
           </div>

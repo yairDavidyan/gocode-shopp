@@ -7,40 +7,33 @@ import Cart from './components/Cart';
 import Load from './components/Load';
 
 
-
 function App() {
+  const [choice, setChoice] = useState("all products");
   const [products, setProducts] = useState([]);
-  const [filterList, setFilter] = useState([]);
   const [isShown, setShown] = useState(true);
   const [items, setItems] = useState([]);
-  
-const groupBy = (xs, key) => xs.reduce((rv, x) => {
-  (rv[x[key]] = true || []);
-  return rv;
-}, {});
-const categories = Object.keys(groupBy(products, 'category'));
+  const categories = products.map(p => p.category).filter((value, index, array) => array.indexOf(value)===index);
 
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(response => response.json())
-      .then(data => (setProducts(data), setFilter(data)))
+      .then(data => (setProducts(data)))
       .then(setShown(false))
   }, []);
-
-  function changeDisplay(category) {
-    setFilter(products.filter(el=> (el.category === category) ||(category === "all products")));
-  }
+  
   return (
-    <CartContext.Provider value={{items,setFilter,setItems,isShown,setShown,filterList}}>
+    <CartContext.Provider value={{items,setProducts,setItems,setShown}}>
       <div>
-        <Header categories={categories} changeDisplay={changeDisplay} />
+        <Header categories={categories} changeDisplay={(category)=>setChoice(category)} />
           <div className="divContainer" >
                 <div>
                   <Cart/>
                 </div>
                 {isShown && <Load />}
-              <Products products={filterList}  />
+              <Products products={products.filter(
+            (el) => el.category === choice || choice === "all products"
+          )}  />
             </div>
         </div>
       </CartContext.Provider>
