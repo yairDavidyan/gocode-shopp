@@ -1,11 +1,30 @@
 import './header.css';
+import Slider from '@material-ui/core/Slider';
+
+import { useContext, useState } from 'react';
+import CartContext from "./CartContext";
+
 
 function Header({ categories ,changeDisplay}) {
+  const { setItems, setProducts,products,sliderProduct,setValue,value } = useContext(CartContext);
+ 
+    const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
 
   return (
     <nav className="ProductFilter">
-    <h1 className="HeaderH1">on line <br/> shopping</h1>
-    <div className="sort">
+      <h1 className="HeaderH1">on line <br /> shopping</h1>
+      <Slider 
+        value={value}
+        max={1000}
+        onChange={handleChange}
+        valueLabelDisplay="on"
+        aria-labelledby="range-slider"
+      />
+      <div className="sort">
+    
       <div className="collection-sort">
         <label className="lableApp">Filter by:</label>
           <select onChange={(e)=>changeDisplay(e.target.value)}>
