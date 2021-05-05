@@ -9,7 +9,7 @@ function ProductCard({title, price, image, description, product,amount ,id}) {
   function addCart() {
     setProducts(prev => { return prev.map(item =>
         item.id === product.id
-          ?{...item, amount: item.amount +1}              
+          ?{...item, amount: item.amount + 1}              
           :item
           );
     });
@@ -26,30 +26,38 @@ function ProductCard({title, price, image, description, product,amount ,id}) {
     });
 
   }
-
-
   function deleteCart() {
-    setProducts(prev => { return prev.map(item =>
+
+    setProducts(prev => {
+     
+      return prev.map(item =>
          item.id === product.id
           ?product.amount > 0
             ?{ ...item, amount: item.amount - 1 }  
           : item
         :item
            );
-     });
+    });
+   
     setItems(prev => {
-      return prev.map(item =>
-          //Looking for the item to delete
-        item.id === product.id ?
-             item.amount > 1  ?
-            { ...item, amount: item.amount - 1 }
-            //Deletes the item from the cart
-              : prev.splice(prev.map(item => item.id).indexOf(product.id), 1)
-            :item
-        );
+      let index;
+      const find = prev.find(item => item.id === product.id);
+      if (find) {
+         index = prev.findIndex(x => x.id === find.id);
+      }
+      if (product.amount > 0) {
+        if (find.amount === 1) {
+          prev.splice(index, 1);
+          return prev;
+        } else {
+          prev[index].amount -= 1;
+          return prev;
+        }
+      } else {
+        return prev
+      }
       }
     );
-    
   }
   return (
     <>

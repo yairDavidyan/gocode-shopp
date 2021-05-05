@@ -3,6 +3,7 @@ import Slider from '@material-ui/core/Slider';
 
 import { useContext} from 'react';
 import CartContext from "./CartContext";
+import ImageHeader from './ImageHeader';
 
 
 function Header({ categories ,changeDisplay}) {
@@ -14,6 +15,8 @@ function Header({ categories ,changeDisplay}) {
 
 
   return (
+    <>
+          <ImageHeader/>
     <nav className="ProductFilter">
       <h1 className="HeaderH1">on line <br /> shopping</h1>
       <Slider 
@@ -47,7 +50,8 @@ function Header({ categories ,changeDisplay}) {
         </select>
       </div>
     </div>
-  </nav>
+      </nav>
+      </>
  
   );
 }

@@ -15,6 +15,8 @@ function App() {
   const [isShown, setShown] = useState(true);
   const [items, setItems] = useState([]);
   const [value, setValue] = useState([0, 1000]);
+
+ 
  
   const categories = products.map(p => p.category).filter((value, index, array) => array.indexOf(value) === index);
 
@@ -22,7 +24,7 @@ function App() {
     fetch('https://fakestoreapi.com/products')
       .then(response => response.json())
       .then(data => (setProducts(data)))
-      .then(data=> setProducts(data => {
+      .then(data => setProducts(data => {
         return data.map((el) =>
           el.id ?
             { ...el, amount: 0 }
@@ -33,6 +35,8 @@ function App() {
       
     
   }, []);
+  
+  console.log("products:",products);
 
   function changeDisplay(category) {  
     setChoice(category);
