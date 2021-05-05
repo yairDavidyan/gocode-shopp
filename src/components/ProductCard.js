@@ -1,9 +1,9 @@
 import './productCard.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import CartContext from "./CartContext";
+import { Link } from 'react-router-dom';
 
-function ProductCard({title, price, image, description, product,amount }) {
-  const [bool, setBool] = useState(true);
+function ProductCard({title, price, image, description, product,amount ,id}) {
   const {setItems ,setProducts } = useContext(CartContext);
 
   function addCart() {
@@ -52,7 +52,11 @@ function ProductCard({title, price, image, description, product,amount }) {
     
   }
   return (
-    <div className="product-card">
+    <>
+
+
+      <div className="product-card">
+        <button className="button"><span><Link to={`products/${id}`}>more</Link></span></button>
         <div className="productImage">
         <img src={image} alt={title} title={description} />
         </div>
@@ -60,12 +64,14 @@ function ProductCard({title, price, image, description, product,amount }) {
           <h5>{title}</h5>
         <h6 className="hh6">{price}</h6>
         <div className="plusMinus" style={{display:'flex'}}>
-          <button disabled={!bool} className="minus-button" onClick={deleteCart} >-</button>
+          <button  className="minus-button" onClick={deleteCart} >-</button>
           <h3 style={{ margin: '12px 15px 13px 16px'}}>{amount}</h3>
           <button className="plus-button" onClick={addCart}>+</button>
         </div>
       </div>
-    </div>
+        </div>
+      
+      </>
   );
 }
 

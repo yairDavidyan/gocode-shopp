@@ -7,6 +7,7 @@ function Products({products}) {
     <section className="Products">
       {products.map(product => (
         <ProductCard
+          id={product.id}
           key={product.id}
           image={product.image}
           title={product.title}

@@ -1,6 +1,10 @@
-import { useContext ,useState} from "react";
+import { useContext } from "react";
 import CartContext from "./CartContext";
 import './Cart.css'
+
+
+
+
 
 function Cart() {
    const {setItems ,setProducts,items} = useContext(CartContext);
@@ -41,7 +45,8 @@ function Cart() {
           </div>
           <div className="cardShop">
         
-                    {items.map((el) =>
+              {items.map((el) =>
+                      
                         <div className="product">
                             <div className="product-image">
                                 <img alt={el.title} src={el.image}  />
@@ -67,9 +72,9 @@ function Cart() {
           <div className="containerTotal">
                     
             <div className="totals">
-            <div class="totals-item">
+            <div className="totals-item">
               <label>Quantity</label>
-                  <div style={{float: 'right'}} class="" id="cart-subtotal">
+                  <div style={{float: 'right'}} className="" id="cart-subtotal">
                   {items.reduce((total, curr) => total + curr.amount , 0)}
                   </div>
             </div>
@@ -88,7 +93,9 @@ function Cart() {
               </div>
             </div>
               </div>
-              <div style={{borderBottom: '3px solid #eee'}}>
+              <div style={{ borderBottom: '3px solid #eee' }}>
+
+
                 <button style={{ marginBottom: '15px' }} className="checkout">payment</button>
                 </div>
               </div>

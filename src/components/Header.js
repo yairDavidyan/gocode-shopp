@@ -1,14 +1,14 @@
 import './header.css';
 import Slider from '@material-ui/core/Slider';
 
-import { useContext, useState } from 'react';
+import { useContext} from 'react';
 import CartContext from "./CartContext";
 
 
 function Header({ categories ,changeDisplay}) {
-  const { setItems, setProducts,products,sliderProduct,setValue,value } = useContext(CartContext);
- 
-    const handleChange = (event, newValue) => {
+  const {setValue, value} = useContext(CartContext);
+  
+  const handleChange = (even,newValue) => { 
     setValue(newValue);
   };
 
@@ -29,7 +29,7 @@ function Header({ categories ,changeDisplay}) {
         <label className="lableApp">Filter by:</label>
           <select onChange={(e)=>changeDisplay(e.target.value)}>
            <option value="all products">All</option>
-            {categories.map(categories => <option value={categories}>{categories}</option>)}
+            {categories.map(categories => <option value={categories} key={categories}>{categories}</option>)}
         </select>
         </div>
         
