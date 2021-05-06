@@ -19,27 +19,25 @@ function App() {
  
  
   const categories = products.map(p => p.category).filter((value, index, array) => array.indexOf(value) === index);
-
+  
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(response => response.json())
-      .then(data => (setProducts(data)))
-      .then(data => setProducts(data => {
+      .then(data => (setProducts(data), setValue([data.reduce((min, p) => p.price < min ? p.price : min, data[0].price),
+        data.reduce((max, p) => p.price > max ? p.price : max, data[0].price)])))
+      .then(data=>setProducts(data => {
         return data.map((el) =>
           el.id ?
             { ...el, amount: 0 }
             : el
         );
       }),)
-      .then(setShown(false))
-      
-    
+      .then(setShown(false))    
   }, []);
   
-  console.log("products:",products);
-
   function changeDisplay(category) {  
     setChoice(category);
+  
 }
 
   return (
@@ -57,10 +55,12 @@ function App() {
                 <div>
                   <Cart/>
                 </div>
-                {isShown && <Load />}
-              <Products products={products.filter(
-            (el) => (el.price >= value[0] && el.price <= value[1]) && (el.category === choice || choice === "all products" )
-          )}  />
+              {isShown ? <Load /> : (
+                <Products products={products.filter(
+                  (el) => ((el.category === choice || choice === "all products") &&
+                    (el.price >= value[0] && el.price <= value[1]))
+                )} />
+              )}
             </div>
           </div>
           </Route>

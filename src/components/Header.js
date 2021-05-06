@@ -4,22 +4,32 @@ import Slider from '@material-ui/core/Slider';
 import { useContext} from 'react';
 import CartContext from "./CartContext";
 import ImageHeader from './ImageHeader';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 function Header({ categories ,changeDisplay}) {
-  const {setValue, value} = useContext(CartContext);
+  const { setValue, value ,products} = useContext(CartContext);
+  
   
   const handleChange = (even,newValue) => { 
     setValue(newValue);
   };
+  const useStyles = makeStyles({
+    root: {
+      width: '30%',
+      margin: '40px 65px'
+    },
+  });
+  const classes = useStyles();
 
 
   return (
     <>
-          <ImageHeader/>
+          {/* <ImageHeader/> */}
     <nav className="ProductFilter">
       <h1 className="HeaderH1">on line <br /> shopping</h1>
-      <Slider 
+        <Slider
+        className={classes.root}
         value={value}
         max={1000}
         onChange={handleChange}
@@ -30,7 +40,7 @@ function Header({ categories ,changeDisplay}) {
     
       <div className="collection-sort">
         <label className="lableApp">Filter by:</label>
-          <select onChange={(e)=>changeDisplay(e.target.value)}>
+            <select onChange={(e) => changeDisplay(e.target.value)}>
            <option value="all products">All</option>
             {categories.map(categories => <option value={categories} key={categories}>{categories}</option>)}
         </select>

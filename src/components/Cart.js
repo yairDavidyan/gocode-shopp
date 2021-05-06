@@ -8,16 +8,40 @@ import './Cart.css'
 
 function Cart() {
    const {setItems ,setProducts,items} = useContext(CartContext);
-
+   let index;
   function amountChange(val,e) {
-    setItems(prev => {return prev.map(item =>
-      item.id === val.id
-        ? e.target.value > 0
-          ? { ...item, amount: +e.target.value }
-          : prev.splice(prev.map(item => item.id).indexOf(val.id), 1)  
-        :  item
-        );
-    });
+
+    setItems(prev => {
+      //find object in items In order to update amount
+      const find = prev.find(item => item.id === val.id);
+      if (find) {
+        //index the object in item 
+         index = prev.findIndex(x => x.id === find.id);
+      }
+      // if remove product in items
+        if (find.amount === 1 && find.amount > e.target.value) {
+          prev.splice(index, 1);
+          return prev;
+          /// if up amount
+        } else if (find.amount < e.target.value) {
+          prev[index].amount += 1;
+          return prev;
+        } // down amount
+          else {
+            prev[index].amount -= 1;
+            return prev;
+          }
+      }
+    );
+
+    // setItems(prev => {return prev.map(item =>
+    //   item.id === val.id
+    //     ? e.target.value > 0
+    //       ? { ...item, amount: +e.target.value }
+    //       : prev.splice(prev.map(item => item.id).indexOf(val.id), 1)  
+    //     :  item
+    //     );
+    // });
     setProducts(prev => {
       return prev.map((el) =>
         el.id === val.id ?
@@ -36,12 +60,12 @@ function Cart() {
         <div className="shopping-cart">
         
           <div className="column-labels">
-            <label className="product-image">Image</label>
-            <label className="product-details">Product</label>
-            <label className="product-price">Price</label>
-            <label className="product-quantity">Quantity</label>
+            <label className="product-image labal">Image</label>
+            <label className="product-details labal">Product</label>
+            <label className="product-price labal">Price</label>
+            <label className="product-quantity labal ">Quantity</label>
             {/* <label className="product-removal">Remove</label> */}
-            <label className="product-line-price">Total</label>
+            <label className="product-line-price labal">Total</label>
           </div>
           <div className="cardShop">
         

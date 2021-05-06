@@ -1,62 +1,48 @@
-
 import './imageHeader.css';
-
-
 function ImageHeader() {
-    var slideIndex = 0;
-   
-
-function showSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-    }
-    
-    slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
- 
-    }
-  //  showSlides();
-    
     return (
-        <>
-        <div className="slideshow-container">
-
-        <div className ="mySlides fade">
-          <div className="numbertext">1 / 3</div>
-                  <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c2hvcHBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" style={{ width:'100%'}} alt=""/>
-          <div className="text">Caption Text</div>
-        </div>
         
-        <div className="mySlides fade">
-          <div className="numbertext">2 / 3</div>
-          <img src="img_snow_wide.jpg" style={{ width:'100%'}} alt=""/>
-          <div className="text">Caption Two</div>
+        <div>
+            <section class='galeria'>
+                <input type="radio" id="uno" value="1" name="tractor" checked='checked' />
+                <input type="radio" id="dole" value="2" name="tractor" />
+                <inu type="radio" id="tele" value="3" name="tractor" />
+                <article class='card una'>
+                    <h2 class='entypo-tag'>Three Labels</h2>
+                    <p>Three Labels for each Input.<br />
+                        One for go back,<br />
+                        Another for go ahead,<br />
+                        The Last for recover it.</p>
+                        <label for='dole' class='entypo-left-bold otra'></label>
+    <label for='tele' class='entypo-right-bold otra'></label>
+    <label for='uno' class='entypo-arrows-ccw afin'></label>  
+                    
+                </article>
+  
+                <article class='card dos'>
+                    <h2 class='entypo-feather'>One Input to rule them all</h2>
+                    <p>In the Land of the Good Taste<br />
+                        where the Performers dwell.<br />
+                        One Input to rule them all,<br />
+                        One Input to find them.</p>
+                        <label for='dole' class='entypo-left-bold otra'></label>
+    <label for='tele' class='entypo-right-bold otra'></label>
+    <label for='uno' class='entypo-arrows-ccw afin'></label>  
+                </article>
+  
+                <article class='card tres'>
+                    <h2 class='entypo-address'>In the Land of Styles</h2>
+                    <p>One Input to bring them all<br />
+                        and in the Html bind them<br />
+                        In the Land of Styles<br />
+                        where the Css is the King.</p>
+                        <label for='dole' class='entypo-left-bold otra'></label>
+    <label for='tele' class='entypo-right-bold otra'></label>
+    <label for='uno' class='entypo-arrows-ccw afin'></label>  
+                </article>
+            </section>
         </div>
-        
-        <div className="mySlides fade">
-          <div className="numbertext">3 / 3</div>
-          <img src="img_mountains_wide.jpg" style={{ width:'100%'}} alt=""/>
-          <div className="text">Caption Three</div>
-        </div>
-        
-        </div>
-        <br/>
-        
-        <div style={{textAlign:'center'}}>
-          <span className="dot"></span> 
-          <span className="dot"></span> 
-          <span className="dot"></span> 
-            </div>
-            </>
     );
 }
+
 export default ImageHeader;

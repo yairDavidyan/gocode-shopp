@@ -42,8 +42,10 @@ function ProductCard({title, price, image, description, product,amount ,id}) {
     setItems(prev => {
       let index;
       const find = prev.find(item => item.id === product.id);
+      console.log(find);
       if (find) {
-         index = prev.findIndex(x => x.id === find.id);
+        index = prev.findIndex(x => x.id === find.id);
+        console.log(index);
       }
       if (product.amount > 0) {
         if (find.amount === 1) {
