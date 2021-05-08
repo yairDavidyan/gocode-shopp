@@ -12,18 +12,22 @@ import Information from './views/Information';
 function App() {
   const [choice, setChoice] = useState("all products");
   const [products, setProducts] = useState([]);
+  let [productsFilter, setProductsFilter] = useState([]);
   const [isShown, setShown] = useState(true);
   const [items, setItems] = useState([]);
-  const [value, setValue] = useState([0, 1000]);
+  const [value, setValue] = useState([]);
+  let [totalProducts, setTotalProducts] = useState([]);
+  let [totalFilter, setTotalFilter] = useState([]);
+  const [isCart, setIsCart] = useState(false);
 
- 
+
  
   const categories = products.map(p => p.category).filter((value, index, array) => array.indexOf(value) === index);
   
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(response => response.json())
-      .then(data => (setProducts(data), setValue([data.reduce((min, p) => p.price < min ? p.price : min, data[0].price),
+      .then(data => (setProducts(data),setTotalFilter(data.length),setTotalProducts(data.length),setProductsFilter(data), setValue([data.reduce((min, p) => p.price < min ? p.price : min, data[0].price),
         data.reduce((max, p) => p.price > max ? p.price : max, data[0].price)])))
       .then(data=>setProducts(data => {
         return data.map((el) =>
@@ -35,15 +39,19 @@ function App() {
       .then(setShown(false))    
   }, []);
   
+
+
   function changeDisplay(category) {  
     setChoice(category);
-  
-}
-
+    productsFilter= products.filter(el => el.category === category || category === "all products");
+    setValue(()=>[productsFilter.reduce((min, p) => p.price < min ? p.price : min, productsFilter[0].price), productsFilter.reduce((max, p) => p.price > max ? p.price : max, productsFilter[0].price)]);
+    setTotalProducts(productsFilter.length);
+    setTotalFilter(productsFilter.length);
+ 
+  }
+  console.log(items);
   return (
-    <CartContext.Provider value={{ products, items, setProducts, setItems, setValue, value }}>
-       
-      
+    <CartContext.Provider value={{isCart, setIsCart,totalFilter,  setTotalFilter,setTotalProducts, totalProducts, productsFilter, products, items, setProducts, setItems, setValue, value }}>
       <Switch>
         <Route path="/products/:id">
         <Information/>
@@ -69,5 +77,3 @@ function App() {
   );
 }
 export default App;
-//(category) => setValue([products.reduce((min, p) => p.category === category ? p.price < min ? p.price : min : min, products[0].price)
-//, products.reduce((max, p) => p.category === category? p.price > max ? p.price : max:max, products[0].price)])

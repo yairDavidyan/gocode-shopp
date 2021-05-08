@@ -64,7 +64,6 @@ function ProductCard({title, price, image, description, product,amount ,id}) {
   return (
     <>
 
-
       <div className="product-card">
         <button className="button"><span><Link to={`products/${id}`}>more</Link></span></button>
         <div className="productImage">
