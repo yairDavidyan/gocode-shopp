@@ -1,11 +1,10 @@
-import ProductCard from './ProductCard.js';
-import './products.css';
+import ProductCard from "./ProductCard.js";
+import "./products.css";
 
-function Products({products}) {
-  
+function Products({ products }) {
   return (
     <section className="Products">
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard
           id={product.id}
           key={product.id}
@@ -18,7 +17,7 @@ function Products({products}) {
           amount={product.amount}
         />
       ))}
-    </section> 
+    </section>
   );
 }
 

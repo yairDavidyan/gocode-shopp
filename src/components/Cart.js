@@ -1,91 +1,88 @@
 import { useContext } from "react";
 import CartContext from "./CartContext";
-import './Cart.css'
+import "./Cart.css";
 import { Button, makeStyles } from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
-
-
+import DeleteIcon from "@material-ui/icons/Delete";
 
 function Cart() {
-   const {setItems ,setProducts,items ,isCart,setIsCart} = useContext(CartContext);
+  const { setItems, setProducts, items, isCart, setIsCart } = useContext(
+    CartContext
+  );
   let index;
   const useStyles = makeStyles((theme) => ({
     button: {
-     // margin: theme.spacing(1),
-      marginTop: '50px'
+      // margin: theme.spacing(1),
+      marginTop: "50px",
     },
   }));
-  
-  
-    const classes = useStyles();
-  function amountChange(val,e) {
 
-    setItems(prev => {
+  const classes = useStyles();
+  function amountChange(val, e) {
+    setItems((prev) => {
       //find object in items In order to update amount
-      const find = prev.find(item => item.id === val.id);
+      const find = prev.find((item) => item.id === val.id);
       if (find) {
-        //index the object in item 
-         index = prev.findIndex(x => x.id === find.id);
+        //index the object in item
+        index = prev.findIndex((x) => x.id === find.id);
       }
       // if remove product in items
-        if (find.amount === 1 && find.amount > e.target.value) {
-          prev.splice(index, 1);
-          return prev;
-          /// if up amount
-        } else if (find.amount < e.target.value) {
-          prev[index].amount += 1;
-          console.log(prev);
-          return prev;
-        } // down amount
-          else {
-            prev[index].amount -= 1;
-            return prev;
-          }
+      if (find.amount === 1 && find.amount > e.target.value) {
+        prev.splice(index, 1);
+        return prev;
+        /// if up amount
+      } else if (find.amount < e.target.value) {
+        prev[index].amount += 1;
+        console.log(prev);
+        return prev;
+      } // down amount
+      else {
+        prev[index].amount -= 1;
+        return prev;
       }
-    );
-
-    setProducts(prev => {
-      return prev.map((el) =>
-        el.id === val.id ?
-          { ...el, amount: +e.target.value }
-        :el
-        );
     });
-  
+
+    setProducts((prev) => {
+      return prev.map((el) =>
+        el.id === val.id ? { ...el, amount: +e.target.value } : el
+      );
+    });
   }
   function deleteCart(el) {
-    setItems(prev => {
-      const find = prev.find(item => item.id === el.id);
+    setItems((prev) => {
+      const find = prev.find((item) => item.id === el.id);
       console.log("find: ", find);
       if (find) {
-        //index the object in item 
-        index = prev.findIndex(x => x.id === find.id);
+        //index the object in item
+        index = prev.findIndex((x) => x.id === find.id);
         console.log("index: ", index);
-
       }
       prev.splice(index, 1);
       console.log("prev: ", prev);
 
       return prev;
     });
-    setProducts(prev => {
+    setProducts((prev) => {
       return prev.map((item) =>
-        item.id === el.id ?
-          { ...item, amount: 0 }
-        :item
-        );
+        item.id === el.id ? { ...item, amount: 0 } : item
+      );
     });
-  
-    
   }
 
-    return (
-      <>
-        {isCart && <div className="cartFixed">
-          <span style={{ fontSize: '23px', color: 'rgb(126 127 130)', marginLeft: '40px' }}>Shopping Cart</span>
-        
+  return (
+    <>
+      {isCart && (
+        <div className="cartFixed">
+          <span
+            style={{
+              fontSize: "23px",
+              color: "rgb(126 127 130)",
+              marginLeft: "40px",
+            }}
+          >
+            Shopping Cart
+          </span>
+
           <div className="shopping-cart">
-        
             <div className="column-labels">
               <label className="product-image labal">Image</label>
               <label className="product-details labal">Product</label>
@@ -95,9 +92,7 @@ function Cart() {
               <label className="product-line-price labal">Total</label>
             </div>
             <div className="cardShop">
-        
-              {items.map((el) =>
-                      
+              {items.map((el) => (
                 <div className="product">
                   <div className="product-image">
                     <img alt={el.title} src={el.image} />
@@ -108,33 +103,41 @@ function Cart() {
                   </div>
                   <div className="product-price">{el.price}</div>
                   <div className="product-quantity">
-                    <input onChange={(e) => amountChange(el, e)} type="number" value={el.amount} min="0" />
+                    <input
+                      onChange={(e) => amountChange(el, e)}
+                      type="number"
+                      value={el.amount}
+                      min="0"
+                    />
                     <div className="product-removal">
-
                       <Button
-                          onClick={() => deleteCart(el)} 
-                          variant="contained"
-                          color="secondary"
-                          className={classes.button}
-                          startIcon={<DeleteIcon />}
-                        >
-                          Delete
-                        </Button>
-                  
+                        onClick={() => deleteCart(el)}
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </div>
 
-                  <div className="product-line-price">{el.price * el.amount}</div>
-                </div>)}
-            
+                  <div className="product-line-price">
+                    {el.price * el.amount}
+                  </div>
+                </div>
+              ))}
             </div>
-          
+
             <div className="containerTotal">
-                    
               <div className="totals">
                 <div className="totals-item">
                   <label>Quantity</label>
-                  <div style={{ float: 'right' }} className="" id="cart-subtotal">
+                  <div
+                    style={{ float: "right" }}
+                    className=""
+                    id="cart-subtotal"
+                  >
                     {items.reduce((total, curr) => total + curr.amount, 0)}
                   </div>
                 </div>
@@ -149,22 +152,25 @@ function Cart() {
                 <div className="totals-item totals-item-total">
                   <label>Grand Total</label>
                   <div className="totals-value" id="cart-total">
-                    {items.reduce((total, curr) => total + curr.price * curr.amount, 0).toFixed(2)}
+                    {items
+                      .reduce(
+                        (total, curr) => total + curr.price * curr.amount,
+                        0
+                      )
+                      .toFixed(2)}
                   </div>
                 </div>
               </div>
-              <div style={{ borderBottom: '3px solid #eee' }}>
-
-
-                <button style={{ marginBottom: '15px' }} className="checkout">payment</button>
+              <div style={{ borderBottom: "3px solid #eee" }}>
+                <button style={{ marginBottom: "15px" }} className="checkout">
+                  payment
+                </button>
               </div>
             </div>
-
           </div>
         </div>
-        }
-            </>
-    );
-            
+      )}
+    </>
+  );
 }
 export default Cart;

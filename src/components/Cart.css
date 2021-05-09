@@ -99,6 +99,7 @@ label {
   border-radius: 9px;
   position: sticky;
   top: 20px;
+  height: 100%;
 }
 .column-labels {
   margin: -15px 15px 0px 0px;
@@ -120,7 +121,7 @@ label {
 .product .product-details .product-description {
   margin: 5px 3px 0px 18px;
   line-height: 1.1em;
-  color: #634ece;
+  color: #f50057;
   text-align: justify;
   font-size: 9px;
 }

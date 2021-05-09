@@ -1,3 +1,13 @@
+h5 {
+  font-weight: 500;
+  line-height: 1.7em;
+}
+
+h6 {
+  color: #f50057;
+  font-size: 16px;
+  padding-top: 5px;
+}
 .product-card {
   display: flex;
   flex-direction: column;

@@ -1,6 +1,9 @@
 @media (max-width: 480px) {
   h1 {
     margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 300;
+    flex: 1;
   }
 
   .ProductFilter {
@@ -24,6 +27,9 @@
   color: white;
 }
 .HeaderH1 {
+  width: 0%;
+  height: 153%;
+  flex: 1;
   font-size: 35px;
   display: flex;
   justify-content: left;
@@ -32,7 +38,7 @@
   background: -webkit-linear-gradient(rgb(243, 8, 8), rgb(10, 10, 10));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  padding: 1px 30px;
+  margin: -24px 0px 0px 2px;
 }
 .lableApp {
   color: #666;
