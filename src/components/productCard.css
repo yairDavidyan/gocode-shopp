@@ -13,12 +13,14 @@
   width: 100%;
 }
 .plusMinus {
-  margin: 15px 10px 0px 22px;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
 }
 .plus-button {
-  border: 2px solid rgb(245, 212, 212);
+  border: 1px solid #f50057;
   background-color: #fff;
-  font-size: 18px;
+  font-size: 15px;
   height: 2.5em;
   width: 2.5em;
   border-radius: 999px;
@@ -28,9 +30,9 @@
   content: "$";
 }
 .minus-button {
-  border: 2px solid rgb(245, 212, 212);
+  border: 1px solid #f50057;
   background-color: #fff;
-  font-size: 18px;
+  font-size: 15px;
   height: 2.5em;
   width: 2.5em;
   border-radius: 999px;

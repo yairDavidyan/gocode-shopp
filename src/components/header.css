@@ -11,7 +11,18 @@
     align-self: flex-start;
   }
 }
-
+.filter-total {
+  display: flex;
+  background: #f50057;
+  padding: 7px 0px 7px 0px;
+  justify-content: center;
+  width: 100px;
+  border-radius: 7px;
+  margin-left: 184px;
+  margin-bottom: 31px;
+  font-weight: bold;
+  color: white;
+}
 .HeaderH1 {
   font-size: 35px;
   display: flex;

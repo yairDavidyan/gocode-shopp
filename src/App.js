@@ -21,7 +21,8 @@ function App() {
   const [isCart, setIsCart] = useState(false);
 
 
- 
+  console.log(products);
+
   const categories = products.map(p => p.category).filter((value, index, array) => array.indexOf(value) === index);
   
   useEffect(() => {
@@ -60,9 +61,9 @@ function App() {
       <div>
         <Header categories={categories} changeDisplay={changeDisplay} />
           <div className="divContainer" >
-                <div>
+                
                   <Cart/>
-                </div>
+                
               {isShown ? <Load /> : (
                 <Products products={products.filter(
                   (el) => ((el.category === choice || choice === "all products") &&

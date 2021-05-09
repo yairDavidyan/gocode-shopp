@@ -65,16 +65,18 @@ function ProductCard({title, price, image, description, product,amount ,id}) {
     <>
 
       <div className="product-card">
-        <button className="button"><span><Link to={`products/${id}`}>more</Link></span></button>
+        {/* <button className="button"><sp</button> */}
+        <Link to={`products/${id}`}>
         <div className="productImage">
         <img src={image} alt={title} title={description} />
-        </div>
+          </div>
+          </Link>
       <div className="product-info">
           <h5>{title}</h5>
         <h6 className="hh6">{price}</h6>
         <div className="plusMinus" style={{display:'flex'}}>
           <button  className="minus-button" onClick={deleteCart} >-</button>
-          <h3 style={{ margin: '12px 15px 13px 16px'}}>{amount}</h3>
+          <h3 style={{ marginTop: '9px'}}>{amount}</h3>
           <button className="plus-button" onClick={addCart}>+</button>
         </div>
       </div>

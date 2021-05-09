@@ -20,7 +20,8 @@ function Header({ categories ,changeDisplay}) {
   };
   const useStyles = makeStyles({
     root: {
-      width:  '500px;',
+      width: '500px;',
+      color: '#f50057'
     },
     
   });
@@ -33,7 +34,8 @@ function Header({ categories ,changeDisplay}) {
     
     },
     root: {
-      marginRight: '100px'
+      marginRight: '100px',
+      
     }
   }))(Badge);
   const classes = useStyles();
@@ -51,7 +53,7 @@ function Header({ categories ,changeDisplay}) {
       </StyledBadge>
     </IconButton>
         <div style={{paddingRight: '100px'}}>
-        <span style={{display: 'flex' ,paddingLeft: '250px', paddingBottom:'35px'}}>
+        <span className="filter-total">
           <h2>{totalFilter} / </h2>
           <h2>{totalProducts}</h2>
           </span>

@@ -34,6 +34,7 @@ function Cart() {
           /// if up amount
         } else if (find.amount < e.target.value) {
           prev[index].amount += 1;
+          console.log(prev);
           return prev;
         } // down amount
           else {
@@ -46,7 +47,7 @@ function Cart() {
     setProducts(prev => {
       return prev.map((el) =>
         el.id === val.id ?
-          { ...el, amount: val.amount-1 }
+          { ...el, amount: +e.target.value }
         :el
         );
     });
