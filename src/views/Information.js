@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import SentimentDissatisfiedIcon from "@material-ui/icons/SentimentDissatisfied";
@@ -12,16 +11,15 @@ import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAltO
 import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-
 import "./information.css";
-
 import React from "react";
 import Load from "../components/Load";
+import { Link } from "react-router-dom";
 
 function Information() {
   const { id } = useParams();
   const [bool, setBool] = useState(true);
-  const [infoProduct, setInfoProduct] = useState([]);
+  const [infoProduct, setInfoProduct] = useState({});
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
@@ -76,6 +74,14 @@ function Information() {
       ) : (
         <div class="product-card-information">
           <div class="badge-information">Hot</div>
+          <Link to="/">
+            {" "}
+            <i
+              class="fa fa-chevron-circle-left"
+              style={{ fontSize: "24px", color: "#fc2222" }}
+            ></i>{" "}
+          </Link>
+
           <div class="product-tumb-information">
             <img src={infoProduct.image} alt={infoProduct.title} />
           </div>

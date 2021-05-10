@@ -28,8 +28,8 @@
 }
 .HeaderH1 {
   width: 0%;
-  height: 153%;
-  flex: 1;
+  height: 64%;
+  flex: 1 1;
   font-size: 35px;
   display: flex;
   justify-content: left;
@@ -38,7 +38,7 @@
   background: -webkit-linear-gradient(rgb(243, 8, 8), rgb(10, 10, 10));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin: -24px 0px 0px 2px;
+  margin: 11px 0px 0px 0px;
 }
 .lableApp {
   color: #666;

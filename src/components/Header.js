@@ -5,7 +5,7 @@ import CartContext from "./CartContext";
 import { makeStyles } from "@material-ui/core/styles";
 import { Badge, IconButton, withStyles } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import logoOnLine from "../images/logoOnLine.png";
+import bali from "../images/bali.png";
 
 function Header({ categories, changeDisplay }) {
   let {
@@ -19,8 +19,10 @@ function Header({ categories, changeDisplay }) {
     setIsCart,
     isCart,
   } = useContext(CartContext);
+
   const handleChange = (even, newValue) => {
     setValue(() => newValue);
+    // update filter number product
     let select = document.querySelector(".selectCategory").value;
     totalFilter = products.filter(
       (el) =>
@@ -30,6 +32,7 @@ function Header({ categories, changeDisplay }) {
     );
     setTotalFilter(totalFilter.length);
   };
+
   const useStyles = makeStyles({
     root: {
       width: "500px;",
@@ -53,7 +56,7 @@ function Header({ categories, changeDisplay }) {
     <>
       <nav className="ProductFilter">
         <span className="HeaderH1">
-          <img src={logoOnLine} alt={"logo"}></img>
+          <img src={bali} alt={"logo"}></img>
         </span>
 
         <IconButton onClick={() => setIsCart(!isCart)} aria-label="cart">

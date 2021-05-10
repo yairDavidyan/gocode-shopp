@@ -2,6 +2,8 @@ import "./productCard.css";
 import { useContext } from "react";
 import CartContext from "./CartContext";
 import { Link } from "react-router-dom";
+import addLogo from "../images/addLogo.png";
+import minusLogo from "../images/minusLogo.png";
 
 function ProductCard({
   title,
@@ -65,7 +67,6 @@ function ProductCard({
   return (
     <>
       <div className="product-card">
-        {/* <button className="button"><sp</button> */}
         <Link to={`products/${id}`}>
           <div className="productImage">
             <img src={image} alt={title} title={description} />
@@ -75,12 +76,12 @@ function ProductCard({
           <h5>{title}</h5>
           <h6 className="hh6">{price}</h6>
           <div className="plusMinus" style={{ display: "flex" }}>
-            <button className="minus-button" onClick={deleteCart}>
-              -
+            <button className="plus-button" onClick={deleteCart}>
+              <img style={{ height: "70%" }} src={minusLogo}></img>
             </button>
-            <h3 style={{ marginTop: "9px" }}>{amount}</h3>
+            <h3 style={{ marginTop: "23px" }}>{amount}</h3>
             <button className="plus-button" onClick={addCart}>
-              +
+              <img style={{ height: "70%" }} src={addLogo}></img>
             </button>
           </div>
         </div>

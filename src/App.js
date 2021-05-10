@@ -56,9 +56,12 @@ function App() {
 
   function changeDisplay(category) {
     setChoice(category);
+
+    //get products by category
     productsFilter = products.filter(
       (el) => el.category === category || category === "all products"
     );
+    // set min-max value in slider by select category
     setValue(() => [
       productsFilter.reduce(
         (min, p) => (p.price < min ? p.price : min),
@@ -69,10 +72,11 @@ function App() {
         productsFilter[0].price
       ),
     ]);
+    // number product from all product category
     setTotalProducts(productsFilter.length);
     setTotalFilter(productsFilter.length);
   }
-  console.log(items);
+
   return (
     <CartContext.Provider
       value={{
@@ -92,10 +96,7 @@ function App() {
       }}
     >
       <Switch>
-        <Route path="/products/:id">
-          <Information />
-        </Route>
-        <Route exact path="/">
+        <Route path="/" exact>
           <div>
             <Header categories={categories} changeDisplay={changeDisplay} />
             <div className="divContainer">
@@ -114,6 +115,9 @@ function App() {
               )}
             </div>
           </div>
+        </Route>
+        <Route path="/products/:id">
+          <Information />
         </Route>
       </Switch>
     </CartContext.Provider>
