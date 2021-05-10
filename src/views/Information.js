@@ -19,12 +19,12 @@ import { Link } from "react-router-dom";
 function Information() {
   const { id } = useParams();
   const [bool, setBool] = useState(true);
-  const [infoProduct, setInfoProduct] = useState({});
+  const [detailsProduct, setDetailsProduct] = useState({});
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => res.json())
-      .then((data) => setInfoProduct(data))
+      .then((data) => setDetailsProduct(data))
       .then(setBool(false));
   }, []);
   const StyledRating = withStyles({
@@ -83,18 +83,18 @@ function Information() {
           </Link>
 
           <div class="product-tumb-information">
-            <img src={infoProduct.image} alt={infoProduct.title} />
+            <img src={detailsProduct.image} alt={detailsProduct.title} />
           </div>
           <div class="product-details-information">
             <span class="product-catagory-information">
-              {infoProduct.category}
+              {detailsProduct.category}
             </span>
             {/* <h4><a href="">Women leather bag</a></h4> */}
-            <p>{infoProduct.description}</p>
+            <p>{detailsProduct.description}</p>
             <div class="product-bottom-details-information">
               <div class="productPrice-information">
                 <small></small>
-                {infoProduct.price}
+                {detailsProduct.price}
               </div>
               <div class="product-links=information">
                 <Box component="fieldset" mb={3} borderColor="transparent">
