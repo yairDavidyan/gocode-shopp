@@ -18,14 +18,16 @@
   margin-top: 12px;
   display: flex;
   background: #f50057;
-  /* padding: 7px 0px 7px 0px; */
-  /* justify-content: center; */
-  width: fit-content;
+  padding: 3px 0px 4px 0px;
+  justify-content: center;
+  width: -moz-fit-content;
+  /* width: fit-content; */
   border-radius: 7px;
-  margin-left: 197px;
+  margin-left: 232px;
   margin-bottom: 7px;
   font-weight: bold;
   color: white;
+  width: 60px;
 }
 /* .HeaderH1 {
   width: 0%;
@@ -67,8 +69,8 @@
 }
 
 .container {
+  margin-top: 12px;
   max-width: 100%;
-  border: 2px solid black;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -95,6 +97,7 @@
 }
 .box5 {
   grid-column: 3/5;
+  margin-left: 12px;
 }
 
 @media (pointer: coarse) {

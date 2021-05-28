@@ -123,6 +123,7 @@ function Header({ categories, changeDisplay }) {
           {" "}
           <IconButton onClick={() => setIsCart(!isCart)} aria-label="cart">
             <StyledBadge
+              style={{ left: "45px", bottom: "auto", top: "35px" }}
               badgeContent={
                 items && items.reduce((total, curr) => total + curr.amount, 0)
               }

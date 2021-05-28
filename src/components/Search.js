@@ -28,6 +28,7 @@ function Search() {
     iconButton: {
       backgroundColor: "#f50057",
       marginRight: "5px",
+      padding: "6px",
     },
   }));
   const classes = useStyles();

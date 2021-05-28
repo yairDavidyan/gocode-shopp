@@ -101,7 +101,7 @@ function App() {
           <div>
             <Login />
             <Header categories={categories} changeDisplay={changeDisplay} />
-            <Timer />
+            {/* <Timer /> */}
             <div className="divContainer">
               <Cart />
               {isShown ? (
