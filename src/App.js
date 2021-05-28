@@ -7,6 +7,9 @@ import Cart from "./components/Cart";
 import Load from "./components/Load";
 import { Route, Switch } from "react-router";
 import Information from "./views/Information";
+import Timer from "./components/Timer";
+import Search from "./components/Search";
+import Login from "./components/Login";
 
 function App() {
   const [choice, setChoice] = useState("all products");
@@ -18,8 +21,6 @@ function App() {
   let [totalProducts, setTotalProducts] = useState([]);
   let [totalFilter, setTotalFilter] = useState([]);
   const [isCart, setIsCart] = useState(false);
-
-  console.log(products);
 
   const categories = products
     .map((p) => p.category)
@@ -98,7 +99,9 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <div>
+            <Login />
             <Header categories={categories} changeDisplay={changeDisplay} />
+            <Timer />
             <div className="divContainer">
               <Cart />
               {isShown ? (

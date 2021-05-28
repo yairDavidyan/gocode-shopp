@@ -5,9 +5,8 @@ import { Button, makeStyles } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 function Cart() {
-  const { setItems, setProducts, items, isCart, setIsCart } = useContext(
-    CartContext
-  );
+  const { setItems, setProducts, items, isCart, setIsCart } =
+    useContext(CartContext);
   let index;
   const useStyles = makeStyles((theme) => ({
     button: {
@@ -71,101 +70,82 @@ function Cart() {
   return (
     <>
       {isCart && (
-        <div className="cartFixed">
-          <span
-            style={{
-              fontSize: "23px",
-              color: "rgb(126 127 130)",
-              marginLeft: "40px",
-            }}
-          >
-            Shopping Cart
-          </span>
-
-          <div className="shopping-cart">
-            <div className="column-labels">
-              <label className="product-image labal">Image</label>
-              <label className="product-details labal">Product</label>
-              <label className="product-price labal">Price</label>
-              <label className="product-quantity labal ">Quantity</label>
-              {/* <label className="product-removal">Remove</label> */}
-              <label className="product-line-price labal">Total</label>
-            </div>
-            <div className="cardShop">
-              {items.map((el) => (
-                <div className="product">
-                  <div className="product-image">
-                    <img alt={el.title} src={el.image} />
-                  </div>
-                  <div className="product-details">
-                    <div className="product-title">{el.title}</div>
-                    <p className="product-description">{el.description}</p>
-                  </div>
-                  <div className="product-price">{el.price}</div>
-                  <div className="product-quantity">
-                    <input
-                      onChange={(e) => amountChange(el, e)}
-                      type="number"
-                      value={el.amount}
-                      min="0"
-                    />
-                    <div className="product-removal">
-                      <Button
-                        onClick={() => deleteCart(el)}
-                        variant="contained"
-                        color="secondary"
-                        className={classes.button}
-                        startIcon={<DeleteIcon />}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="product-line-price">
-                    {el.price * el.amount}
+        <div style={{ marginRight: "20px" }} className="shopping-cart">
+          <div className="titleCart">
+            <label className="labal1">Image</label>
+            <label className="labal1">Product</label>
+            <label className="labal1">Price</label>
+            <label className="labal1">Quantity</label>
+            <label className="labal1">Total</label>
+          </div>
+          <div className="cardShop">
+            {items.map((el) => (
+              <div className="product">
+                <div className="product-image">
+                  <img alt={el.title} src={el.image} />
+                </div>
+                <div className="product-details">
+                  <div className="product-title">{el.title}</div>
+                  {/* <p className="product-description">{el.description}</p> */}
+                </div>
+                <div className="product-price">{el.price}</div>
+                <div className="product-quantity">
+                  <input
+                    onChange={(e) => amountChange(el, e)}
+                    type="number"
+                    value={el.amount}
+                    min="0"
+                  />
+                  <div className="product-removal">
+                    <Button
+                      onClick={() => deleteCart(el)}
+                      variant="contained"
+                      color="secondary"
+                      className={classes.button}
+                      startIcon={<DeleteIcon />}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            <div className="containerTotal">
-              <div className="totals">
-                <div className="totals-item">
-                  <label>Quantity</label>
-                  <div
-                    style={{ float: "right" }}
-                    className=""
-                    id="cart-subtotal"
-                  >
-                    {items.reduce((total, curr) => total + curr.amount, 0)}
-                  </div>
+                <div className="product-line-price">{el.price * el.amount}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="containerTotal">
+            <div className="totals">
+              <div className="totals-item">
+                <label>Quantity</label>
+                <div style={{ float: "right" }} className="" id="cart-subtotal">
+                  {items.reduce((total, curr) => total + curr.amount, 0)}
                 </div>
-                {/* <div class="totals-item">
+              </div>
+              {/* <div class="totals-item">
               <label>Tax (5%)</label>
               <div class="totals-value" id="cart-tax">3.60</div>
             </div> */}
-                {/* <div class="totals-item">
+              {/* <div class="totals-item">
               <label>Shipping</label>
               <div class="totals-value" id="cart-shipping">15.00</div>
             </div> */}
-                <div className="totals-item totals-item-total">
-                  <label>Grand Total</label>
-                  <div className="totals-value" id="cart-total">
-                    {items
-                      .reduce(
-                        (total, curr) => total + curr.price * curr.amount,
-                        0
-                      )
-                      .toFixed(2)}
-                  </div>
+              <div className="totals-item totals-item-total">
+                <label>Grand Total</label>
+                <div className="totals-value" id="cart-total">
+                  {items
+                    .reduce(
+                      (total, curr) => total + curr.price * curr.amount,
+                      0
+                    )
+                    .toFixed(2)}
                 </div>
               </div>
-              <div style={{ borderBottom: "3px solid #eee" }}>
-                <button style={{ marginBottom: "15px" }} className="checkout">
-                  payment
-                </button>
-              </div>
+            </div>
+            <div style={{ borderBottom: "3px solid #eee" }}>
+              <button style={{ marginBottom: "15px" }} className="checkout">
+                payment
+              </button>
             </div>
           </div>
         </div>

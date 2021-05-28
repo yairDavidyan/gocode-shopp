@@ -111,12 +111,11 @@ label {
   text-align: center;
 }
 .product .product-image img {
-  width: 100px;
+  width: 80%;
 }
 .product .product-details .product-title {
-  margin-right: 15px;
+  margin-right: 20px;
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-  margin-left: 19px;
 }
 .product .product-details .product-description {
   margin: 5px 3px 0px 18px;
@@ -165,12 +164,27 @@ label {
 }
 .cardShop {
   height: 400px;
-  overflow: auto;
+  overflow-y: auto;
   min-width: 450px;
   max-width: 500px;
-  margin-right: 14px;
   padding-right: 6px;
-  padding-left: 6px;
+  margin-top: 12px;
+}
+.labal1 {
+  padding: 8px;
+  color: #0f0e0c;
+  font-size: 17px;
+  font-family: cursive;
+}
+
+.titleCart {
+  background: rgb(203, 203, 206);
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 0.5fr 1fr 1fr;
+  /* grid-column-gap: 1em; */
+  grid: gap 1em;
 }
 
 .checkout {
