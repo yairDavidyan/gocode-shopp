@@ -2,9 +2,18 @@ import "./login.css";
 function Login() {
   return (
     <div className="containerBox">
-      <div className="boxx">יצירת חשבון</div>
-      <div className="boxx">התחברות</div>
-      <div className="boxx">About us</div>
+      <div className="boxx">
+        <a href="">manager login</a>
+      </div>
+      <div className="boxx">
+        <a href="">user login</a>
+      </div>
+      <div className="boxx">
+        <a href="">user sign</a>
+      </div>
+      <div className="boxx">
+        <a href="">About us</a>
+      </div>
     </div>
   );
 }

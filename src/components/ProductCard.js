@@ -1,5 +1,5 @@
 import "./productCard.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartContext from "./CartContext";
 import { Link } from "react-router-dom";
 import addLogo from "../images/addLogo.png";
@@ -14,7 +14,16 @@ function ProductCard({
   amount,
   id,
 }) {
-  const { setItems, setProducts } = useContext(CartContext);
+  const { setItems, setProducts, isSale, percent } = useContext(CartContext);
+  function ifSale() {
+    let salePrice;
+    salePrice = (price - (price / 100) * percent).toFixed(2);
+    if (isSale) {
+      return salePrice;
+    } else {
+      return;
+    }
+  }
 
   function addCart() {
     setProducts((prev) => {
@@ -74,7 +83,16 @@ function ProductCard({
         </Link>
         <div className="product-info">
           <h5>{title}</h5>
-          <h6 className="hh6">{price}</h6>
+          <h6
+            style={
+              isSale
+                ? { textDecoration: "line-through" }
+                : { textDecoration: "none" }
+            }
+          >
+            {price}
+          </h6>
+          <h6> {ifSale()} </h6>
           <div className="plusMinus" style={{ display: "flex" }}>
             <button className="plus-button" onClick={deleteCart}>
               <img style={{ height: "70%" }} src={minusLogo}></img>

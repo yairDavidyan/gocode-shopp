@@ -50,7 +50,7 @@ function Header({ categories, changeDisplay }) {
       padding: "0 4px",
     },
     root: {
-      marginRight: "80px",
+      // marginRight: "80px",
     },
   }))(Badge);
   const classes = useStyles();
@@ -61,7 +61,7 @@ function Header({ categories, changeDisplay }) {
         <div className="box box1">
           {" "}
           <span className="HeaderH1">
-            <img src={bali} alt={"logo"}></img>
+            <img style={{ marginTop: "30px" }} src={bali} alt={"logo"}></img>
           </span>
         </div>
         <div className="box box4">
@@ -121,9 +121,12 @@ function Header({ categories, changeDisplay }) {
         </div>
         <div className="box box3">
           {" "}
-          <IconButton onClick={() => setIsCart(!isCart)} aria-label="cart">
+          <IconButton
+            // style={{ top: "62px" }}
+            onClick={() => setIsCart(!isCart)}
+            aria-label="cart"
+          >
             <StyledBadge
-              style={{ left: "45px", bottom: "auto", top: "35px" }}
               badgeContent={
                 items && items.reduce((total, curr) => total + curr.amount, 0)
               }

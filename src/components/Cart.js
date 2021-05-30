@@ -5,7 +5,7 @@ import { Button, makeStyles } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 function Cart() {
-  const { setItems, setProducts, items, isCart, setIsCart } =
+  const { setItems, setProducts, items, isCart, setIsCart, isSale, percent } =
     useContext(CartContext);
   let index;
   const useStyles = makeStyles((theme) => ({
@@ -88,7 +88,9 @@ function Cart() {
                   <div className="product-title">{el.title}</div>
                   {/* <p className="product-description">{el.description}</p> */}
                 </div>
-                <div className="product-price">{el.price}</div>
+                <div className="product-price">
+                  {(el.price - (el.price / 100) * percent).toFixed(2)}
+                </div>
                 <div className="product-quantity">
                   <input
                     onChange={(e) => amountChange(el, e)}
@@ -109,7 +111,10 @@ function Cart() {
                   </div>
                 </div>
 
-                <div className="product-line-price">{el.price * el.amount}</div>
+                <div className="product-line-price">
+                  {(el.price - (el.price / 100) * percent).toFixed(2) *
+                    el.amount}
+                </div>
               </div>
             ))}
           </div>
@@ -135,7 +140,10 @@ function Cart() {
                 <div className="totals-value" id="cart-total">
                   {items
                     .reduce(
-                      (total, curr) => total + curr.price * curr.amount,
+                      (total, curr) =>
+                        total +
+                        (curr.price - (curr.price / 100) * percent) *
+                          curr.amount,
                       0
                     )
                     .toFixed(2)}

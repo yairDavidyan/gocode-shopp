@@ -1,25 +1,31 @@
 import "./timer.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import CartContext from "./CartContext";
 
 function Timer() {
+  const { setIsSale, isSale, setPercent } = useContext(CartContext);
   const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
-    let difference = +new Date(`05/29/${year}`) - +new Date();
+    let difference = +new Date(`05/30/${year} 21:09:50`) - +new Date();
 
     let timeLeft = {};
 
     if (difference > 0) {
+      setIsSale(true);
+      setPercent(20);
       timeLeft = {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
       };
+    } else {
+      setIsSale(false);
+      setPercent(0);
     }
-
     return timeLeft;
   };
-
+  console.log(isSale);
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [year] = useState(new Date().getFullYear());
   const timerComponents = [];
@@ -30,12 +36,13 @@ function Timer() {
     }
 
     timerComponents.push(
-      <div>
-        {timeLeft[interval]} {interval}{" "}
-      </div>
+      <li>
+        <span>{timeLeft[interval]}</span>
+        {`${interval}`}
+      </li>
     );
   });
-  console.log(timeLeft);
+  console.log(timerComponents);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -45,10 +52,45 @@ function Timer() {
   });
 
   return (
-    <div>
-      <h1>sale {year}</h1>
-      {timerComponents.length ? timerComponents : <span>Time's up!</span>}
-    </div>
+    <>
+      {isSale ? (
+        <div>
+          <div
+            style={{
+              backgroundColor: "#ffd54f",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
+            <h1
+              style={{
+                fontWeight: "bold",
+                display: "flex",
+                color: "red",
+                justifyContent: "center",
+                backgroundColor: "yellow",
+                msTransform: "skewY(20deg)",
+                transform: "skewY(-20deg)",
+                height: "17px",
+              }}
+            >
+              SALE {year}
+            </h1>
+            <h1 className="h1Percent blink_me">20%</h1>
+            <span className="container1">
+              {timerComponents.length ? (
+                timerComponents
+              ) : (
+                <span>Time's up!</span>
+              )}
+            </span>
+            <h1 className="h1Percent blink_me">20%</h1>
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </>
   );
 }
 export default Timer;

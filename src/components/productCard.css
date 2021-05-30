@@ -8,6 +8,8 @@ h6 {
   font-size: 16px;
   padding-top: 5px;
 }
+.hh6 {
+}
 .product-card {
   display: flex;
   flex-direction: column;

@@ -11,8 +11,8 @@ function Search() {
       display: "flex",
       alignItems: "center",
       width: "100%",
-      border: "2px solid #f50057",
-      height: "38px",
+      border: "1px solid #f50057",
+      // height: "38px",
     },
     input: {
       marginLeft: theme.spacing(1),
@@ -26,9 +26,8 @@ function Search() {
       margin: 4,
     },
     iconButton: {
-      backgroundColor: "#f50057",
-      marginRight: "5px",
-      padding: "6px",
+      marginRight: "3px",
+      padding: "2px",
     },
   }));
   const classes = useStyles();
