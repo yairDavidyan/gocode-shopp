@@ -4,6 +4,7 @@ import CartContext from "./CartContext";
 import { Link } from "react-router-dom";
 import addLogo from "../images/addLogo.png";
 import minusLogo from "../images/minusLogo.png";
+import Fade from "react-reveal/Fade";
 
 function ProductCard({
   title,
@@ -75,35 +76,37 @@ function ProductCard({
   }
   return (
     <>
-      <div className="product-card">
-        <Link to={`products/${id}`}>
-          <div className="productImage">
-            <img src={image} alt={title} title={description} />
-          </div>
-        </Link>
-        <div className="product-info">
-          <h5>{title}</h5>
-          <h6
-            style={
-              isSale
-                ? { textDecoration: "line-through" }
-                : { textDecoration: "none" }
-            }
-          >
-            {price}
-          </h6>
-          <h6> {ifSale()} </h6>
-          <div className="plusMinus" style={{ display: "flex" }}>
-            <button className="plus-button" onClick={deleteCart}>
-              <img style={{ height: "70%" }} src={minusLogo}></img>
-            </button>
-            <h3 style={{ marginTop: "23px" }}>{amount}</h3>
-            <button className="plus-button" onClick={addCart}>
-              <img style={{ height: "70%" }} src={addLogo}></img>
-            </button>
+      <Fade bottom cascade>
+        <div className="product-card">
+          <Link to={`products/${id}`}>
+            <div className="productImage">
+              <img src={image} alt={title} title={description} />
+            </div>
+          </Link>
+          <div className="product-info">
+            <h5>{title}</h5>
+            <h6
+              style={
+                isSale
+                  ? { textDecoration: "line-through" }
+                  : { textDecoration: "none" }
+              }
+            >
+              {price}
+            </h6>
+            <h6> {ifSale()} </h6>
+            <div className="plusMinus" style={{ display: "flex" }}>
+              <button className="plus-button" onClick={deleteCart}>
+                <img style={{ height: "70%" }} src={minusLogo}></img>
+              </button>
+              <h3 style={{ marginTop: "23px" }}>{amount}</h3>
+              <button className="plus-button" onClick={addCart}>
+                <img style={{ height: "70%" }} src={addLogo}></img>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </Fade>
     </>
   );
 }
