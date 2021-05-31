@@ -6,7 +6,7 @@ function Timer() {
   const { setIsSale, isSale, setPercent } = useContext(CartContext);
   const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
-    let difference = +new Date(`05/30/${year} 21:09:50`) - +new Date();
+    let difference = +new Date(`05/31/${year} 23:09:50`) - +new Date();
 
     let timeLeft = {};
 

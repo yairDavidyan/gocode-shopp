@@ -21,8 +21,7 @@ function Home() {
   const [isSale, setIsSale] = useState(false);
   const [percent, setPercent] = useState(0);
 
-  console.log("product:", products);
-  console.log(items);
+  console.log("items", items);
 
   const categories = products
     .map((p) => p.category)
@@ -57,6 +56,7 @@ function Home() {
 
       .then(setShown(false));
   }, []);
+
   function changeDisplay(category) {
     setChoice(category);
     //get products by category
@@ -100,7 +100,7 @@ function Home() {
         setPercent,
       }}
     >
-      <div>
+      <div style={{ backgroundColor: "#f3f3f3" }}>
         <Login />
         <Header categories={categories} changeDisplay={changeDisplay} />
         <Timer />

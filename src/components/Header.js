@@ -41,6 +41,12 @@ function Header({ categories, changeDisplay }) {
       color: "#f50057",
       padding: "6px",
     },
+    a: {
+      marginRight: "20px",
+      marginTop: "10px",
+      padding: "0px",
+      // marginRight: "80px",
+    },
   });
   const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -48,9 +54,6 @@ function Header({ categories, changeDisplay }) {
       top: 13,
       border: `2px solid ${theme.palette.background.paper}`,
       padding: "0 4px",
-    },
-    root: {
-      // marginRight: "80px",
     },
   }))(Badge);
   const classes = useStyles();
@@ -125,6 +128,7 @@ function Header({ categories, changeDisplay }) {
             // style={{ top: "62px" }}
             onClick={() => setIsCart(!isCart)}
             aria-label="cart"
+            className={classes.a}
           >
             <StyledBadge
               badgeContent={

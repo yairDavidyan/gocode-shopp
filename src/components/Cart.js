@@ -86,7 +86,6 @@ function Cart() {
                 </div>
                 <div className="product-details">
                   <div className="product-title">{el.title}</div>
-                  {/* <p className="product-description">{el.description}</p> */}
                 </div>
                 <div className="product-price">
                   {(el.price - (el.price / 100) * percent).toFixed(2)}
@@ -135,6 +134,24 @@ function Cart() {
               <label>Shipping</label>
               <div class="totals-value" id="cart-shipping">15.00</div>
             </div> */}
+              <div className="totals-item">
+                <label>Savings</label>
+                <div style={{ float: "right" }}>
+                  {(
+                    items.reduce(
+                      (total, curr) => total + curr.price * curr.amount,
+                      0
+                    ) -
+                    items.reduce(
+                      (total, curr) =>
+                        total +
+                        (curr.price - (curr.price / 100) * percent) *
+                          curr.amount,
+                      0
+                    )
+                  ).toFixed(2)}
+                </div>
+              </div>
               <div className="totals-item totals-item-total">
                 <label>Grand Total</label>
                 <div className="totals-value" id="cart-total">

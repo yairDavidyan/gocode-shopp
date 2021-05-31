@@ -146,6 +146,7 @@ label {
   clear: both;
   width: 100%;
   margin-bottom: 10px;
+  margin-top: 15px;
 }
 .totals .totals-item label {
   float: left;
@@ -157,6 +158,8 @@ label {
   float: right;
   width: 21%;
   text-align: right;
+  font-weight: bold;
+  font-size: 18px;
 }
 .totals .totals-item-total {
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";

@@ -32,7 +32,6 @@ li {
 li span {
   display: block;
   font-size: 4.5rem;
-  margin-left: 22px;
 }
 @media all and (max-width: 768px) {
   li {
