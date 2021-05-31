@@ -21,8 +21,6 @@ function Home() {
   const [isSale, setIsSale] = useState(false);
   const [percent, setPercent] = useState(0);
 
-  console.log("items", items);
-
   const categories = products
     .map((p) => p.category)
     .filter((value, index, array) => array.indexOf(value) === index);
@@ -53,7 +51,6 @@ function Home() {
           return data.map((el) => (el.id ? { ...el, amount: 0 } : el));
         })
       )
-
       .then(setShown(false));
   }, []);
 
@@ -100,11 +97,10 @@ function Home() {
         setPercent,
       }}
     >
-      <div style={{ backgroundColor: "#f3f3f3" }}>
+      <div className="containerHome">
         <Login />
         <Header categories={categories} changeDisplay={changeDisplay} />
         <Timer />
-
         <div className="divContainer">
           <Cart />
           {isShown ? (

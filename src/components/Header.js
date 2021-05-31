@@ -20,7 +20,6 @@ function Header({ categories, changeDisplay }) {
     setIsCart,
     isCart,
   } = useContext(CartContext);
-  const [loginBool, setLoginBool] = useState(false);
 
   const handleChange = (even, newValue) => {
     setValue(() => newValue);
@@ -45,7 +44,6 @@ function Header({ categories, changeDisplay }) {
       marginRight: "20px",
       marginTop: "10px",
       padding: "0px",
-      // marginRight: "80px",
     },
   });
   const StyledBadge = withStyles((theme) => ({
@@ -125,7 +123,6 @@ function Header({ categories, changeDisplay }) {
         <div className="box box3">
           {" "}
           <IconButton
-            // style={{ top: "62px" }}
             onClick={() => setIsCart(!isCart)}
             aria-label="cart"
             className={classes.a}

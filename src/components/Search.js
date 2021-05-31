@@ -12,7 +12,6 @@ function Search() {
       alignItems: "center",
       width: "100%",
       border: "1px solid #f50057",
-      // height: "38px",
     },
     input: {
       marginLeft: theme.spacing(1),

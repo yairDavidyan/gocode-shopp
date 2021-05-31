@@ -6,12 +6,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Fade from "react-reveal/Fade";
 
 function Cart() {
-  const { setItems, setProducts, items, isCart, setIsCart, isSale, percent } =
+  const { setItems, setProducts, items, isCart, percent } =
     useContext(CartContext);
   let index;
   const useStyles = makeStyles((theme) => ({
     button: {
-      // margin: theme.spacing(1),
       marginTop: "50px",
     },
   }));

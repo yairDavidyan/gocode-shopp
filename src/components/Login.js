@@ -1,3 +1,4 @@
+import "./login.css";
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -6,10 +7,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-
-import "./login.css";
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import {
   Collapse,
   List,
@@ -18,7 +17,7 @@ import {
   ListItemText,
   makeStyles,
 } from "@material-ui/core";
-import { ExpandLess, ExpandMore, StarBorder } from "@material-ui/icons";
+
 function Login() {
   const [openUser, setOpenUser] = useState(false);
   const [openManager, setOpenManager] = useState(false);
@@ -28,8 +27,7 @@ function Login() {
     root: {
       width: "100%",
       maxWidth: 360,
-
-      // backgroundColor: theme.palette.background.paper,
+      backgroundColor: theme.palette.background.paper,
     },
     nested: {
       paddingLeft: theme.spacing(4),
