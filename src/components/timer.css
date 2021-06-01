@@ -22,6 +22,9 @@ li {
 .blink_me {
   animation: blinker 1s linear infinite;
 }
+.h1Percent::after {
+  content: "%";
+}
 
 @keyframes blinker {
   50% {

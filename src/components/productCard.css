@@ -42,7 +42,7 @@ h6 {
   border: 0px solid #f50057;
   background-color: #fff;
 }
-.product-info .hh6::before {
+.product-info h6::before {
   content: "$";
 }
 

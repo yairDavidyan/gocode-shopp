@@ -20,6 +20,9 @@ function Home() {
   const [isCart, setIsCart] = useState(false);
   const [isSale, setIsSale] = useState(false);
   const [percent, setPercent] = useState(0);
+  const [modal, setModal] = useState(false);
+  const [updateSale, setUpdateSale] = useState(false);
+  const [date, setDate] = useState("");
 
   const categories = products
     .map((p) => p.category)
@@ -95,12 +98,19 @@ function Home() {
         isSale,
         percent,
         setPercent,
+        modal,
+        setModal,
+        updateSale,
+        setUpdateSale,
+        date,
+        setDate,
       }}
     >
       <div className="containerHome">
         <Login />
         <Header categories={categories} changeDisplay={changeDisplay} />
         <Timer />
+
         <div className="divContainer">
           <Cart />
           {isShown ? (

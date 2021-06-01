@@ -170,7 +170,7 @@ label {
   overflow-y: auto;
   min-width: 450px;
   max-width: 500px;
-  padding-right: 6px;
+  padding-right: 19px;
   margin-top: 12px;
 }
 .labal1 {
@@ -196,12 +196,13 @@ label {
   margin-top: 20px;
   padding: 6px 25px;
   background-color: #f50057;
-  color: #fff;
+  color: rgb(8, 8, 8);
   font-size: 25px;
   border-radius: 3px;
+  width: 144%;
 }
 .checkout:hover {
-  background-color: #494;
+  background-color: rgb(192, 192, 192);
 }
 /* Make adjustments for tablet */
 @media screen and (max-width: 650px) {

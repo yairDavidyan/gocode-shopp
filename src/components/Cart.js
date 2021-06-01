@@ -4,10 +4,14 @@ import "./Cart.css";
 import { Button, makeStyles } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Fade from "react-reveal/Fade";
+import Payment from "./Payment";
+import { useState } from "react";
+import Modal from "react-modal";
 
 function Cart() {
-  const { setItems, setProducts, items, isCart, percent } =
+  const { setItems, setProducts, items, isCart, percent, modal, setModal } =
     useContext(CartContext);
+
   let index;
   const useStyles = makeStyles((theme) => ({
     button: {
@@ -71,10 +75,7 @@ function Cart() {
     <>
       {isCart && (
         <Fade bottom cascade>
-          <div
-            style={{ marginRight: "10px", marginLeft: "10px" }}
-            className="shopping-cart"
-          >
+          <div style={{ margin: "10px" }} className="shopping-cart">
             <div className="titleCart">
               <label className="labal1">Image</label>
               <label className="labal1">Product</label>
@@ -176,11 +177,22 @@ function Cart() {
                     </div>
                   </div>
                 </div>
-                <div style={{ borderBottom: "3px solid #eee" }}>
+                <div
+                  style={{ borderBottom: "3px solid #eee", display: "grid" }}
+                >
                   <button style={{ marginBottom: "15px" }} className="checkout">
                     payment
                   </button>
+                  <button
+                    onClick={() => setModal(true)}
+                    style={{ marginBottom: "15px" }}
+                    className="checkout"
+                  >
+                    add new cart
+                  </button>
                 </div>
+
+                {modal && <Payment />}
               </div>
             </Fade>
           </div>

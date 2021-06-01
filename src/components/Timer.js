@@ -3,16 +3,17 @@ import { useState, useEffect, useContext } from "react";
 import CartContext from "./CartContext";
 
 function Timer() {
-  const { setIsSale, isSale, setPercent } = useContext(CartContext);
+  const { setIsSale, isSale, setPercent, date, setDate, percent } =
+    useContext(CartContext);
   const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
-    let difference = +new Date(`05/31/${year} 23:09:50`) - +new Date();
+    let difference = +new Date(date) - +new Date();
 
     let timeLeft = {};
 
     if (difference > 0) {
       setIsSale(true);
-      setPercent(20);
+      //setPercent(20);
       timeLeft = {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
@@ -76,7 +77,7 @@ function Timer() {
             >
               SALE {year}
             </h1>
-            <h1 className="h1Percent blink_me">20%</h1>
+            <h1 className="h1Percent blink_me">{percent}</h1>
             <span className="container1">
               {timerComponents.length ? (
                 timerComponents
@@ -84,7 +85,7 @@ function Timer() {
                 <span>Time's up!</span>
               )}
             </span>
-            <h1 className="h1Percent blink_me">20%</h1>
+            <h1 className="h1Percent blink_me">{percent}</h1>
           </div>
         </div>
       ) : (

@@ -94,7 +94,7 @@ function ProductCard({
             >
               {price}
             </h6>
-            <h6> {ifSale()} </h6>
+            {isSale && <h6> {ifSale()} </h6>}
             <div className="plusMinus" style={{ display: "flex" }}>
               <button className="plus-button" onClick={deleteCart}>
                 <img style={{ height: "70%" }} src={minusLogo}></img>
