@@ -1,6 +1,7 @@
 h5 {
   font-weight: 500;
   line-height: 1.7em;
+  margin: 4px;
 }
 
 h6 {
@@ -8,8 +9,7 @@ h6 {
   font-size: 16px;
   padding-top: 5px;
 }
-.hh6 {
-}
+
 .product-card {
   display: flex;
   flex-direction: column;

@@ -8,7 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import { ExpandLess, ExpandMore, SingleBedOutlined } from "@material-ui/icons";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {
   Collapse,
@@ -29,6 +29,7 @@ function Login() {
   const [passwordManager, setPasswordManager] = useState("");
   const [open, setOpen] = useState(false);
   const [ifManager, setIfManager] = useState(false);
+
   const useStyles = makeStyles((theme) => ({
     root: {
       width: "100%",
@@ -40,21 +41,28 @@ function Login() {
       backgroundColor: "#dfdcdc",
     },
     a: {
-      color: "#f50057",
+      // color: "bla",
     },
     icon: {
       color: "white",
     },
     containedPrimary: {
       color: "#202020",
-      backgroundColor: "#fab417",
+      backgroundColor: "#f50132 ",
       height: "78%",
       marginTop: "5px",
       marginLeft: "5px",
     },
+    nested: {
+      backgroundColor: "rgb(236 184 28)",
+    },
   }));
   const classes = useStyles();
 
+  function signOut() {
+    setIfManager(false);
+    setOpen(false);
+  }
   const handleClick = () => {
     setOpen(!open);
   };
@@ -198,7 +206,7 @@ function Login() {
       ) : (
         <div className="boxx">
           <IconButton
-            onClick={() => setIfManager(false)}
+            onClick={() => signOut()}
             aria-label="delete"
             className={classes.icon}
           >

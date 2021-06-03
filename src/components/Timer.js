@@ -63,7 +63,7 @@ function Timer() {
               justifyContent: "space-around",
             }}
           >
-            <h1
+            {/* <h1
               style={{
                 fontWeight: "bold",
                 display: "flex",
@@ -76,7 +76,7 @@ function Timer() {
               }}
             >
               SALE {year}
-            </h1>
+            </h1> */}
             <h1 className="h1Percent blink_me">{percent}</h1>
             <span className="container1">
               {timerComponents.length ? (

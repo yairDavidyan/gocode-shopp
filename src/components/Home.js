@@ -7,8 +7,37 @@ import Load from "./Load";
 import Timer from "./Timer";
 import Login from "./Login";
 import CartContext from "./CartContext";
+import SliderImage from "./SliderImage";
+import women from "../images/women.jpg";
+import jewerly from "../images/jewerly.jpg";
+import men from "../images/men.jpg";
+import elecronic from "../images/elecronic.jpg";
+import homeImage from "../images/homeImage.jpg";
+import SliderFilter from "./SliderFilter";
 
 function Home() {
+  let slides = [
+    {
+      background: `"${women}"`,
+      text: "women's clothing",
+      link: "https://unsplash.com/anthonydelanoix",
+    },
+    {
+      background: `"${jewerly}"`,
+      text: "jewelery",
+      link: "https://unsplash.com/aleskrivec",
+    },
+    {
+      background: `"${elecronic}"`,
+      text: "electronics",
+      link: "https://unsplash.com/intrepid",
+    },
+    {
+      background: `"${men}"`,
+      text: "men's clothing",
+      link: "https://unsplash.com/intrepid",
+    },
+  ];
   const [choice, setChoice] = useState("all products");
   const [products, setProducts] = useState([]);
   let [productsFilter, setProductsFilter] = useState([]);
@@ -23,6 +52,7 @@ function Home() {
   const [modal, setModal] = useState(false);
   const [updateSale, setUpdateSale] = useState(false);
   const [date, setDate] = useState("");
+  const [isConect, setIsConect] = useState(true);
 
   const categories = products
     .map((p) => p.category)
@@ -104,28 +134,68 @@ function Home() {
         setUpdateSale,
         date,
         setDate,
+        changeDisplay,
       }}
     >
       <div className="containerHome">
-        <Login />
-        <Header categories={categories} changeDisplay={changeDisplay} />
-        <Timer />
+        {isConect ? (
+          <>
+            <Login />
+            <Header />
 
-        <div className="divContainer">
-          <Cart />
-          {isShown ? (
-            <Load />
-          ) : (
-            <Products
-              products={products.filter(
-                (el) =>
-                  (el.category === choice || choice === "all products") &&
-                  el.price >= value[0] &&
-                  el.price <= value[1]
-              )}
+            <SliderImage slides={slides} />
+
+            <Timer />
+            <SliderFilter
+              categories={categories}
+              changeDisplay={changeDisplay}
             />
-          )}
-        </div>
+
+            <div className="divContainer">
+              <Cart />
+              {isShown ? (
+                <Load />
+              ) : (
+                <Products
+                  products={products.filter(
+                    (el) =>
+                      (el.category === choice || choice === "all products") &&
+                      el.price >= value[0] &&
+                      el.price <= value[1]
+                  )}
+                />
+              )}
+            </div>
+          </>
+        ) : (
+          <div
+            style={{
+              height: "600px",
+              width: "1334px",
+              backgroundImage: `url(${homeImage})`,
+            }}
+          >
+            <div id="move">
+              <div id="cercle">
+                <p>welcome</p>
+              </div>
+              <div id="Bienvenue">
+                <h1>shopping online</h1>
+                <h3>
+                  <a
+                    className="enter"
+                    onClick={() => setIsConect(true)}
+                    href="#.html"
+                  >
+                    ENTRER
+                  </a>
+                </h3>
+              </div>
+            </div>
+            {/* <h1>welcom to Bali Express</h1>
+            <h3>shopping online</h3> */}
+          </div>
+        )}
       </div>
     </CartContext.Provider>
   );

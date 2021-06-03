@@ -6,3 +6,158 @@
 .containerHome {
   background-color: #efefef;
 }
+/* body {
+  background-color: #c8e0eb;
+  animation-name: couleurfond;
+  animation-duration: 20s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+} */
+
+#cercle {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  background-color: #f50057c4;
+  font-size: 15px;
+}
+@keyframes positioncercle {
+  0% {
+    top: 150px;
+  }
+  50% {
+    top: 300px;
+  }
+  100% {
+    top: 150px;
+  }
+}
+#cercle p {
+  font-family: "Courier New", monospace;
+  font-weight: 100;
+  color: #c8e0eb;
+  font-size: 3em;
+  text-align: center;
+  margin: auto;
+  line-height: 200px;
+  animation-name: couleurtxt;
+  animation-duration: 20s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  font-weight: bold;
+}
+
+#Bienvenue {
+  width: auto;
+  height: auto;
+  color: white;
+  font-family: "Arial Narrow Bold", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 2em;
+  line-break: 15px;
+  line-height: 200x;
+  margin: auto;
+}
+
+#move {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  width: auto;
+  height: auto;
+  top: auto;
+  left: 50%;
+  transform: translate(-50%);
+  animation-name: positioncercle1;
+  animation-duration: 18s;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  text-align: center;
+  margin-top: 150px;
+}
+
+@keyframes positioncercle1 {
+  0% {
+    top: 2vh;
+  }
+  50% {
+    top: 12vh;
+  }
+  100% {
+    top: 2vh;
+  }
+}
+
+@keyframes couleurfond {
+  0% {
+    background-color: #c8e0eb;
+  }
+  25% {
+    background-color: #c8cfeb;
+  }
+  50% {
+    background-color: #ebc8da;
+  }
+  75% {
+    background-color: #c8ebe2;
+  }
+  100% {
+    background-color: #c8e0eb;
+  }
+}
+@keyframes couleurtxt {
+  0% {
+    color: #a0c7da;
+  }
+  25% {
+    color: #a2acd4;
+  }
+  50% {
+    color: #cc9bb4;
+  }
+  75% {
+    color: #9bd1c4;
+  }
+  100% {
+    color: #98b9c9;
+  }
+}
+.enter {
+  color: rgb(236 184 28);
+}
+@keyframes animres {
+  0% {
+    width: 80px;
+    height: 80px;
+  }
+  50% {
+    width: 90px;
+    height: 90px;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media (max-width: 800px) {
+  @keyframes animres {
+    0% {
+      width: 40px;
+      height: 40px;
+    }
+    50% {
+      width: 50px;
+      height: 50px;
+    }
+    100% {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  #Bienvenue {
+    font-size: 1em;
+  }
+}
