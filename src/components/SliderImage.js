@@ -4,7 +4,6 @@ import "./sliderImage.css";
 
 function Slide({ background, text, link, active }) {
   const { changeDisplay } = useContext(CartContext);
-  console.log(background);
   let slideStyle = {
     backgroundImage: `url(${background})`,
     backgroundSize: "1350px 200px",

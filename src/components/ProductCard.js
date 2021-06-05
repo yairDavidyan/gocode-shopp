@@ -15,7 +15,17 @@ function ProductCard({
   amount,
   id,
 }) {
-  const { setItems, setProducts, isSale, percent } = useContext(CartContext);
+  const {
+    setItems,
+    setProducts,
+    isSale,
+    percent,
+    saleCategory,
+    setSaleCategory,
+  } = useContext(CartContext);
+
+  //const [productWhere, setProductWhere] = useState("");
+
   function ifSale() {
     let salePrice;
     salePrice = (price - (price / 100) * percent).toFixed(2);
@@ -78,6 +88,14 @@ function ProductCard({
     <>
       <Fade bottom cascade>
         <div className="product-card">
+          {isSale &&
+            (saleCategory === product.category || saleCategory === "") && (
+              <>
+                <div className=" fa fa-arrow-down fa-2x arrow bounce">
+                  {percent}%{" "}
+                </div>
+              </>
+            )}
           <Link to={`products/${id}`}>
             <div className="productImage">
               <img src={image} alt={title} title={description} />
@@ -87,14 +105,21 @@ function ProductCard({
             <h5>{title}</h5>
             <h6
               style={
-                isSale
-                  ? { textDecoration: "line-through" }
+                isSale &&
+                (saleCategory === product.category || saleCategory === "")
+                  ? {
+                      textDecoration: "line-through",
+                      textDecorationColor: "black",
+                    }
                   : { textDecoration: "none" }
               }
             >
               {price}
             </h6>
-            {isSale && <h6> {ifSale()} </h6>}
+            {isSale &&
+              (saleCategory === product.category || saleCategory === "") && (
+                <h6> {ifSale()} </h6>
+              )}
             <div className="plusMinus" style={{ display: "flex" }}>
               <button className="plus-button" onClick={deleteCart}>
                 <img style={{ height: "70%" }} src={minusLogo}></img>

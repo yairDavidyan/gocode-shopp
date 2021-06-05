@@ -10,10 +10,28 @@ import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 
 function UpdateSale() {
-  const { updateSale, setUpdateSale, date, setDate, setPercent, percent } =
-    useContext(CartContext);
+  const {
+    updateSale,
+    setUpdateSale,
+    setDate,
+    setPercent,
+    saleCategory,
+    setSaleCategory,
+    products,
+  } = useContext(CartContext);
+
+  const categories = products
+    .map((p) => p.category)
+    .filter((value, index, array) => array.indexOf(value) === index);
   let textInputDate = createRef();
   let textInputPercent = createRef();
+
+  function changeDisplay(value) {
+    if (value === "") {
+      setSaleCategory("all product");
+    }
+    setSaleCategory(value);
+  }
 
   function updateSaleFun() {
     setDate(textInputDate.current.value);
@@ -64,6 +82,20 @@ function UpdateSale() {
                 update sale
               </i>{" "}
             </label>
+            <div className="collection-sort">
+              <label className="lableApp">select category for sale</label>
+              <select
+                className="selectCategory"
+                onChange={(e) => changeDisplay(e.target.value)}
+              >
+                <option value="all products">All</option>
+                {categories.map((categories) => (
+                  <option value={categories} key={categories}>
+                    {categories}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div>
               <label>saving percent:</label>
               <input

@@ -1,8 +1,12 @@
 .containerBox {
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr 1fr;
+  grid-template-columns: 9fr 3fr 3fr 3fr;
   grid-auto-rows: auto;
-  background: linear-gradient(270deg, #f50132 14.3%, rgb(236 184 28) 1%);
+  /* background: linear-gradient(270deg, #f50132 14.3%, rgb(236 184 28) 1%); */
   color: black;
+  background-color: white;
   border-bottom: 2px solid #ffffff;
+}
+.loginOutIn {
+  direction: rtl;
 }

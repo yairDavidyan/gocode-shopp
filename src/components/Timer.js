@@ -26,7 +26,6 @@ function Timer() {
     }
     return timeLeft;
   };
-  console.log(isSale);
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [year] = useState(new Date().getFullYear());
   const timerComponents = [];
@@ -43,7 +42,6 @@ function Timer() {
       </li>
     );
   });
-  console.log(timerComponents);
 
   useEffect(() => {
     const timer = setTimeout(() => {

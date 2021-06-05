@@ -75,7 +75,7 @@ function Cart() {
     <>
       {isCart && (
         <Fade bottom cascade>
-          <div style={{ margin: "10px" }} className="shopping-cart">
+          <div className="shopping-cart">
             <div className="titleCart">
               <label className="labal1">Image</label>
               <label className="labal1">Product</label>
@@ -85,43 +85,67 @@ function Cart() {
             </div>
             <Fade right cascade>
               <div className="cardShop">
-                {items.map((el) => (
-                  <div className="product">
-                    <div className="product-image">
-                      <img alt={el.title} src={el.image} />
-                    </div>
-                    <div className="product-details">
-                      <div className="product-title">{el.title}</div>
-                    </div>
-                    <div className="product-price">
-                      {(el.price - (el.price / 100) * percent).toFixed(2)}
-                    </div>
-                    <div className="product-quantity">
-                      <input
-                        onChange={(e) => amountChange(el, e)}
-                        type="number"
-                        value={el.amount}
-                        min="0"
-                      />
-                      <div className="product-removal">
-                        <Button
-                          onClick={() => deleteCart(el)}
-                          variant="contained"
-                          color="secondary"
-                          className={classes.button}
-                          startIcon={<DeleteIcon />}
-                        >
-                          Delete
-                        </Button>
+                {items.length !== 0 ? (
+                  items.map((el) => (
+                    <div className="product">
+                      <div className="product-image">
+                        <img alt={el.title} src={el.image} />
+                      </div>
+                      <div className="product-details">
+                        <div className="product-title">{el.title}</div>
+                      </div>
+                      <div className="product-price">
+                        {(el.price - (el.price / 100) * percent).toFixed(2)}
+                      </div>
+                      <div className="product-quantity">
+                        <input
+                          onChange={(e) => amountChange(el, e)}
+                          type="number"
+                          value={el.amount}
+                          min="0"
+                        />
+                        <div className="product-removal">
+                          <Button
+                            onClick={() => deleteCart(el)}
+                            variant="contained"
+                            color="secondary"
+                            className={classes.button}
+                            startIcon={<DeleteIcon />}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div className="product-line-price">
+                        {(el.price - (el.price / 100) * percent).toFixed(2) *
+                          el.amount}
                       </div>
                     </div>
-
-                    <div className="product-line-price">
-                      {(el.price - (el.price / 100) * percent).toFixed(2) *
-                        el.amount}
+                  ))
+                ) : (
+                  <div class="container-fluid mt-100">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="card">
+                          <div class="card-body cart">
+                            <div class="col-sm-12 empty-cart-cls text-center">
+                              <img
+                                src="https://i.imgur.com/dCdflKN.png"
+                                width="130"
+                                height="130"
+                                class="img-fluid mb-4 mr-3"
+                              />
+                              <h3>
+                                <strong>Your Cart is Empty</strong>
+                              </h3>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                ))}
+                )}
               </div>
 
               <div className="containerTotal">

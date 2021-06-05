@@ -14,6 +14,9 @@ import men from "../images/men.jpg";
 import elecronic from "../images/elecronic.jpg";
 import homeImage from "../images/homeImage.jpg";
 import SliderFilter from "./SliderFilter";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+
+import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
 
 function Home() {
   let slides = [
@@ -53,7 +56,28 @@ function Home() {
   const [updateSale, setUpdateSale] = useState(false);
   const [date, setDate] = useState("");
   const [isConect, setIsConect] = useState(true);
-
+  const [saleCategory, setSaleCategory] = useState("");
+  const StyledBadge = withStyles((theme) => ({
+    badge: {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }))(Badge);
+  const useStyles = makeStyles({
+    root: {
+      width: "500px;",
+      color: "#f50057",
+      padding: "6px",
+    },
+    a: {
+      marginRight: "20px",
+      marginTop: "10px",
+      padding: "0px",
+    },
+  });
+  const classes = useStyles();
   const categories = products
     .map((p) => p.category)
     .filter((value, index, array) => array.indexOf(value) === index);
@@ -135,6 +159,8 @@ function Home() {
         date,
         setDate,
         changeDisplay,
+        saleCategory,
+        setSaleCategory,
       }}
     >
       <div className="containerHome">
@@ -156,14 +182,33 @@ function Home() {
               {isShown ? (
                 <Load />
               ) : (
-                <Products
-                  products={products.filter(
-                    (el) =>
-                      (el.category === choice || choice === "all products") &&
-                      el.price >= value[0] &&
-                      el.price <= value[1]
-                  )}
-                />
+                <div className="content">
+                  <Products
+                    products={products.filter(
+                      (el) =>
+                        (el.category === choice || choice === "all products") &&
+                        el.price >= value[0] &&
+                        el.price <= value[1]
+                    )}
+                  />
+                  <div class="side">
+                    <IconButton
+                      onClick={() => setIsCart(!isCart)}
+                      aria-label="cart"
+                      className={classes.a}
+                    >
+                      <StyledBadge
+                        badgeContent={
+                          items &&
+                          items.reduce((total, curr) => total + curr.amount, 0)
+                        }
+                        color="secondary"
+                      >
+                        <ShoppingCartIcon />
+                      </StyledBadge>
+                    </IconButton>
+                  </div>
+                </div>
               )}
             </div>
           </>

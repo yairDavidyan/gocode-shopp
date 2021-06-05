@@ -41,20 +41,28 @@ function Login() {
       backgroundColor: "#dfdcdc",
     },
     a: {
-      // color: "bla",
+      fontSize: "22px",
     },
+    list: {
+      height: "24px",
+    },
+
     icon: {
-      color: "white",
+      color: "black",
+      height: "0px",
+      padding: "0px",
     },
     containedPrimary: {
       color: "#202020",
-      backgroundColor: "#f50132 ",
-      height: "78%",
-      marginTop: "5px",
-      marginLeft: "5px",
+      backgroundColor: "#fc0738 ",
+      marginBottom: "5px",
+      height: "21px",
     },
     nested: {
-      backgroundColor: "rgb(236 184 28)",
+      backgroundColor: "black",
+      paddingLeft: "0px",
+      paddingRight: "0px",
+      // position: "absolute",
     },
   }));
   const classes = useStyles();
@@ -106,15 +114,19 @@ function Login() {
       <div className="boxx"></div>
       <div className="boxx"></div>
       {!ifManager ? (
-        <div className="boxx">
-          <ListItem button onClick={handleClick}>
-            <ListItemIcon>
-              <AccountCircleIcon className={classes.a} />
-            </ListItemIcon>
-            <ListItemText primary="Login" />
+        <div className="loginOutIn">
+          <ListItem className={classes.list} button onClick={handleClick}>
+            <AccountCircleIcon className={classes.a} />
+
+            {/* <ListItemText primary="Login" /> */}
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
-          <Collapse in={open} timeout="auto" unmountOnExit>
+          <Collapse
+            style={{ position: "absolute" }}
+            in={open}
+            timeout="auto"
+            unmountOnExit
+          >
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
                 <div>
@@ -204,7 +216,7 @@ function Login() {
           </Collapse>
         </div>
       ) : (
-        <div className="boxx">
+        <div className="loginOutIn">
           <IconButton
             onClick={() => signOut()}
             aria-label="delete"
