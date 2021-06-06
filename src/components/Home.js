@@ -14,6 +14,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
+import Snackbars from "./Snackbars";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -34,6 +35,8 @@ function Home() {
   const [isConect, setIsConect] = useState(true);
   const [saleCategory, setSaleCategory] = useState("");
   const [ifManager, setIfManager] = useState(false);
+  const [snackBar, setSnackBar] = useState(false);
+  const [message, setMessage] = useState("");
 
   const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -153,6 +156,10 @@ function Home() {
         setIfManager,
         updateProduct,
         setUpdateProduct,
+        snackBar,
+        setSnackBar,
+        message,
+        setMessage,
       }}
     >
       <div className="containerHome">
@@ -164,6 +171,7 @@ function Home() {
                 <div className="table-update">
                   {updateProduct && <UpdateProduct />}
                   {updateSale && <UpdateSale />}
+                  {snackBar && <Snackbars />}
                 </div>
               </div>
             ) : (

@@ -1,6 +1,6 @@
-import { createRef, useContext } from "react";
+import { createRef, useContext, useState } from "react";
 import CartContext from "./CartContext";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Snackbar } from "@material-ui/core";
 import React from "react";
 import Fade from "@material-ui/core/Fade";
 import "./updateSale.css";
@@ -16,6 +16,9 @@ function UpdateSale() {
     saleCategory,
     setSaleCategory,
     products,
+    snackBar,
+    setSnackBar,
+    setMessage,
   } = useContext(CartContext);
 
   const categories = products
@@ -34,6 +37,8 @@ function UpdateSale() {
   function updateSaleFun() {
     setDate(textInputDate.current.value);
     setPercent(textInputPercent.current.value);
+    setSnackBar(true);
+    setMessage("Successfully update sale");
     handleClose();
   }
   const useStyles = makeStyles((theme) => ({

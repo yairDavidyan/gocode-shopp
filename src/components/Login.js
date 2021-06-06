@@ -80,6 +80,8 @@ function Login() {
   function signOut() {
     setIfManager(false);
     setListTipe(["Inbox", "Starred", "Send email", "Drafts"]);
+    setUpdateProduct(false);
+    setUpdateSale(false);
   }
 
   const handleProfileMenuOpen = (event) => {

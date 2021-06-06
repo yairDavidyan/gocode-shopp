@@ -375,7 +375,7 @@ function UpdateProduct() {
                       <TableCell align="right">
                         <div>
                           <img
-                            style={{ width: "60px", height: "60px" }}
+                            style={{ width: "70px", height: "60px" }}
                             src={product.image}
                             alt={product.title}
                           />
