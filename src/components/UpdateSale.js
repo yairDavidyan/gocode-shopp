@@ -2,8 +2,6 @@ import { createRef, useContext } from "react";
 import CartContext from "./CartContext";
 import { makeStyles } from "@material-ui/core";
 import React from "react";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import "./updateSale.css";
 import SaveIcon from "@material-ui/icons/Save";

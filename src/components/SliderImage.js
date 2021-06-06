@@ -1,5 +1,9 @@
 import React, { useContext, useState } from "react";
 import CartContext from "./CartContext";
+import women from "../images/women.jpg";
+import jewerly from "../images/jewerly.jpg";
+import men from "../images/men.jpg";
+import elecronic from "../images/elecronic.jpg";
 import "./sliderImage.css";
 
 function Slide({ background, text, link, active }) {
@@ -17,7 +21,29 @@ function Slide({ background, text, link, active }) {
   );
 }
 
-function SliderImage({ slides }) {
+function SliderImage() {
+  let slides = [
+    {
+      background: `"${women}"`,
+      text: "women's clothing",
+      link: "https://unsplash.com/anthonydelanoix",
+    },
+    {
+      background: `"${jewerly}"`,
+      text: "jewelery",
+      link: "https://unsplash.com/aleskrivec",
+    },
+    {
+      background: `"${elecronic}"`,
+      text: "electronics",
+      link: "https://unsplash.com/intrepid",
+    },
+    {
+      background: `"${men}"`,
+      text: "men's clothing",
+      link: "https://unsplash.com/intrepid",
+    },
+  ];
   const [activeSlide, setActiveSlide] = useState(0);
 
   const nextSlide = () => {

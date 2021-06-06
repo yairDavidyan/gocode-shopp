@@ -8,43 +8,14 @@ import Timer from "./Timer";
 import Login from "./Login";
 import CartContext from "./CartContext";
 import SliderImage from "./SliderImage";
-import women from "../images/women.jpg";
-import managment from "../images/managment.jpg";
-import jewerly from "../images/jewerly.jpg";
-import men from "../images/men.jpg";
-import elecronic from "../images/elecronic.jpg";
 import homeImage from "../images/homeImage.jpg";
 import SliderFilter from "./SliderFilter";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-
 import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
-import Payment from "./Payment";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 
 function Home() {
-  let slides = [
-    {
-      background: `"${women}"`,
-      text: "women's clothing",
-      link: "https://unsplash.com/anthonydelanoix",
-    },
-    {
-      background: `"${jewerly}"`,
-      text: "jewelery",
-      link: "https://unsplash.com/aleskrivec",
-    },
-    {
-      background: `"${elecronic}"`,
-      text: "electronics",
-      link: "https://unsplash.com/intrepid",
-    },
-    {
-      background: `"${men}"`,
-      text: "men's clothing",
-      link: "https://unsplash.com/intrepid",
-    },
-  ];
   const [choice, setChoice] = useState("all products");
   const [products, setProducts] = useState([]);
   let [productsFilter, setProductsFilter] = useState([]);
@@ -199,7 +170,7 @@ function Home() {
               <>
                 <Header />
 
-                <SliderImage slides={slides} />
+                <SliderImage />
 
                 <Timer />
                 <SliderFilter
