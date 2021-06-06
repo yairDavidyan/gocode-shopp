@@ -9,6 +9,7 @@ import Login from "./Login";
 import CartContext from "./CartContext";
 import SliderImage from "./SliderImage";
 import women from "../images/women.jpg";
+import managment from "../images/managment.jpg";
 import jewerly from "../images/jewerly.jpg";
 import men from "../images/men.jpg";
 import elecronic from "../images/elecronic.jpg";
@@ -17,6 +18,9 @@ import SliderFilter from "./SliderFilter";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
+import Payment from "./Payment";
+import UpdateProduct from "./UpdateProduct";
+import UpdateSale from "./UpdateSale";
 
 function Home() {
   let slides = [
@@ -54,15 +58,21 @@ function Home() {
   const [percent, setPercent] = useState(0);
   const [modal, setModal] = useState(false);
   const [updateSale, setUpdateSale] = useState(false);
+  const [updateProduct, setUpdateProduct] = useState(false);
   const [date, setDate] = useState("");
   const [isConect, setIsConect] = useState(true);
   const [saleCategory, setSaleCategory] = useState("");
+  const [ifManager, setIfManager] = useState(false);
+
   const StyledBadge = withStyles((theme) => ({
     badge: {
-      right: -3,
-      top: 13,
+      right: 38,
+      top: -28,
       border: `2px solid ${theme.palette.background.paper}`,
       padding: "0 4px",
+      width: "4em",
+      height: "4em",
+      transform: "rotate(-0.1turn)",
     },
   }))(Badge);
   const useStyles = makeStyles({
@@ -75,6 +85,13 @@ function Home() {
       marginRight: "20px",
       marginTop: "10px",
       padding: "0px",
+    },
+    iconShoping: {
+      height: "4em",
+      width: "4em",
+      display: "block",
+      zIndex: "5",
+      animation: "updown 1s ease infinite",
     },
   });
   const classes = useStyles();
@@ -161,56 +178,78 @@ function Home() {
         changeDisplay,
         saleCategory,
         setSaleCategory,
+        ifManager,
+        setIfManager,
+        updateProduct,
+        setUpdateProduct,
       }}
     >
       <div className="containerHome">
         {isConect ? (
           <>
             <Login />
-            <Header />
-
-            <SliderImage slides={slides} />
-
-            <Timer />
-            <SliderFilter
-              categories={categories}
-              changeDisplay={changeDisplay}
-            />
-
-            <div className="divContainer">
-              <Cart />
-              {isShown ? (
-                <Load />
-              ) : (
-                <div className="content">
-                  <Products
-                    products={products.filter(
-                      (el) =>
-                        (el.category === choice || choice === "all products") &&
-                        el.price >= value[0] &&
-                        el.price <= value[1]
-                    )}
-                  />
-                  <div class="side">
-                    <IconButton
-                      onClick={() => setIsCart(!isCart)}
-                      aria-label="cart"
-                      className={classes.a}
-                    >
-                      <StyledBadge
-                        badgeContent={
-                          items &&
-                          items.reduce((total, curr) => total + curr.amount, 0)
-                        }
-                        color="secondary"
-                      >
-                        <ShoppingCartIcon />
-                      </StyledBadge>
-                    </IconButton>
-                  </div>
+            {ifManager ? (
+              <div className="container-managment">
+                <div className="table-update">
+                  {updateProduct && <UpdateProduct />}
+                  {updateSale && <UpdateSale />}
                 </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              <>
+                <Header />
+
+                <SliderImage slides={slides} />
+
+                <Timer />
+                <SliderFilter
+                  categories={categories}
+                  changeDisplay={changeDisplay}
+                />
+
+                <div className="divContainer">
+                  <Cart />
+                  {isShown ? (
+                    <Load />
+                  ) : (
+                    <div className="content">
+                      <Products
+                        products={products.filter(
+                          (el) =>
+                            (el.category === choice ||
+                              choice === "all products") &&
+                            el.price >= value[0] &&
+                            el.price <= value[1]
+                        )}
+                      />
+                      <div class="side">
+                        <IconButton
+                          onClick={() => setIsCart(!isCart)}
+                          aria-label="cart"
+                          className={classes.a}
+                        >
+                          <StyledBadge
+                            badgeContent={
+                              items &&
+                              items.reduce(
+                                (total, curr) => total + curr.amount,
+                                0
+                              )
+                            }
+                            color="secondary"
+                          >
+                            <ShoppingCartIcon
+                              fa-rotate-90
+                              className={classes.iconShoping}
+                            />
+                          </StyledBadge>
+                        </IconButton>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
           </>
         ) : (
           <div

@@ -49,6 +49,7 @@ function UpdateSale() {
       border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      marginTop: "10%",
     },
   }));
 
@@ -63,7 +64,7 @@ function UpdateSale() {
   };
   return (
     <>
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
@@ -74,64 +75,64 @@ function UpdateSale() {
         BackdropProps={{
           timeout: 500,
         }}
-      >
-        <Fade in={updateSale}>
-          <div className={classes.paper}>
-            <label for="input">
-              <i class="fa fa-ticket" aria-hidden="true">
-                update sale
-              </i>{" "}
-            </label>
-            <div className="collection-sort">
-              <label className="lableApp">select category for sale</label>
-              <select
-                className="selectCategory"
-                onChange={(e) => changeDisplay(e.target.value)}
-              >
-                <option value="all products">All</option>
-                {categories.map((categories) => (
-                  <option value={categories} key={categories}>
-                    {categories}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label>saving percent:</label>
-              <input
-                ref={textInputPercent}
-                className="inputPayment"
-                type="text"
-                id="sale"
-                name="sale"
-                placeholder=""
-              />
-            </div>
-            <div>
-              <label>up to:</label>
-              <input
-                ref={textInputDate}
-                className="inputPayment"
-                type="datetime-local"
-                id="sale"
-                name="sale"
-                placeholder=""
-              />
-            </div>
-            <Button
-              onClick={() => updateSaleFun()}
-              style={{ left: "63px" }}
-              variant="contained"
-              color="primary"
-              size="small"
-              className={classes.button}
-              startIcon={<SaveIcon />}
+      > */}
+      <Fade in={updateSale}>
+        <div className={classes.paper}>
+          <label for="input">
+            <i class="fa fa-ticket" aria-hidden="true">
+              update sale
+            </i>{" "}
+          </label>
+          <div className="collection-sort">
+            <label className="lableApp">select category for sale</label>
+            <select
+              className="selectCategory"
+              onChange={(e) => changeDisplay(e.target.value)}
             >
-              Save
-            </Button>
+              <option value="all products">All</option>
+              {categories.map((categories) => (
+                <option value={categories} key={categories}>
+                  {categories}
+                </option>
+              ))}
+            </select>
           </div>
-        </Fade>
-      </Modal>
+          <div>
+            <label>saving percent:</label>
+            <input
+              ref={textInputPercent}
+              className="inputPayment"
+              type="text"
+              id="sale"
+              name="sale"
+              placeholder=""
+            />
+          </div>
+          <div>
+            <label>up to:</label>
+            <input
+              ref={textInputDate}
+              className="inputPayment"
+              type="datetime-local"
+              id="sale"
+              name="sale"
+              placeholder=""
+            />
+          </div>
+          <Button
+            onClick={() => updateSaleFun()}
+            style={{ left: "63px" }}
+            variant="contained"
+            color="primary"
+            size="small"
+            className={classes.button}
+            startIcon={<SaveIcon />}
+          >
+            Save
+          </Button>
+        </div>
+      </Fade>
+      {/* </Modal> */}
     </>
   );
 

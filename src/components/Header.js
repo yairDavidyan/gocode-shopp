@@ -70,7 +70,7 @@ function Header() {
         </div>
         <div className="box box3">
           {" "}
-          <IconButton
+          {/* <IconButton
             onClick={() => setIsCart(!isCart)}
             aria-label="cart"
             className={classes.a}
@@ -83,7 +83,7 @@ function Header() {
             >
               <ShoppingCartIcon />
             </StyledBadge>
-          </IconButton>
+          </IconButton> */}
         </div>
       </div>
     </>

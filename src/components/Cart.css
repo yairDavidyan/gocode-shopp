@@ -282,7 +282,7 @@ label {
   margin-top: 100px;
 }
 
-.card {
+/* .card {
   margin-bottom: 30px;
   border: 0;
   -webkit-transition: all 0.3s ease;
@@ -291,7 +291,7 @@ label {
   border-radius: 8px;
   -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, 0.05);
   box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, 0.05);
-}
+} */
 .row {
   display: flex;
   flex-wrap: wrap;
