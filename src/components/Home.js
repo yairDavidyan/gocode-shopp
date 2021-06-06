@@ -176,6 +176,7 @@ function Home() {
               </div>
             ) : (
               <>
+                <div></div>
                 <Header />
 
                 <SliderImage />

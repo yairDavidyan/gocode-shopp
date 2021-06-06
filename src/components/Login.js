@@ -29,8 +29,6 @@ import MailIcon from "@material-ui/icons/Mail";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import { IconButton, makeStyles, Menu } from "@material-ui/core";
-import UpdateSale from "./UpdateSale";
-import { EqualizerTwoTone } from "@material-ui/icons";
 
 function Login() {
   const { updateSale, setUpdateSale } = useContext(CartContext);
@@ -48,7 +46,6 @@ function Login() {
     "Send email",
     "Drafts",
   ]);
-  let update;
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -110,13 +107,16 @@ function Login() {
   const handleClickOpenManager = () => {
     setOpenManager(true);
     setAnchorEl(null);
-    setListTipe(["update sale", "update product", "settings", "users"]);
   };
 
-  const handleCloseManager = () => {
-    if (passwordManager === "") {
+  const handleOpenManager = (passwordManager) => {
+    if (passwordManager === "1") {
       setIfManager(true);
+      setOpenManager(false);
+      setListTipe(["update sale", "update product", "settings", "users"]);
     }
+  };
+  const handleCloseManager = () => {
     setOpenManager(false);
   };
 
@@ -186,7 +186,7 @@ function Login() {
         </div>
         <Dialog
           open={openManager}
-          onClose={handleCloseManager}
+          onClose={handleOpenManager}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Manager login</DialogTitle>
@@ -208,7 +208,7 @@ function Login() {
               Cancel
             </Button>
             <Button
-              onClick={() => handleCloseManager(passwordManager)}
+              onClick={() => handleOpenManager(passwordManager)}
               color="primary"
             >
               login

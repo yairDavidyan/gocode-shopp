@@ -94,6 +94,7 @@ label {
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid #c5c7ff;
+  margin-top: 7px;
 }
 .cartFixed {
   margin-right: 17px;
@@ -180,7 +181,7 @@ label {
   min-width: 450px;
   max-width: 500px;
   padding-right: 19px;
-  margin-top: 12px;
+  background-color: #00000021;
 }
 .labal1 {
   padding: 8px;
@@ -190,7 +191,7 @@ label {
 }
 
 .titleCart {
-  background: rgb(203, 203, 206);
+  background: rgb(255, 213, 79);
   max-width: 100%;
   margin: 0 auto;
   display: grid;

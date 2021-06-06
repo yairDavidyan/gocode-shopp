@@ -19,6 +19,7 @@ function UpdateSale() {
     snackBar,
     setSnackBar,
     setMessage,
+    changeDisplay,
   } = useContext(CartContext);
 
   const categories = products
@@ -27,11 +28,13 @@ function UpdateSale() {
   let textInputDate = createRef();
   let textInputPercent = createRef();
 
-  function changeDisplay(value) {
+  function change(value) {
     if (value === "") {
-      setSaleCategory("all product");
+      setSaleCategory("all products");
+    } else {
+      setSaleCategory(value);
     }
-    setSaleCategory(value);
+    changeDisplay("all products");
   }
 
   function updateSaleFun() {
@@ -90,7 +93,7 @@ function UpdateSale() {
             <label className="lableApp">select category for sale</label>
             <select
               className="selectCategory"
-              onChange={(e) => changeDisplay(e.target.value)}
+              onChange={(e) => change(e.target.value)}
             >
               <option value="all products">All</option>
               {categories.map((categories) => (

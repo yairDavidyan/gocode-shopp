@@ -13,6 +13,8 @@ function SliderFilter({ categories, changeDisplay }) {
     value,
   } = useContext(CartContext);
 
+  const selected = "selected";
+
   const handleChange = (even, newValue) => {
     setValue(() => newValue);
     // update filter number product

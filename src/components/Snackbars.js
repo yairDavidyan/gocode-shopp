@@ -36,7 +36,7 @@ function Snackbars() {
 
   return (
     <div className={classes.root}>
-      <Snackbar open={snackBar} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={snackBar} autoHideDuration={2000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           {message}
         </Alert>

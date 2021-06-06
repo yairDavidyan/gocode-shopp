@@ -55,6 +55,7 @@ function SliderImage() {
     let slide = activeSlide - 1 < 0 ? slides.length - 1 : activeSlide - 1;
     setActiveSlide(slide);
   }
+
   setTimeout(() => {
     nextSlide();
   }, 3000);
