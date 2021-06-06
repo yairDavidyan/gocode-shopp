@@ -4,7 +4,7 @@
   margin-top: 20px;
 }
 .containerHome {
-  background-color: #00000024;
+  background-color: #00000014;
 }
 /* body {
   background-color: #c8e0eb;
@@ -48,7 +48,7 @@
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url(../images/managment.jpg);
+    url(https://images.pexels.com/photos/171198/pexels-photo-171198.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
   margin-top: 10px;
 }
 .table-update {
