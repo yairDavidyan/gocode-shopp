@@ -171,6 +171,7 @@ function Cart() {
                   <div className="totals-item">
                     <label>Savings</label>
                     <div style={{ float: "right" }}>
+                      $
                       {(
                         items.reduce(
                           (total, curr) => total + curr.price * curr.amount,

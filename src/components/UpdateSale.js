@@ -1,6 +1,6 @@
-import { createRef, useContext, useState } from "react";
+import { createRef, useContext } from "react";
 import CartContext from "./CartContext";
-import { makeStyles, Snackbar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import Fade from "@material-ui/core/Fade";
 import "./updateSale.css";
@@ -13,10 +13,8 @@ function UpdateSale() {
     setUpdateSale,
     setDate,
     setPercent,
-    saleCategory,
     setSaleCategory,
     products,
-    snackBar,
     setSnackBar,
     setMessage,
     changeDisplay,
@@ -61,27 +59,11 @@ function UpdateSale() {
 
   const classes = useStyles();
 
-  const handleOpen = () => {
-    setUpdateSale(true);
-  };
-
   const handleClose = () => {
     setUpdateSale(false);
   };
   return (
     <>
-      {/* <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={updateSale}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      > */}
       <Fade in={updateSale}>
         <div className={classes.paper}>
           <label for="input">
@@ -138,25 +120,7 @@ function UpdateSale() {
           </Button>
         </div>
       </Fade>
-      {/* </Modal> */}
     </>
   );
-
-  // <Modal isOpen={true} onRequestClose={updateSale}>
-  {
-    /* <div>
-        <label for="input">
-          <i class="fa fa-envelope"></i> sale
-        </label>
-        <input
-          className="inputPayment"
-          type="text"
-          id="sale"
-          name="sale"
-          placeholder="%%"
-        />
-      </div>
-    </Modal> */
-  }
 }
 export default UpdateSale;

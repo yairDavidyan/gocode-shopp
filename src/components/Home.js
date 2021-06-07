@@ -176,58 +176,60 @@ function Home() {
               </div>
             ) : (
               <>
-                <div></div>
                 <Header />
 
                 <SliderImage />
 
                 <Timer />
-                <SliderFilter
-                  categories={categories}
-                  changeDisplay={changeDisplay}
-                />
 
-                <div className="divContainer">
-                  <Cart />
-                  {isShown ? (
-                    <Load />
-                  ) : (
-                    <div className="content">
-                      <Products
-                        products={products.filter(
-                          (el) =>
-                            (el.category === choice ||
-                              choice === "all products") &&
-                            el.price >= value[0] &&
-                            el.price <= value[1]
-                        )}
-                      />
-                      <div class="side">
-                        <IconButton
-                          onClick={() => setIsCart(!isCart)}
-                          aria-label="cart"
-                          className={classes.a}
-                        >
-                          <StyledBadge
-                            badgeContent={
-                              items &&
-                              items.reduce(
-                                (total, curr) => total + curr.amount,
-                                0
-                              )
-                            }
-                            color="secondary"
+                {isShown ? (
+                  <Load />
+                ) : (
+                  <>
+                    <SliderFilter
+                      categories={categories}
+                      changeDisplay={changeDisplay}
+                    />
+
+                    <div className="divContainer">
+                      <Cart />
+                      <div className="content">
+                        <Products
+                          products={products.filter(
+                            (el) =>
+                              (el.category === choice ||
+                                choice === "all products") &&
+                              el.price >= value[0] &&
+                              el.price <= value[1]
+                          )}
+                        />
+                        <div class="side">
+                          <IconButton
+                            onClick={() => setIsCart(!isCart)}
+                            aria-label="cart"
+                            className={classes.a}
                           >
-                            <ShoppingCartIcon
-                              fa-rotate-90
-                              className={classes.iconShoping}
-                            />
-                          </StyledBadge>
-                        </IconButton>
+                            <StyledBadge
+                              badgeContent={
+                                items &&
+                                items.reduce(
+                                  (total, curr) => total + curr.amount,
+                                  0
+                                )
+                              }
+                              color="secondary"
+                            >
+                              <ShoppingCartIcon
+                                fa-rotate-90
+                                className={classes.iconShoping}
+                              />
+                            </StyledBadge>
+                          </IconButton>
+                        </div>
                       </div>
                     </div>
-                  )}
-                </div>
+                  </>
+                )}
               </>
             )}
           </>

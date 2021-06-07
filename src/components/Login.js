@@ -14,9 +14,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import CartContext from "./CartContext";
-
-//********************************************************* */
-
 import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -27,7 +24,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-
 import { IconButton, makeStyles, Menu } from "@material-ui/core";
 
 function Login() {
@@ -38,8 +34,7 @@ function Login() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuId = "primary-search-account-menu";
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { ifManager, setIfManager, updateProduct, setUpdateProduct } =
-    useContext(CartContext);
+  const { ifManager, setIfManager, setUpdateProduct } = useContext(CartContext);
   const [listType, setListTipe] = useState([
     "Inbox",
     "Starred",
@@ -73,7 +68,6 @@ function Login() {
   }));
   const classes = useStyles();
 
-  //************************************************ */
   function signOut() {
     setIfManager(false);
     setListTipe(["Inbox", "Starred", "Send email", "Drafts"]);
@@ -94,9 +88,6 @@ function Login() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
   const handleClickOpenUser = () => {
     setOpenUser(true);
   };
@@ -132,7 +123,6 @@ function Login() {
   }
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -221,7 +211,6 @@ function Login() {
     </Menu>
   );
 
-  //****************************************************** */
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -270,34 +259,6 @@ function Login() {
       </List>
     </div>
   );
-  // const useStyles = makeStyles((theme) => ({
-  //   root: {
-  //     width: "100%",
-  //     maxWidth: 360,
-  //     backgroundColor: theme.palette.background.paper,
-  //   },
-  //   nested: {
-  //     paddingLeft: theme.spacing(4),
-  //     backgroundColor: "#dfdcdc",
-  //   },
-
-  //   list: {
-  //     height: "24px",
-  //   },
-
-  //   containedPrimary: {
-  //     color: "#202020",
-  //     backgroundColor: "#fc0738 ",
-  //     marginBottom: "5px",
-  //     height: "21px",
-  //   },
-  //   nested: {
-  //     backgroundColor: "black",
-  //     paddingLeft: "0px",
-  //     paddingRight: "0px",
-  //     // position: "absolute",
-  //   },
-  // }));
 
   return (
     <div className={classes.root}>

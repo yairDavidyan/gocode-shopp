@@ -93,7 +93,7 @@ label {
 .product {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #c5c7ff;
+  border-bottom: 3px solid rgb(255, 213, 79);
   margin-top: 7px;
 }
 .cartFixed {

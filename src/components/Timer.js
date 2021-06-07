@@ -13,7 +13,6 @@ function Timer() {
 
     if (difference > 0) {
       setIsSale(true);
-      //setPercent(20);
       timeLeft = {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),

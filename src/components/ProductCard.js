@@ -24,18 +24,6 @@ function ProductCard({
     setSaleCategory,
   } = useContext(CartContext);
 
-  //const [productWhere, setProductWhere] = useState("");
-
-  function ifSale() {
-    let salePrice;
-    salePrice = (price - (price / 100) * percent).toFixed(2);
-    if (isSale) {
-      return salePrice;
-    } else {
-      return;
-    }
-  }
-
   function addCart() {
     setProducts((prev) => {
       return prev.map((item) =>
@@ -118,7 +106,10 @@ function ProductCard({
             </h6>
             {isSale &&
               (saleCategory === product.category || saleCategory === "") && (
-                <h6> {ifSale()} </h6>
+                <h6>
+                  {" "}
+                  {isSale && (price - (price / 100) * percent).toFixed(2)}
+                </h6>
               )}
             <div className="plusMinus" style={{ display: "flex" }}>
               <button className="plus-button" onClick={deleteCart}>
