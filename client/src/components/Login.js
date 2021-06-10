@@ -24,17 +24,18 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { IconButton, makeStyles, Menu } from "@material-ui/core";
+import { IconButton, makeStyles, Menu, Modal } from "@material-ui/core";
+import SignInSide from "./SignInSide";
 
 function Login() {
-  const { updateSale, setUpdateSale } = useContext(CartContext);
-  const [openUser, setOpenUser] = useState(false);
+  const { setUpdateSale } = useContext(CartContext);
   const [openManager, setOpenManager] = useState(false);
   const [passwordManager, setPasswordManager] = useState("");
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const menuId = "primary-search-account-menu";
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { ifManager, setIfManager, setUpdateProduct } = useContext(CartContext);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const { ifManager, setIfManager, setUpdateProduct, openUser, setOpenUser } =
+    useContext(CartContext);
   const [listType, setListTipe] = useState([
     "Inbox",
     "Starred",
@@ -45,6 +46,10 @@ function Login() {
     root: {
       flexGrow: 1,
     },
+    // modal: {
+    //   top: "800px",
+    //   left: "900px",
+    // },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -90,6 +95,7 @@ function Login() {
 
   const handleClickOpenUser = () => {
     setOpenUser(true);
+    setAnchorEl(null);
   };
 
   const handleCloseUser = () => {
@@ -134,17 +140,23 @@ function Login() {
       onClose={handleMenuClose}
     >
       <div>
+        <MenuItem onClick={handleClickOpenUser}>user Login</MenuItem>
+        {/* <Dialog
+          open={openUser}
+          onClose={handleCloseUser}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">User login</DialogTitle> */}
         <div>
-          <MenuItem onClick={handleClickOpenUser}>user Login</MenuItem>
-
-          <Dialog
+          <Modal
+            className={classes.modal}
             open={openUser}
             onClose={handleCloseUser}
-            aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">User login</DialogTitle>
-
-            <DialogContent>
+            <SignInSide />
+          </Modal>
+        </div>
+        {/* <DialogContent>
               <DialogContentText></DialogContentText>
 
               <TextField
@@ -163,17 +175,16 @@ function Login() {
                 type="text"
                 fullWidth
               />
-            </DialogContent>
-            <DialogActions>
+            </DialogContent> */}
+        {/* <DialogActions>
               <Button onClick={handleCloseUser} color="primary">
                 Cancel
               </Button>
               <Button onClick={handleCloseUser} color="primary">
                 login
               </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
+            </DialogActions> */}
+        {/* </Dialog> */}
         <Dialog
           open={openManager}
           onClose={handleOpenManager}

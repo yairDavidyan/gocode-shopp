@@ -15,11 +15,13 @@ import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
+import CardDetails from "./CardDetails";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
   const [products, setProducts] = useState([]);
   let [productsFilter, setProductsFilter] = useState([]);
+  let [minMax, setMinMax] = useState([]);
   const [isShown, setShown] = useState(true);
   const [items, setItems] = useState([]);
   const [value, setValue] = useState([]);
@@ -37,6 +39,20 @@ function Home() {
   const [ifManager, setIfManager] = useState(false);
   const [snackBar, setSnackBar] = useState(false);
   const [message, setMessage] = useState("");
+  const [openUser, setOpenUser] = useState(false);
+
+  const calMin = (data) => {
+    return data.reduce(
+      (min, p) => (p.price < min ? p.price : min),
+      data[0].price
+    );
+  };
+  const calMax = (data) => {
+    return data.reduce(
+      (max, p) => (p.price > max ? p.price : max),
+      data[0].price
+    );
+  };
 
   const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -68,6 +84,7 @@ function Home() {
       animation: "updown 1s ease infinite",
     },
   });
+
   const classes = useStyles();
   const categories = products
     .map((p) => p.category)
@@ -82,16 +99,8 @@ function Home() {
           setTotalFilter(data.length),
           setTotalProducts(data.length),
           setProductsFilter(data),
-          setValue([
-            data.reduce(
-              (min, p) => (p.price < min ? p.price : min),
-              data[0].price
-            ),
-            data.reduce(
-              (max, p) => (p.price > max ? p.price : max),
-              data[0].price
-            ),
-          ])
+          setMinMax(data),
+          setValue([calMin(data), calMax(data)])
         )
       )
       .then((data) =>
@@ -108,17 +117,9 @@ function Home() {
     productsFilter = products.filter(
       (el) => el.category === category || category === "all products"
     );
+    setMinMax(productsFilter);
     // set min-max value in slider by select category
-    setValue(() => [
-      productsFilter.reduce(
-        (min, p) => (p.price < min ? p.price : min),
-        productsFilter[0].price
-      ),
-      productsFilter.reduce(
-        (max, p) => (p.price > max ? p.price : max),
-        productsFilter[0].price
-      ),
-    ]);
+    setValue([calMin(productsFilter), calMax(productsFilter)]);
     // number product from all product category
     setTotalProducts(productsFilter.length);
     setTotalFilter(productsFilter.length);
@@ -126,6 +127,7 @@ function Home() {
   return (
     <CartContext.Provider
       value={{
+        choice,
         isCart,
         setIsCart,
         totalFilter,
@@ -160,6 +162,11 @@ function Home() {
         setSnackBar,
         message,
         setMessage,
+        minMax,
+        calMax,
+        calMin,
+        openUser,
+        setOpenUser,
       }}
     >
       <div className="containerHome">
@@ -190,7 +197,7 @@ function Home() {
                       categories={categories}
                       changeDisplay={changeDisplay}
                     />
-
+                    <CardDetails />
                     <div className="divContainer">
                       <Cart />
                       <div className="content">

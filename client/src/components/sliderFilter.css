@@ -50,14 +50,13 @@
   display: flex;
   flex-direction: column;
 }
-
-@media (pointer: coarse) {
-  .MuiSlider-root {
-    padding: 20px 0;
-    width: 35%;
-  }
-  .MuiSlider-root {
-    width: 35%;
-    top: 20px;
-  }
+.rail {
+  width: 100%;
+  height: 25px;
+  display: block;
+  opacity: 0.38;
+  position: absolute;
+  border-radius: 1px;
+  background-color: currentColor;
+  top: 50px;
 }

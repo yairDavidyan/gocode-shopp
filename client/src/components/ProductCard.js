@@ -1,5 +1,5 @@
 import "./productCard.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import CartContext from "./CartContext";
 import { Link } from "react-router-dom";
 import addLogo from "../images/addLogo.png";
@@ -15,23 +15,17 @@ function ProductCard({
   amount,
   id,
 }) {
-  const {
-    setItems,
-    setProducts,
-    isSale,
-    percent,
-    saleCategory,
-    setSaleCategory,
-  } = useContext(CartContext);
+  const { setItems, setProducts, isSale, percent, saleCategory } =
+    useContext(CartContext);
 
-  function addCart() {
+  function addProduct() {
     setProducts((prev) => {
       return prev.map((item) =>
         item.id === product.id ? { ...item, amount: item.amount + 1 } : item
       );
     });
     setItems((prev) => {
-      const isFound = prev.find((item) => item.id === product.id);
+      const isFound = prev.some((item) => item.id === product.id);
       if (isFound) {
         return prev.map((item) =>
           item.id === product.id ? { ...item, amount: item.amount + 1 } : item
@@ -40,7 +34,7 @@ function ProductCard({
       return [...prev, { ...product, amount: 1 }];
     });
   }
-  function deleteCart() {
+  function deleteProduct() {
     setProducts((prev) => {
       return prev.map((item) =>
         item.id === product.id
@@ -52,15 +46,9 @@ function ProductCard({
     });
 
     setItems((prev) => {
-      let index;
-      const find = prev.find((item) => item.id === product.id);
-      console.log(find);
-      if (find) {
-        index = prev.findIndex((x) => x.id === find.id);
-        console.log(index);
-      }
+      const index = prev.findIndex((x) => x.id === product.id);
       if (product.amount > 0) {
-        if (find.amount === 1) {
+        if (prev[index].amount === 1) {
           prev.splice(index, 1);
           return prev;
         } else {
@@ -89,6 +77,11 @@ function ProductCard({
               <img src={image} alt={title} title={description} />
             </div>
           </Link>
+
+          <div className="slider__slide__text">
+            <div>bhhghgj</div>
+          </div>
+
           <div className="product-info">
             <h5>{title}</h5>
             <h6
@@ -112,11 +105,11 @@ function ProductCard({
                 </h6>
               )}
             <div className="plusMinus" style={{ display: "flex" }}>
-              <button className="plus-button" onClick={deleteCart}>
+              <button className="plus-button" onClick={deleteProduct}>
                 <img style={{ height: "70%" }} src={minusLogo}></img>
               </button>
               <h3 style={{ marginTop: "23px" }}>{amount}</h3>
-              <button className="plus-button" onClick={addCart}>
+              <button className="plus-button" onClick={addProduct}>
                 <img style={{ height: "70%" }} src={addLogo}></img>
               </button>
             </div>

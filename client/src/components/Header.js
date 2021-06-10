@@ -1,10 +1,4 @@
 import "./header.css";
-import Slider from "@material-ui/core/Slider";
-import { useContext, useState } from "react";
-import CartContext from "./CartContext";
-import { makeStyles } from "@material-ui/core/styles";
-import { Badge, IconButton, withStyles } from "@material-ui/core";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import bali from "../images/bali.png";
 import Search from "./Search";
 

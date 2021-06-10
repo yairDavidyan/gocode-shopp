@@ -10,15 +10,15 @@
 }
 .product-details {
   float: left;
-  width: 40%;
+  width: 34%;
 }
 .product-price {
   float: left;
-  width: 15%;
+  width: 18%;
 }
 .product-quantity {
   float: left;
-  width: 13%;
+  width: 14%;
 }
 .product-removal {
   float: left;
@@ -128,7 +128,9 @@ label {
   font-size: 9px;
 }
 .product .product-quantity input {
-  width: 40px;
+  width: 39px;
+  background-color: rgb(255, 213, 79);
+  padding: 6px 0px 5px 8px;
 }
 .product .remove-product {
   border: 0;

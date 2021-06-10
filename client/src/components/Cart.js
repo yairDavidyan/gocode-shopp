@@ -1,41 +1,35 @@
 import { useContext } from "react";
 import CartContext from "./CartContext";
 import "./Cart.css";
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles, TextField } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Fade from "react-reveal/Fade";
 import Payment from "./Payment";
-import { useState } from "react";
-import Modal from "react-modal";
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    marginTop: "50px",
+  },
+  taxtFilde: {
+    border: "none",
+  },
+}));
 
 function Cart() {
   const { setItems, setProducts, items, isCart, percent, modal, setModal } =
     useContext(CartContext);
 
-  let index;
-  const useStyles = makeStyles((theme) => ({
-    button: {
-      marginTop: "50px",
-    },
-  }));
-
   const classes = useStyles();
   function amountChange(val, e) {
     setItems((prev) => {
-      //find object in items In order to update amount
-      const find = prev.find((item) => item.id === val.id);
-      if (find) {
-        //index the object in item
-        index = prev.findIndex((x) => x.id === find.id);
-      }
+      const index = prev.findIndex((x) => x.id === val.id);
       // if remove product in items
-      if (find.amount === 1 && find.amount > e.target.value) {
+      if (prev[index].amount === 1 && prev[index].amount > e.target.value) {
         prev.splice(index, 1);
         return prev;
         /// if up amount
-      } else if (find.amount < e.target.value) {
+      } else if (prev[index].amount < e.target.value) {
         prev[index].amount += 1;
-        console.log(prev);
         return prev;
       } // down amount
       else {
@@ -52,16 +46,8 @@ function Cart() {
   }
   function deleteCart(el) {
     setItems((prev) => {
-      const find = prev.find((item) => item.id === el.id);
-      console.log("find: ", find);
-      if (find) {
-        //index the object in item
-        index = prev.findIndex((x) => x.id === find.id);
-        console.log("index: ", index);
-      }
+      const index = prev.findIndex((item) => item.id === el.id);
       prev.splice(index, 1);
-      console.log("prev: ", prev);
-
       return prev;
     });
     setProducts((prev) => {
@@ -98,11 +84,16 @@ function Cart() {
                         {(el.price - (el.price / 100) * percent).toFixed(2)}
                       </div>
                       <div className="product-quantity">
-                        <input
+                        <TextField
+                          className={classes.root}
                           onChange={(e) => amountChange(el, e)}
                           type="number"
                           value={el.amount}
                           min="0"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          variant="outlined"
                         />
                         <div className="product-removal">
                           <Button
@@ -132,6 +123,7 @@ function Cart() {
                             <div class="col-sm-12 empty-cart-cls text-center">
                               <img
                                 src="https://i.imgur.com/dCdflKN.png"
+                                alt=""
                                 width="130"
                                 height="130"
                                 class="img-fluid mb-4 mr-3"

@@ -11,12 +11,14 @@ function SliderFilter({ categories, changeDisplay }) {
     totalProducts,
     setValue,
     value,
+    choice,
+    minMax,
+    calMin,
+    calMax,
   } = useContext(CartContext);
 
-  const selected = "selected";
-
   const handleChange = (even, newValue) => {
-    setValue(() => newValue);
+    setValue(newValue);
     // update filter number product
     let select = document.querySelector(".selectCategory").value;
     totalFilter = products.filter(
@@ -31,12 +33,22 @@ function SliderFilter({ categories, changeDisplay }) {
     root: {
       color: "#f50057",
     },
+
     a: {
       marginRight: "20px",
       marginTop: "10px",
       padding: "0px",
     },
   });
+
+  function marks() {
+    let arrMark = [];
+    minMax.length > 0 &&
+      minMax.map((item) => {
+        arrMark.push({ value: item.price });
+      });
+    return arrMark;
+  }
 
   const classes = useStyles();
   return (
@@ -51,7 +63,9 @@ function SliderFilter({ categories, changeDisplay }) {
           <Slider
             className={classes.root}
             value={value}
-            max={1000}
+            marks={marks()}
+            min={minMax.length > 0 && calMin(minMax)}
+            max={minMax.length > 0 && calMax(minMax)}
             onChange={handleChange}
             valueLabelDisplay="on"
             aria-labelledby="range-slider"
@@ -65,6 +79,7 @@ function SliderFilter({ categories, changeDisplay }) {
             <div className="collection-sort">
               <label className="lableApp">Filter by:</label>
               <select
+                value={choice}
                 className="selectCategory"
                 onChange={(e) => changeDisplay(e.target.value)}
               >

@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+.cart1 {
+  position: relative;
+  width: 300px;
+  height: auto;
+  cursor: pointer;
+  overflow: hidden;
+}
+.cart__number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  padding: 50px 30px 10px;
+}
+.cart__number--cartIcon {
+  color: #fff;
+  font-size: 5rem;
+}
+.cart__number--num,
+.cart__number--popup,
+.cart__number--backgroundColor {
+  position: absolute;
+  top: 8%;
+  right: 17%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: #fff;
+}
+.cart__number--popup {
+  transition: all 0.3s ease-out;
+  background-color: #fc565a !important;
+  transform: scale(0);
+}
+.cart__number--num {
+  transition: all 0.3s ease-out;
+}
+.cart__number--backgroundColor {
+  background-color: #fc565a !important;
+  transform: scale(0);
+}
+.cart__buttons {
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart__buttons button {
+  background-color: #ff6263;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cart__buttons button:hover {
+  background-color: #eb4d4b;
+}
+.cart__buttons--decrease,
+.cart__buttons--increase {
+  font-size: 20px;
+  color: #fff;
+  padding: 15px 20px;
+  background-color: #f27b1d;
+  transition: all 0.3s ease-out;
+}
+.cart__buttons--decrease {
+  transform: translateX(64px);
+}
+.cart__buttons--decrease--slide {
+  transform: translateX(0px);
+}
+.cart__buttons--increase {
+  transform: translateX(-64px);
+}
+.cart__buttons--increase--slide {
+  transform: translateX(0px);
+}
+.cart__buttons--addToCart {
+  margin: 0 auto;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.3s;
+  width: 180px;
+  z-index: 100;
+}
+.popup-open {
+  /* animation: name duration timing-function delay iteration-count direction fill-mode;
+	 */
+  animation: pop-up 0.3s ease-out 0.2s;
+  transition-delay: 0.3s;
+  transform: scale(1);
+}
+.popup-two {
+  animation: pop-up-2 0.3s ease-out !important;
+  transition-delay: 0.3s;
+  transform: scale(1);
+}
+@keyframes pop-up {
+  0% {
+    transform: scale(0);
+  }
+  20% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes pop-up-2 {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
