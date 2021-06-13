@@ -91,7 +91,7 @@ function Home() {
     .filter((value, index, array) => array.indexOf(value) === index);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("api/product")
       .then((response) => response.json())
       .then(
         (data) => (
@@ -111,6 +111,7 @@ function Home() {
       .then(setShown(false));
   }, []);
 
+  console.log(products);
   function changeDisplay(category) {
     setChoice(category);
     //get products by category

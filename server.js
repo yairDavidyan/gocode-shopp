@@ -1,3 +1,4 @@
+var $ = require("jquery");
 const express = require("express");
 const app = express();
 app.use(express.json());
@@ -40,13 +41,16 @@ const Order = model("Order", OrderSchema);
 
 //*************************************************************** */
 
-//db product
-
-function readProduct(callback) {
-  Product.find({})
-    .exec()
-    .then((productArr) => callback(productArr));
-}
+app.get("/api/productMinMax", (req, res) => {
+  const { min, max } = req.query;
+  if (min && max) {
+    Product.find({ price: { $gte: +min } } && { price: { $lte: +max } }).then(
+      (product) => res.send(product)
+    );
+  } else {
+    Product.find({}).then((product) => res.send(product));
+  }
+});
 //filter by id
 app.get("/api/product/:id", (req, res) => {
   const { id } = req.params;
@@ -63,10 +67,10 @@ app.post("/api/product", (req, res) => {
   Product.insertMany([
     {
       title: req.body.title,
-      price: 109.95,
-      description: "blabla",
-      category: "men's clothing",
-      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      price: req.body.price,
+      description: req.body.description,
+      category: req.body.category,
+      image: req.body.image,
     },
   ]).then((addProduct) => {
     res.send(addProduct);
@@ -75,47 +79,45 @@ app.post("/api/product", (req, res) => {
 
 //filter by title search
 app.get("/api/product", (req, res) => {
-  readProduct((products) => {
-    const { title, category } = req.query;
-    console.log(title);
-    if (title || category) {
-      let updateArr = products.filter(
-        (item) => item.title.includes(title) || item.category.includes(category)
-      );
-      res.send(updateArr.length ? updateArr : "no data");
-    } else {
-      res.send(products);
-    }
-  });
+  const { title, category } = req.query;
+  console.log(req.query);
+  if (title || category) {
+    Product.find(
+      { title: { $regex: `.*${title}.*` } } || {
+        category: { $regex: `.*${category}.*` },
+      }
+    ).then((product) => res.send(product));
+  } else {
+    Product.find({}).then((product) => res.send(product));
+  }
 });
 
 //update product
 app.put("/api/product/:id", (req, res) => {
   const { id } = req.params;
-  console.log(id);
   const { title, price, category, description, image } = req.body;
-  readProduct((products) => {
-    products.map((item) =>
-      item.id === id
-        ? Product.updateOne({
-            price: price ? price : item.price,
-            title: title ? title : item.title,
-            category: category ? category : item.category,
-            description: description ? description : item.description,
-            image: image ? image : item.image,
-          }).then((updateProduct) => res.send(updateProduct))
-        : item
-    );
-  });
+  const updateArr = {
+    ...(!!title && { title }),
+    ...(!!price && { price }),
+    ...(!!category && { category }),
+    ...(!!description && { description }),
+    ...(!!image && { image }),
+  };
+
+  Product.findByIdAndUpdate(id, updateArr, { new: true })
+    .then((product) => res.send(product))
+    .catch((err) => {
+      res.status(500);
+      res.send(err.massage);
+    });
 });
 
 //dalete product
 app.delete("/api/product/:id", (req, res) => {
-  readProduct((products) => {
-    const updateArr = products.find((item) => item.id !== req.params.id);
-    Product.deleteMany({ updateArr }).then((deleteProduct) => res.send("yes"));
-  });
+  const { id } = req.params;
+  Product.findByIdAndDelete(id).then(res.send("delete"));
 });
+
 //***************************************************************** */
 
 //db custumer
@@ -130,10 +132,10 @@ app.post("/customer", (req, res) => {
   Customer.insertMany([
     {
       name: req.body.name,
-      lastName: "yam",
+      lastName: req.body.lastName,
       phone: req.body.phone,
-      mail: "yair@gmail.com",
-      adress: "bne brak",
+      mail: req.body.mail,
+      adress: req.body.adress,
     },
   ]).then((customer) => {
     res.send(customer);
@@ -192,25 +194,6 @@ app.post("/order", (req, res) => {
   });
 });
 
-//***************************************************************** */
-// filter by slider
-// app.get("/product", (req, res) => {
-//   readProduct((products) => {
-//     const min = 100;
-//     const max = 1000;
-
-//     const product = products.filter(
-//       (item) => item.price >= min && item.price <= max
-//     );
-//     if (product) {
-//       res.send(product);
-//     } else {
-//       res.status(404);
-//       res.send();
-//     }
-//   });
-// });
-
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/client/build/index.html");
 });
@@ -226,5 +209,5 @@ mongoose
   )
   .then(() => {
     console.log("connect");
-    app.listen(process.env.PORT || 8080);
+    app.listen(8080);
   });
