@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,6 +15,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CartContext from "./CartContext";
 import IconButton from "@material-ui/core/IconButton";
+import SignUp from "./SignUp";
+import { Modal } from "@material-ui/core";
 
 function Copyright() {
   return (
@@ -68,89 +70,102 @@ const useStyles = makeStyles((theme) => ({
     left: "46%",
     top: "50px",
   },
+  link: {
+    cursor: "pointer",
+  },
 }));
 
-export default function SignInSide() {
+export default function SignInSide({ close }) {
   const classes = useStyles();
-  const { setOpenUser } = useContext(CartContext);
+  const { setOpenUser, setIsSignUp } = useContext(CartContext);
+  function openSignUp() {
+    close();
+    setIsSignUp(true);
+  }
 
   return (
-    <Grid container component="main" className={classes.root}>
-      {/* <CssBaseline /> */}
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+    <>
+      <Grid container component="main" className={classes.root}>
+        {/* <CssBaseline /> */}
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link
+                    className={classes.link}
+                    onClick={openSignUp}
+                    variant="body2"
+                  >
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-            <IconButton
-              color="secondary"
-              aria-label="add an alarm"
-              onClick={() => setOpenUser(false)}
-              variant="contained"
-              color="primary"
-              href="#contained-buttons"
-              className={classes.btn}
-            >
-              <ExitToAppIcon />
-            </IconButton>
-          </form>
-        </div>
+              <Box mt={5}>
+                <Copyright />
+              </Box>
+              <IconButton
+                color="secondary"
+                aria-label="add an alarm"
+                onClick={() => setOpenUser(false)}
+                variant="contained"
+                color="primary"
+                href="#contained-buttons"
+                className={classes.btn}
+              >
+                <ExitToAppIcon />
+              </IconButton>
+            </form>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 }

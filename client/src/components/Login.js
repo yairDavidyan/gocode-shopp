@@ -26,9 +26,10 @@ import MailIcon from "@material-ui/icons/Mail";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { IconButton, makeStyles, Menu, Modal } from "@material-ui/core";
 import SignInSide from "./SignInSide";
+import SignUp from "./SignUp";
 
 function Login() {
-  const { setUpdateSale } = useContext(CartContext);
+  const { setUpdateSale, isSignUp, setIsSignUp } = useContext(CartContext);
   const [openManager, setOpenManager] = useState(false);
   const [passwordManager, setPasswordManager] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -153,7 +154,7 @@ function Login() {
             open={openUser}
             onClose={handleCloseUser}
           >
-            <SignInSide />
+            <SignInSide close={handleCloseUser} />
           </Modal>
         </div>
         {/* <DialogContent>
@@ -329,6 +330,7 @@ function Login() {
         </Toolbar>
       </AppBar>
       {renderMenu}
+      {isSignUp && <SignUp />}
     </div>
   );
 }

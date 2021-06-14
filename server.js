@@ -15,6 +15,7 @@ const CustomerSchema = Schema({
   phone: String,
   mail: String,
   adress: String,
+  password: String,
   orders: [{ type: Schema.Types.ObjectId, ref: "Order" }],
 });
 
@@ -35,9 +36,38 @@ const ProductSchema = Schema({
   image: String,
 });
 
+const AdminSchema = Schema({
+  name: String,
+  password: String,
+});
+
 const Product = model("Product", ProductSchema);
 const Customer = model("Customer", CustomerSchema);
 const Order = model("Order", OrderSchema);
+const Admin = model("Admin", AdminSchema);
+
+//*************************************************************** * /
+//admin
+
+app.get("/api/admin", (req, res) => {
+  const { name, password } = req.query;
+  if (
+    process.env.DB_USERNAME === name &&
+    process.env.DB_PASSWORD === password
+  ) {
+    res.send("sucsses admin");
+  } else {
+    res.send("not admin");
+  }
+});
+app.post("/api/admin", (req, res) => {
+  Admin.insertMany([
+    {
+      name: req.body.name,
+      password: req.body.password,
+    },
+  ]).then((admin) => res.send(admin));
+});
 
 //*************************************************************** */
 
@@ -122,13 +152,7 @@ app.delete("/api/product/:id", (req, res) => {
 
 //db custumer
 
-function readCustomer(callback) {
-  Customer.find({})
-    .exec()
-    .then((CustomerArr) => callback(CustomerArr));
-}
-
-app.post("/customer", (req, res) => {
+app.post("/api/customer", (req, res) => {
   Customer.insertMany([
     {
       name: req.body.name,
@@ -136,25 +160,46 @@ app.post("/customer", (req, res) => {
       phone: req.body.phone,
       mail: req.body.mail,
       adress: req.body.adress,
+      password: req.body.password,
+      orders: req.body.orders,
     },
   ]).then((customer) => {
     res.send(customer);
   });
 });
-app.get("/customer", (req, res) => {
-  readCustomer((customer) => {
-    const { q } = req.query;
-    if (q) {
-      let updateArr = customer.filter(
-        (item) => item.phone.includes(q) || item.mail.includes(q)
-      );
-      res.send(updateArr.length ? updateArr : "no data");
-    } else {
-      res.send(customer);
-    }
-  });
+
+app.get("/api/customer", (req, res) => {
+  Customer.find({})
+    .populate("orders")
+    .then((customer) => res.send(customer));
 });
 
+//dalete customer
+app.delete("/api/customer/:id", (req, res) => {
+  const { id } = req.params;
+  Customer.findByIdAndDelete(id).then(res.send("delete"));
+});
+//update customer
+app.put("/api/customer/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, lastName, phone, mail, adress, password, orders } = req.body;
+  const updateArr = {
+    ...(!!name && { name }),
+    ...(!!lastName && { lastName }),
+    ...(!!phone && { phone }),
+    ...(!!mail && { mail }),
+    ...(!!adress && { adress }),
+    ...(!!password && { password }),
+    ...(!!orders && { orders }),
+  };
+
+  Customer.findByIdAndUpdate(id, updateArr, { new: true })
+    .then((customer) => res.send(customer))
+    .catch((err) => {
+      res.status(500);
+      res.send(err.massage);
+    });
+});
 //***************************************************************** */
 
 //db order
@@ -164,30 +209,22 @@ function readOrder(callback) {
     .exec()
     .then((OrderArr) => callback(OrderArr));
 }
+
 //filter by title search
-app.get("/order", (req, res) => {
-  readOrder((order) => {
-    const { q } = req.query;
-    if (q) {
-      let updateArr = order.filter(
-        (item) => item.phone.includes(q) || item.mail.includes(q)
-      );
-      res.send(updateArr.length ? updateArr : "no data");
-    } else {
-      res.send(order);
-    }
-  });
+app.get("/api/order", (req, res) => {
+  Order.find({}).then((order) => res.send(order));
 });
 
-app.post("/order", (req, res) => {
+app.post("/api/order", (req, res) => {
   Order.insertMany([
     {
-      numberOrder: "123456",
-      date: "2012-04-23T18:25:43.511Z",
-      cost: 750,
-      ifPay: true,
-      customer: Customer._id,
-      // products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+      numberOrder: req.body.numberOrder,
+      //2012-04-23T18:25:43.511Z
+      date: req.body.date,
+      cost: req.body.cost,
+      ifPay: req.body.ifPay,
+      // customer: req.body.customer,
+      // products: req.body.product,
     },
   ]).then((order) => {
     res.send(order);

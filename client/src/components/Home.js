@@ -16,6 +16,7 @@ import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
 import CardDetails from "./CardDetails";
+import SignUp from "./SignUp";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -40,6 +41,7 @@ function Home() {
   const [snackBar, setSnackBar] = useState(false);
   const [message, setMessage] = useState("");
   const [openUser, setOpenUser] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const calMin = (data) => {
     return data.reduce(
@@ -168,12 +170,15 @@ function Home() {
         calMin,
         openUser,
         setOpenUser,
+        isSignUp,
+        setIsSignUp,
       }}
     >
       <div className="containerHome">
         {isConect ? (
           <>
             <Login />
+
             {ifManager ? (
               <div className="container-managment">
                 <div className="table-update">
