@@ -22,7 +22,7 @@ function Information() {
   const [detailsProduct, setDetailsProduct] = useState({});
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
+    fetch(`/api/product/${id}`)
       .then((res) => res.json())
       .then((data) => setDetailsProduct(data))
       .then(setBool(false));

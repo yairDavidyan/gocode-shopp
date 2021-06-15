@@ -21,14 +21,14 @@ function ProductCard({
   function addProduct() {
     setProducts((prev) => {
       return prev.map((item) =>
-        item.id === product.id ? { ...item, amount: item.amount + 1 } : item
+        item._id === product._id ? { ...item, amount: item.amount + 1 } : item
       );
     });
     setItems((prev) => {
-      const isFound = prev.some((item) => item.id === product.id);
+      const isFound = prev.some((item) => item._id === product._id);
       if (isFound) {
         return prev.map((item) =>
-          item.id === product.id ? { ...item, amount: item.amount + 1 } : item
+          item._id === product._id ? { ...item, amount: item.amount + 1 } : item
         );
       }
       return [...prev, { ...product, amount: 1 }];
@@ -37,7 +37,7 @@ function ProductCard({
   function deleteProduct() {
     setProducts((prev) => {
       return prev.map((item) =>
-        item.id === product.id
+        item._id === product._id
           ? product.amount > 0
             ? { ...item, amount: item.amount - 1 }
             : item
@@ -46,7 +46,7 @@ function ProductCard({
     });
 
     setItems((prev) => {
-      const index = prev.findIndex((x) => x.id === product.id);
+      const index = prev.findIndex((x) => x._id === product._id);
       if (product.amount > 0) {
         if (prev[index].amount === 1) {
           prev.splice(index, 1);
@@ -72,15 +72,13 @@ function ProductCard({
                 </div>
               </>
             )}
-          <Link to={`products/${id}`}>
+          <Link to={`/api/product/${id}`}>
             <div className="productImage">
               <img src={image} alt={title} title={description} />
             </div>
           </Link>
 
-          <div className="slider__slide__text">
-            <div>bhhghgj</div>
-          </div>
+          {/* S */}
 
           <div className="product-info">
             <h5>{title}</h5>

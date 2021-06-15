@@ -262,7 +262,7 @@ function UpdateProduct() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = products.map((n) => n.id);
+      const newSelecteds = products.map((n) => n._id);
       setSelected(newSelecteds);
       return;
     }
@@ -331,17 +331,17 @@ function UpdateProduct() {
               {stableSort(products, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((product, index) => {
-                  const isItemSelected = isSelected(product.id);
+                  const isItemSelected = isSelected(product._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, product.id)}
+                      onClick={(event) => handleClick(event, product._id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={product.id}
+                      key={product._id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -356,7 +356,7 @@ function UpdateProduct() {
                         scope="row"
                         padding="none"
                       >
-                        {product.id}
+                        {product._id}
                       </TableCell>
                       <TableCell align="right">{product.price}</TableCell>
                       <TableCell align="right">{product.title}</TableCell>

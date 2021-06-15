@@ -84,6 +84,7 @@ app.get("/api/productMinMax", (req, res) => {
 //filter by id
 app.get("/api/product/:id", (req, res) => {
   const { id } = req.params;
+  console.log(id);
   Product.findById(id)
     .then((product) => res.send(product))
     .catch((err) => {
@@ -110,7 +111,6 @@ app.post("/api/product", (req, res) => {
 //filter by title search
 app.get("/api/product", (req, res) => {
   const { title, category } = req.query;
-  console.log(req.query);
   if (title || category) {
     Product.find(
       { title: { $regex: `.*${title}.*` } } || {
@@ -246,5 +246,5 @@ mongoose
   )
   .then(() => {
     console.log("connect");
-    app.listen(process.env.PORT || 8080);
+    app.listen(process.env.PORT || 5000);
   });

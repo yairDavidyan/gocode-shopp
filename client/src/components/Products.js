@@ -8,8 +8,8 @@ function Products({ products }) {
       <section className="Products">
         {products.map((product) => (
           <ProductCard
-            id={product.id}
-            key={product.id}
+            id={product._id}
+            key={product._id}
             image={product.image}
             title={product.title}
             description={product.description}

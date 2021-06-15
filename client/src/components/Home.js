@@ -107,13 +107,14 @@ function Home() {
       )
       .then((data) =>
         setProducts((data) => {
-          return data.map((el) => (el.id ? { ...el, amount: 0 } : el));
+          return data.map((el) => (el._id ? { ...el, amount: 0 } : el));
         })
       )
       .then(setShown(false));
   }, []);
 
-  console.log(products);
+  console.log("pro:", products);
+  console.log("iems:", items);
   function changeDisplay(category) {
     setChoice(category);
     //get products by category

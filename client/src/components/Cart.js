@@ -22,7 +22,7 @@ function Cart() {
   const classes = useStyles();
   function amountChange(val, e) {
     setItems((prev) => {
-      const index = prev.findIndex((x) => x.id === val.id);
+      const index = prev.findIndex((x) => x._id === val._id);
       // if remove product in items
       if (prev[index].amount === 1 && prev[index].amount > e.target.value) {
         prev.splice(index, 1);
@@ -40,19 +40,19 @@ function Cart() {
 
     setProducts((prev) => {
       return prev.map((el) =>
-        el.id === val.id ? { ...el, amount: +e.target.value } : el
+        el._id === val._id ? { ...el, amount: +e.target.value } : el
       );
     });
   }
   function deleteCart(el) {
     setItems((prev) => {
-      const index = prev.findIndex((item) => item.id === el.id);
+      const index = prev.findIndex((item) => item._id === el._id);
       prev.splice(index, 1);
       return prev;
     });
     setProducts((prev) => {
       return prev.map((item) =>
-        item.id === el.id ? { ...item, amount: 0 } : item
+        item._id === el._id ? { ...item, amount: 0 } : item
       );
     });
   }
