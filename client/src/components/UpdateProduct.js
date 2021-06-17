@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { createRef, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -21,25 +21,10 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import CartContext from "./CartContext";
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-// const rows = [
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Donut", 452, 25.0, 51, 4.9),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-//   createData("Honeycomb", 408, 3.2, 87, 6.5),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Jelly Bean", 375, 0.0, 94, 0.0),
-//   createData("KitKat", 518, 26.0, 65, 7.0),
-//   createData("Lollipop", 392, 0.2, 98, 0.0),
-//   createData("Marshmallow", 318, 0, 81, 2.0),
-//   createData("Nougat", 360, 19.0, 9, 37.0),
-//   createData("Oreo", 437, 18.0, 63, 4.0),
-// ];
+import EditIcon from "@material-ui/icons/Edit";
+import { DataGrid } from "@material-ui/data-grid";
+import { Button, Fade, Modal, TextField } from "@material-ui/core";
+import Backdrop from "@material-ui/core/Backdrop";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -69,13 +54,18 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "name",
+    id: "id",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)",
+    label: "ID",
   },
-  { id: "price", numeric: true, disablePadding: false, label: "Price" },
-  { id: "title", numeric: true, disablePadding: false, label: "Title" },
+  {
+    id: "price",
+    numeric: true,
+    disablePadding: false,
+    label: "Price",
+  },
+  { id: "title", numeric: true, disablePadding: false, label: "Name" },
   { id: "category", numeric: true, disablePadding: false, label: "Category" },
   {
     id: "description",
@@ -95,7 +85,9 @@ function EnhancedTableHead(props) {
     numSelected,
     rowCount,
     onRequestSort,
+    selected,
   } = props;
+
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -145,6 +137,7 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
+  selected: PropTypes.string.isRequired,
 };
 
 const useToolbarStyles = makeStyles((theme) => ({
@@ -165,12 +158,94 @@ const useToolbarStyles = makeStyles((theme) => ({
   title: {
     flex: "1 1 100%",
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 const EnhancedTableToolbar = (props) => {
-  const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const {
+    setProducts,
+    setTotalProducts,
+    setTotalFilter,
+    setProductsFilter,
+    setMinMax,
+    setValue,
+    calMin,
+    calMax,
+    categories,
+    products,
+  } = useContext(CartContext);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [open, setOpen] = useState(false);
+  let textInputPrice = createRef();
+  let textInputName = createRef();
+  let textInputDes = createRef();
+  let textInputUrl = createRef();
+  let categoryRef = createRef();
+
+  const classes = useToolbarStyles();
+  const { numSelected, selected } = props;
+  function deleteProduct() {
+    selected.map((el) => {
+      fetch(`/api/product/${el}`, {
+        method: "DELETE",
+      }).then(
+        fetch("/api/product")
+          .then((res) => res.json())
+          .then(
+            (data) => (
+              setProducts(data),
+              setTotalFilter((prev) => prev - 1),
+              setTotalProducts((prev) => prev - 1),
+              setProductsFilter(data),
+              setMinMax(data),
+              setValue([calMin(data), calMax(data)])
+            )
+          )
+      );
+    });
+  }
+
+  function update(id) {
+    const updateProduct = {
+      title: textInputName.current.value,
+      price: +textInputPrice.current.value,
+      description: textInputDes.current.value,
+      //    category: categoryRef.current.value,
+      image: textInputUrl.current.value,
+      amount: 0,
+    };
+    fetch(`/api/product/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updateProduct),
+    }).then(
+      fetch("/api/product")
+        .then((res) => res.json())
+        .then(
+          (data) => (
+            setProducts(data),
+            setProductsFilter(data),
+            setMinMax(data),
+            setValue([calMin(data), calMax(data)])
+          )
+        )
+    );
+    setOpen(false);
+  }
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -198,11 +273,139 @@ const EnhancedTableToolbar = (props) => {
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <>
+          <Tooltip title="Delete">
+            <IconButton onClick={() => deleteProduct()} aria-label="delete">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="edit">
+            <IconButton
+              onClick={() =>
+                numSelected === 1
+                  ? setOpen(true)
+                  : alert("select just one please")
+              }
+              aria-label="edit"
+            >
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <div style={{ display: "grid", justifyContent: "center" }}>
+                  <h2 id="transition-modal-title">add product</h2>
+
+                  <select
+                    style={{ marginBottom: "0px" }}
+                    className="selectCategory"
+                    Ref={categoryRef}
+                    value={products
+                      .map((el) => {
+                        if (el._id === selected[0]) {
+                          return el.category;
+                        }
+                      })
+                      .join("")}
+                    //  onChange={(e) => change(e.target.value)}
+                  >
+                    <option aria-label="None" value="" />
+
+                    {categories.map((categories) => (
+                      <option value={categories} key={categories}>
+                        {categories}
+                      </option>
+                    ))}
+                  </select>
+                  <TextField
+                    autoComplete="off"
+                    inputRef={textInputUrl}
+                    id="standard-basic1"
+                    // label="url"
+                    defaultValue={products
+                      .map((el) => {
+                        if (el._id === selected[0]) {
+                          return el.image;
+                        }
+                      })
+                      .join("")}
+                  />
+
+                  <TextField
+                    inputRef={textInputName}
+                    autoComplete="off"
+                    id="standard-basic2"
+                    label="name"
+                    defaultValue={products
+                      .map((el) => {
+                        if (el._id === selected[0]) {
+                          return el.title;
+                        }
+                      })
+                      .join("")}
+                  />
+                  <TextField
+                    inputRef={textInputPrice}
+                    autoComplete="off"
+                    id="standard-basic3"
+                    label="price"
+                    defaultValue={products
+                      .map((el) => {
+                        if (el._id === selected[0]) {
+                          return el.price;
+                        }
+                      })
+                      .join("")}
+                  />
+                  <TextField
+                    inputRef={textInputDes}
+                    autoComplete="off"
+                    id="standard-basic4"
+                    label="des"
+                    defaultValue={products
+                      .map((el) => {
+                        if (el._id === selected[0]) {
+                          return el.description;
+                        }
+                      })
+                      .join("")}
+                  />
+                </div>
+                <Button
+                  style={{ position: "relative", top: "10px", left: "25%" }}
+                  onClick={() =>
+                    update(
+                      products
+                        .map((el) => {
+                          if (el._id === selected[0]) {
+                            return el._id;
+                          }
+                        })
+                        .join("")
+                    )
+                  }
+                  variant="outlined"
+                  color="primary"
+                >
+                  submit
+                </Button>
+              </div>
+            </Fade>
+          </Modal>
+        </>
       ) : (
         <Tooltip title="Filter list">
           <IconButton aria-label="filter list">
@@ -216,6 +419,7 @@ const EnhancedTableToolbar = (props) => {
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
+  selected: PropTypes.string.isRequired,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -244,7 +448,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UpdateProduct() {
-  const { products } = useContext(CartContext);
+  const { products, setProducts } = useContext(CartContext);
 
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
@@ -285,7 +489,6 @@ function UpdateProduct() {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
   };
 
@@ -310,7 +513,10 @@ function UpdateProduct() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          selected={selected}
+        />
         <TableContainer>
           <Table
             className={classes.table}
@@ -326,6 +532,7 @@ function UpdateProduct() {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={products.length}
+              selected={selected}
             />
             <TableBody>
               {stableSort(products, getComparator(order, orderBy))
@@ -333,7 +540,6 @@ function UpdateProduct() {
                 .map((product, index) => {
                   const isItemSelected = isSelected(product._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover

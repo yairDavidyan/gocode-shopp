@@ -11,12 +11,18 @@ import SliderImage from "./SliderImage";
 import homeImage from "../images/homeImage.jpg";
 import SliderFilter from "./SliderFilter";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
+import {
+  Badge,
+  Button,
+  IconButton,
+  makeStyles,
+  withStyles,
+} from "@material-ui/core";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
-import CardDetails from "./CardDetails";
 import SignUp from "./SignUp";
+import EditProduct from "./EditProduct";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -105,13 +111,26 @@ function Home() {
           setValue([calMin(data), calMax(data)])
         )
       )
-      .then((data) =>
-        setProducts((data) => {
-          return data.map((el) => (el._id ? { ...el, amount: 0 } : el));
-        })
-      )
       .then(setShown(false));
   }, []);
+  console.log("total", totalFilter);
+  // const product1 = {
+  //   title: "lbb",
+  //   price: 23232,
+  //   description: "blablalbl",
+  //   category: "gsdgadg",
+  //   image: "req.body.image",
+  //   amount: 8,
+  // };
+  // function addProduct() {
+  //   fetch("/api/product", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(product1),
+  //   });
+  // }
 
   console.log("pro:", products);
   console.log("iems:", items);
@@ -132,6 +151,7 @@ function Home() {
     <CartContext.Provider
       value={{
         choice,
+        setMinMax,
         isCart,
         setIsCart,
         totalFilter,
@@ -173,6 +193,8 @@ function Home() {
         setOpenUser,
         isSignUp,
         setIsSignUp,
+        categories,
+        setProductsFilter,
       }}
     >
       <div className="containerHome">
@@ -191,9 +213,16 @@ function Home() {
             ) : (
               <>
                 <Header />
+                {/* <Button
+                  onClick={addProduct}
+                  variant="contained"
+                  color="secondary"
+                >
+                  cleck me
+                </Button> */}
 
-                <SliderImage />
-
+                {/* <SliderImage /> */}
+                {/* {products.length > 0 && <EditProduct />} */}
                 <Timer />
 
                 {isShown ? (
@@ -204,7 +233,6 @@ function Home() {
                       categories={categories}
                       changeDisplay={changeDisplay}
                     />
-                    <CardDetails />
                     <div className="divContainer">
                       <Cart />
                       <div className="content">

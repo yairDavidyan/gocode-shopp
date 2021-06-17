@@ -32,11 +32,7 @@ function Copyright() {
 }
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxHeight: "65vh",
     maxWidth: "150vh",
-    position: "relative",
-    left: "15%",
-    top: "6%",
   },
   image: {
     backgroundImage: "url(https://source.unsplash.com/random)",

@@ -10,3 +10,11 @@
 .loginOutIn {
   direction: rtl;
 }
+.imageAdd {
+  width: 150px;
+  height: 150px;
+
+  background-repeat: "no-repeat";
+
+  background-image: url("");
+}

@@ -34,6 +34,7 @@ const ProductSchema = Schema({
   description: String,
   category: String,
   image: String,
+  amount: Number,
 });
 
 const AdminSchema = Schema({
@@ -95,6 +96,7 @@ app.get("/api/product/:id", (req, res) => {
 
 //add new product
 app.post("/api/product", (req, res) => {
+  console.log(req.body);
   Product.insertMany([
     {
       title: req.body.title,
@@ -102,6 +104,7 @@ app.post("/api/product", (req, res) => {
       description: req.body.description,
       category: req.body.category,
       image: req.body.image,
+      amount: req.body.amount,
     },
   ]).then((addProduct) => {
     res.send(addProduct);

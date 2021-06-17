@@ -1,5 +1,5 @@
 import "./login.css";
-import React, { useContext, useState } from "react";
+import { createRef, Fragment, useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -24,19 +24,94 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { IconButton, makeStyles, Menu, Modal } from "@material-ui/core";
+import {
+  Fade,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  makeStyles,
+  Menu,
+  Modal,
+  Select,
+} from "@material-ui/core";
 import SignInSide from "./SignInSide";
 import SignUp from "./SignUp";
+import Backdrop from "@material-ui/core/Backdrop";
+import ProductCard from "./ProductCard";
 
 function Login() {
-  const { setUpdateSale, isSignUp, setIsSignUp } = useContext(CartContext);
+  const {
+    setUpdateSale,
+    setTotalProducts,
+    isSignUp,
+    categories,
+    setProducts,
+    products,
+    setTotalFilter,
+    setProductsFilter,
+    setMinMax,
+    setValue,
+    calMin,
+    calMax,
+  } = useContext(CartContext);
+  let textInputPrice = createRef();
+  let textInputName = createRef();
+  let textInputDes = createRef();
+  let textInputUrl = createRef();
+
+  function updateSaleFun() {
+    const addProduct = {
+      title: textInputName.current.value,
+      price: +textInputPrice.current.value,
+      description: textInputDes.current.value,
+      category: category,
+      image: textInputUrl.current.value,
+      amount: 0,
+    };
+
+    fetch("/api/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addProduct),
+    }).then(
+      fetch("/api/product")
+        .then((res) => res.json())
+        .then(
+          (data) => (
+            setProducts(data),
+            setTotalFilter((prev) => prev + 1),
+            setTotalProducts((prev) => prev + 1),
+            //  setProductsFilter(data),
+            setMinMax(data),
+            setValue([calMin(data), calMax(data)])
+          )
+        )
+    );
+
+    setOpen(false);
+  }
+
   const [openManager, setOpenManager] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const [passwordManager, setPasswordManager] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const menuId = "primary-search-account-menu";
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const { ifManager, setIfManager, setUpdateProduct, openUser, setOpenUser } =
     useContext(CartContext);
+  const [category, setCategory] = useState("");
+
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
+
+  function change(e) {
+    setCategory(e);
+  }
   const [listType, setListTipe] = useState([
     "Inbox",
     "Starred",
@@ -57,6 +132,10 @@ function Login() {
     title: {
       flexGrow: 1,
     },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
     a: {
       fontSize: "22px",
     },
@@ -70,6 +149,27 @@ function Login() {
     },
     colorPrimary: {
       backgroundColor: "rgb(255, 213, 79)",
+    },
+    modal: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: "2px solid #000",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+    image: {
+      backgroundImage: "url(https://source.unsplash.com/random)",
+      backgroundRepeat: "no-repeat",
+      backgroundColor:
+        theme.palette.type === "light"
+          ? theme.palette.grey[50]
+          : theme.palette.grey[900],
+      backgroundSize: "cover",
+      backgroundPosition: "center",
     },
   }));
   const classes = useStyles();
@@ -106,12 +206,19 @@ function Login() {
     setOpenManager(true);
     setAnchorEl(null);
   };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleOpenManager = (passwordManager) => {
     if (passwordManager === "1") {
       setIfManager(true);
       setOpenManager(false);
-      setListTipe(["update sale", "update product", "settings", "users"]);
+      setListTipe(["update sale", "update product", "add product", "users"]);
     }
   };
   const handleCloseManager = () => {
@@ -126,6 +233,8 @@ function Login() {
     } else if (text === "update product") {
       setUpdateProduct(true);
       setUpdateSale(false);
+    } else if (text === "add product") {
+      setOpen(true);
     }
   }
 
@@ -284,7 +393,7 @@ function Login() {
           >
             <div>
               {["left"].map((anchor) => (
-                <React.Fragment key={anchor}>
+                <Fragment key={anchor}>
                   <MenuIcon onClick={toggleDrawer(anchor, true)}>
                     {anchor}
                   </MenuIcon>
@@ -295,7 +404,7 @@ function Login() {
                   >
                     {list(anchor)}
                   </Drawer>
-                </React.Fragment>
+                </Fragment>
               ))}
             </div>
           </IconButton>
@@ -331,6 +440,72 @@ function Login() {
       </AppBar>
       {renderMenu}
       {isSignUp && <SignUp />}
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <div style={{ display: "grid", justifyContent: "center" }}>
+              <h2 id="transition-modal-title">add product</h2>
+              <select
+                style={{ marginBottom: "0px" }}
+                className="selectCategory"
+                onChange={(e) => change(e.target.value)}
+              >
+                <option aria-label="None" value="" />
+                {categories.map((categories) => (
+                  <option value={categories} key={categories}>
+                    {categories}
+                  </option>
+                ))}
+              </select>
+              <TextField
+                autoComplete="off"
+                inputRef={textInputUrl}
+                id="standard-basic1"
+                label="url"
+              />
+
+              <TextField
+                inputRef={textInputName}
+                autoComplete="off"
+                id="standard-basic2"
+                label="name"
+              />
+              <TextField
+                inputRef={textInputPrice}
+                autoComplete="off"
+                id="standard-basic3"
+                label="price"
+              />
+              <TextField
+                inputRef={textInputDes}
+                autoComplete="off"
+                id="standard-basic4"
+                label="des"
+              />
+            </div>
+            <Button
+              style={{ position: "relative", top: "10px", left: "25%" }}
+              onClick={() => updateSaleFun()}
+              variant="outlined"
+              color="primary"
+            >
+              Primary
+            </Button>
+          </div>
+        </Fade>
+      </Modal>
     </div>
   );
 }
