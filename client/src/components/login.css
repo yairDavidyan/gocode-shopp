@@ -18,3 +18,11 @@
 
   background-image: url("");
 }
+.menuLogin {
+}
+
+@media screen and (max-width: 728px) {
+  .menuLogin {
+    display: none;
+  }
+}

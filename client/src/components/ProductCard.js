@@ -18,20 +18,46 @@ function ProductCard({
   const { setItems, setProducts, isSale, percent, saleCategory } =
     useContext(CartContext);
 
-  function addProduct() {
+  function addProduct(productCategory) {
     setProducts((prev) => {
       return prev.map((item) =>
         item._id === product._id ? { ...item, amount: item.amount + 1 } : item
       );
     });
+
     setItems((prev) => {
       const isFound = prev.some((item) => item._id === product._id);
+      console.log(saleCategory);
       if (isFound) {
         return prev.map((item) =>
-          item._id === product._id ? { ...item, amount: item.amount + 1 } : item
+          item._id === product._id
+            ? saleCategory === productCategory ||
+              saleCategory === "all products"
+              ? {
+                  ...item,
+                  amount: item.amount + 1,
+                  price: (price - (price / 100) * percent).toFixed(2),
+                  isSaleProduct: true,
+                }
+              : { ...item, amount: item.amount + 1, isSaleProduct: false }
+            : item
         );
+      } else {
+        if (
+          saleCategory === productCategory ||
+          saleCategory === "all products"
+        ) {
+          return [
+            ...prev,
+            {
+              ...product,
+              amount: 1,
+              price: (price - (price / 100) * percent).toFixed(2),
+            },
+          ];
+        }
+        return [...prev, { ...product, amount: 1 }];
       }
-      return [...prev, { ...product, amount: 1 }];
     });
   }
   function deleteProduct() {
@@ -65,7 +91,8 @@ function ProductCard({
       <Fade bottom cascade>
         <div className="product-card">
           {isSale &&
-            (saleCategory === product.category || saleCategory === "") && (
+            (saleCategory === product.category ||
+              saleCategory === "all products") && (
               <>
                 <div className=" fa fa-arrow-down fa-2x arrow bounce">
                   {percent}%{" "}
@@ -85,7 +112,8 @@ function ProductCard({
             <h6
               style={
                 isSale &&
-                (saleCategory === product.category || saleCategory === "")
+                (saleCategory === product.category ||
+                  saleCategory === "all products")
                   ? {
                       textDecoration: "line-through",
                       textDecorationColor: "black",
@@ -96,7 +124,8 @@ function ProductCard({
               {price}
             </h6>
             {isSale &&
-              (saleCategory === product.category || saleCategory === "") && (
+              (saleCategory === product.category ||
+                saleCategory === "all products") && (
                 <h6>
                   {" "}
                   {isSale && (price - (price / 100) * percent).toFixed(2)}
@@ -107,7 +136,10 @@ function ProductCard({
                 <img style={{ height: "70%" }} src={minusLogo}></img>
               </button>
               <h3 style={{ marginTop: "23px" }}>{amount}</h3>
-              <button className="plus-button" onClick={addProduct}>
+              <button
+                className="plus-button"
+                onClick={() => addProduct(product.category)}
+              >
                 <img style={{ height: "70%" }} src={addLogo}></img>
               </button>
             </div>

@@ -22,7 +22,6 @@ import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
 import SignUp from "./SignUp";
-import EditProduct from "./EditProduct";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -113,7 +112,6 @@ function Home() {
       )
       .then(setShown(false));
   }, []);
-  console.log("total", totalFilter);
   // const product1 = {
   //   title: "lbb",
   //   price: 23232,

@@ -241,6 +241,7 @@ function Login() {
   const isMenuOpen = Boolean(anchorEl);
   const renderMenu = (
     <Menu
+      className="menuLogin"
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
@@ -251,12 +252,6 @@ function Login() {
     >
       <div>
         <MenuItem onClick={handleClickOpenUser}>user Login</MenuItem>
-        {/* <Dialog
-          open={openUser}
-          onClose={handleCloseUser}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">User login</DialogTitle> */}
         <div>
           <Modal
             className={classes.modal}
@@ -266,35 +261,6 @@ function Login() {
             <SignInSide close={handleCloseUser} />
           </Modal>
         </div>
-        {/* <DialogContent>
-              <DialogContentText></DialogContentText>
-
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="User name"
-                type="text"
-                fullWidth
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Password"
-                type="text"
-                fullWidth
-              />
-            </DialogContent> */}
-        {/* <DialogActions>
-              <Button onClick={handleCloseUser} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={handleCloseUser} color="primary">
-                login
-              </Button>
-            </DialogActions> */}
-        {/* </Dialog> */}
         <Dialog
           open={openManager}
           onClose={handleOpenManager}
@@ -501,7 +467,7 @@ function Login() {
               variant="outlined"
               color="primary"
             >
-              Primary
+              submit
             </Button>
           </div>
         </Fade>

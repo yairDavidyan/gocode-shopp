@@ -27,7 +27,7 @@ function UpdateSale() {
   let textInputPercent = createRef();
 
   function change(value) {
-    if (value === "") {
+    if (value === "ALL") {
       setSaleCategory("all products");
     } else {
       setSaleCategory(value);
@@ -77,6 +77,7 @@ function UpdateSale() {
               className="selectCategory"
               onChange={(e) => change(e.target.value)}
             >
+              <option value=""></option>
               <option value="all products">All</option>
               {categories.map((categories) => (
                 <option value={categories} key={categories}>

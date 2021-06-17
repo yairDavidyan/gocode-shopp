@@ -80,9 +80,7 @@ function Cart() {
                       <div className="product-details">
                         <div className="product-title">{el.title}</div>
                       </div>
-                      <div className="product-price">
-                        {(el.price - (el.price / 100) * percent).toFixed(2)}
-                      </div>
+                      <div className="product-price">{el.price}</div>
                       <div className="product-quantity">
                         <TextField
                           className={classes.root}
@@ -109,8 +107,7 @@ function Cart() {
                       </div>
 
                       <div className="product-line-price">
-                        {(el.price - (el.price / 100) * percent).toFixed(2) *
-                          el.amount}
+                        {(el.price * el.amount).toFixed(0)}
                       </div>
                     </div>
                   ))

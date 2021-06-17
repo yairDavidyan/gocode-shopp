@@ -8,9 +8,12 @@ function Header() {
       <div className="container">
         <div className="box box1">
           {" "}
-          <span className="HeaderH1">
-            <img style={{ marginTop: "30px" }} src={bali} alt={"logo"}></img>
-          </span>
+          <div
+            className="HeaderH1"
+            style={{ backgroundImage: `url(${bali})` }}
+            src={bali}
+            alt={"logo"}
+          ></div>
         </div>
         <div className="box box2">
           <Search />

@@ -23,7 +23,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import CartContext from "./CartContext";
 import EditIcon from "@material-ui/icons/Edit";
 import { DataGrid } from "@material-ui/data-grid";
-import { Button, Fade, Modal, TextField } from "@material-ui/core";
+import { Button, CardMedia, Fade, Modal, TextField } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
 
 function descendingComparator(a, b, orderBy) {
@@ -168,6 +168,21 @@ const useToolbarStyles = makeStyles((theme) => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    width: "30%",
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%",
+    width: "41%",
+    position: "relative",
+    left: "28%",
+  },
+  h2: {
+    backgroundColor: "#fed72e",
+    fontFamily: "cursive",
+    fontSize: "24px",
+
+    paddingLeft: "23px",
   },
 }));
 
@@ -306,102 +321,130 @@ const EnhancedTableToolbar = (props) => {
           >
             <Fade in={open}>
               <div className={classes.paper}>
-                <div style={{ display: "grid", justifyContent: "center" }}>
-                  <h2 id="transition-modal-title">add product</h2>
-
-                  <select
-                    style={{ marginBottom: "0px" }}
-                    className="selectCategory"
-                    Ref={categoryRef}
-                    value={products
-                      .map((el) => {
-                        if (el._id === selected[0]) {
-                          return el.category;
-                        }
-                      })
-                      .join("")}
-                    //  onChange={(e) => change(e.target.value)}
-                  >
-                    <option aria-label="None" value="" />
-
-                    {categories.map((categories) => (
-                      <option value={categories} key={categories}>
-                        {categories}
-                      </option>
-                    ))}
-                  </select>
-                  <TextField
-                    autoComplete="off"
-                    inputRef={textInputUrl}
-                    id="standard-basic1"
-                    // label="url"
-                    defaultValue={products
+                <div style={{ marginBottom: "9px" }}>
+                  <CardMedia
+                    className={classes.media}
+                    image={products
                       .map((el) => {
                         if (el._id === selected[0]) {
                           return el.image;
                         }
                       })
                       .join("")}
-                  />
-
-                  <TextField
-                    inputRef={textInputName}
-                    autoComplete="off"
-                    id="standard-basic2"
-                    label="name"
-                    defaultValue={products
-                      .map((el) => {
-                        if (el._id === selected[0]) {
-                          return el.title;
-                        }
-                      })
-                      .join("")}
-                  />
-                  <TextField
-                    inputRef={textInputPrice}
-                    autoComplete="off"
-                    id="standard-basic3"
-                    label="price"
-                    defaultValue={products
-                      .map((el) => {
-                        if (el._id === selected[0]) {
-                          return el.price;
-                        }
-                      })
-                      .join("")}
-                  />
-                  <TextField
-                    inputRef={textInputDes}
-                    autoComplete="off"
-                    id="standard-basic4"
-                    label="des"
-                    defaultValue={products
-                      .map((el) => {
-                        if (el._id === selected[0]) {
-                          return el.description;
-                        }
-                      })
-                      .join("")}
+                    title="Paella dish"
                   />
                 </div>
-                <Button
-                  style={{ position: "relative", top: "10px", left: "25%" }}
-                  onClick={() =>
-                    update(
-                      products
+                <div>
+                  <div style={{ display: "grid" }}>
+                    <select
+                      style={{ marginBottom: "15px" }}
+                      className="selectCategory"
+                      Ref={categoryRef}
+                      value={products
                         .map((el) => {
                           if (el._id === selected[0]) {
-                            return el._id;
+                            return el.category;
                           }
                         })
-                        .join("")
-                    )
-                  }
-                  variant="outlined"
-                  color="primary"
-                >
-                  submit
-                </Button>
+                        .join("")}
+                      //  onChange={(e) => change(e.target.value)}
+                    >
+                      <option aria-label="None" value="" />
+
+                      {categories.map((categories) => (
+                        <option value={categories} key={categories}>
+                          {categories}
+                        </option>
+                      ))}
+                    </select>
+
+                    <TextField
+                      style={{ marginBottom: "15px" }}
+                      autoComplete="off"
+                      inputRef={textInputUrl}
+                      id="standard-basic1"
+                      // label="url"
+                      defaultValue={products
+                        .map((el) => {
+                          if (el._id === selected[0]) {
+                            return el.image;
+                          }
+                        })
+                        .join("")}
+                    />
+
+                    <TextField
+                      style={{ marginBottom: "15px" }}
+                      inputRef={textInputName}
+                      autoComplete="off"
+                      id="standard-basic2"
+                      label="name"
+                      defaultValue={products
+                        .map((el) => {
+                          if (el._id === selected[0]) {
+                            return el.title;
+                          }
+                        })
+                        .join("")}
+                    />
+                    <TextField
+                      style={{ marginBottom: "15px" }}
+                      inputRef={textInputPrice}
+                      autoComplete="off"
+                      id="standard-basic3"
+                      label="price"
+                      defaultValue={products
+                        .map((el) => {
+                          if (el._id === selected[0]) {
+                            return el.price;
+                          }
+                        })
+                        .join("")}
+                    />
+                    <TextField
+                      style={{ marginBottom: "15px" }}
+                      inputRef={textInputDes}
+                      autoComplete="off"
+                      id="standard-basic4"
+                      label="des"
+                      defaultValue={products
+                        .map((el) => {
+                          if (el._id === selected[0]) {
+                            return el.description;
+                          }
+                        })
+                        .join("")}
+                    />
+                  </div>
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Button
+                      onClick={() =>
+                        update(
+                          products
+                            .map((el) => {
+                              if (el._id === selected[0]) {
+                                return el._id;
+                              }
+                            })
+                            .join("")
+                        )
+                      }
+                      variant="outlined"
+                      color="primary"
+                    >
+                      Update
+                    </Button>
+                    <Button
+                      onClick={() => setOpen(false)}
+                      variant="outlined"
+                      color="primary"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
               </div>
             </Fade>
           </Modal>
