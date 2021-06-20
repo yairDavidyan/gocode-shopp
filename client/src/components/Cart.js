@@ -43,6 +43,7 @@ function Cart() {
   const [open, setOpen] = useState(false);
   const [numOrder, setNumOrder] = useState("");
   const [idOrder, setIdOrder] = useState("");
+  console.log(idOrder);
 
   const handleOpen = () => {
     setOpen(true);
@@ -139,7 +140,7 @@ function Cart() {
               },
 
               body: JSON.stringify({
-                orders: data[data.length - 1]._id,
+                orders: data && data.map((el) => el._id),
               }),
             })
           )

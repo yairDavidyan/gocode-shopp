@@ -96,7 +96,7 @@ export default function SignInSide({ close }) {
             id = el._id;
           }
         });
-        setUserContent(`welcom to ${name} ${lastName}`);
+        setUserContent(`welcom ${name} ${lastName}`);
         setUserContentId(id);
         setOpenUser(false);
       });

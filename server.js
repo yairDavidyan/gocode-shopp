@@ -194,9 +194,10 @@ app.delete("/api/customer/:id", (req, res) => {
 //update customer
 app.put("/api/customer/:id", (req, res) => {
   const { id } = req.params;
+
   const { name, lastName, phone, mail, adress, password, orders } = req.body;
-  console.log(orders);
-  const updateArr = {
+
+  updateArr = {
     ...(!!name && { name }),
     ...(!!lastName && { lastName }),
     ...(!!phone && { phone }),
@@ -240,7 +241,7 @@ app.post("/api/order", (req, res) => {
 app.get("/api/order/:id", (req, res) => {
   const { id } = req.params;
   var o_id = new ObjectId(id);
-  console.log(o_id);
+  // console.log(o_id);
   Order.find({ customer: o_id })
     .then((order) => res.send(order))
     .catch((err) => {
