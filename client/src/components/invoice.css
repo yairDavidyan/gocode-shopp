@@ -1,0 +1,91 @@
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 13px;
+}
+.container3 {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.logotype {
+  background: #000;
+  color: #fff;
+  width: 75px;
+  height: 75px;
+  line-height: 75px;
+  text-align: center;
+  font-size: 11px;
+}
+.column-title {
+  background: #eee;
+  text-transform: uppercase;
+  padding: 15px 5px 15px 15px;
+  font-size: 11px;
+}
+.column-detail {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.column-header {
+  background: #eee;
+  text-transform: uppercase;
+  padding: 15px;
+  font-size: 11px;
+  border-right: 1px solid #eee;
+}
+.row1 {
+  padding: 7px 14px;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.alert {
+  background: #ffd9e8;
+  padding: 20px;
+  margin: 20px 0;
+  line-height: 22px;
+  color: #333;
+}
+.socialmedia {
+  background: #eee;
+  padding: 20px;
+  display: inline-block;
+}
+.iconInvoice {
+  background-repeat: no-repeat;
+  background: #ffd9e8
+    url("https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-128.png")
+    no-repeat;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  background-position: center;
+  background-size: 25px;
+  float: left;
+  margin-bottom: 15px;
+}
+.iconDelivery {
+  background-repeat: no-repeat;
+  background: #ffd9e8
+    url("https://cdn4.iconfinder.com/data/icons/app-custom-ui-1/48/Check_circle-128.png")
+    no-repeat;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  background-position: center;
+  background-size: 25px;
+  float: left;
+  margin-bottom: 15px;
+}
+.iconDeliver {
+  background-repeat: no-repeat;
+  background: #ffd9e8
+    url("https://cdn0.iconfinder.com/data/icons/commerce-line-1/512/comerce_delivery_shop_business-07-128.png")
+    no-repeat;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  background-position: center;
+  background-size: 45px;
+  float: left;
+  margin-bottom: 15px;
+}

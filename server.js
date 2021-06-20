@@ -8,6 +8,7 @@ const model = mongoose.model;
 require("dotenv").config();
 
 app.use(express.static("client/build"));
+var ObjectId = require("mongodb").ObjectId;
 
 const CustomerSchema = Schema({
   name: String,
@@ -21,7 +22,7 @@ const CustomerSchema = Schema({
 
 const OrderSchema = Schema({
   numberOrder: String,
-  date: Date,
+  date: String,
   cost: Number,
   ifPay: Boolean,
   customer: { type: Schema.Types.ObjectId, ref: "Customer" },
@@ -85,7 +86,6 @@ app.get("/api/productMinMax", (req, res) => {
 //filter by id
 app.get("/api/product/:id", (req, res) => {
   const { id } = req.params;
-  console.log(id);
   Product.findById(id)
     .then((product) => res.send(product))
     .catch((err) => {
@@ -96,7 +96,6 @@ app.get("/api/product/:id", (req, res) => {
 
 //add new product
 app.post("/api/product", (req, res) => {
-  console.log(req.body);
   Product.insertMany([
     {
       title: req.body.title,
@@ -171,6 +170,16 @@ app.post("/api/customer", (req, res) => {
   });
 });
 
+app.get("/api/customer/:id", (req, res) => {
+  const { id } = req.params;
+  Customer.findById(id)
+    .then((customer) => res.send(customer))
+    .catch((err) => {
+      res.status(404);
+      res.send(err);
+    });
+});
+
 app.get("/api/customer", (req, res) => {
   Customer.find({})
     .populate("orders")
@@ -186,6 +195,7 @@ app.delete("/api/customer/:id", (req, res) => {
 app.put("/api/customer/:id", (req, res) => {
   const { id } = req.params;
   const { name, lastName, phone, mail, adress, password, orders } = req.body;
+  console.log(orders);
   const updateArr = {
     ...(!!name && { name }),
     ...(!!lastName && { lastName }),
@@ -207,12 +217,6 @@ app.put("/api/customer/:id", (req, res) => {
 
 //db order
 
-function readOrder(callback) {
-  Order.find({})
-    .exec()
-    .then((OrderArr) => callback(OrderArr));
-}
-
 //filter by title search
 app.get("/api/order", (req, res) => {
   Order.find({}).then((order) => res.send(order));
@@ -226,12 +230,23 @@ app.post("/api/order", (req, res) => {
       date: req.body.date,
       cost: req.body.cost,
       ifPay: req.body.ifPay,
-      // customer: req.body.customer,
+      customer: req.body.customer,
       // products: req.body.product,
     },
   ]).then((order) => {
     res.send(order);
   });
+});
+app.get("/api/order/:id", (req, res) => {
+  const { id } = req.params;
+  var o_id = new ObjectId(id);
+  console.log(o_id);
+  Order.find({ customer: o_id })
+    .then((order) => res.send(order))
+    .catch((err) => {
+      res.status(404);
+      res.send(err);
+    });
 });
 
 app.get("*", (req, res) => {

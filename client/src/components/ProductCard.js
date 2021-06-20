@@ -36,7 +36,7 @@ function ProductCard({
               ? {
                   ...item,
                   amount: item.amount + 1,
-                  price: (price - (price / 100) * percent).toFixed(2),
+                  price: +(price - (price / 100) * percent).toFixed(2),
                   isSaleProduct: true,
                 }
               : { ...item, amount: item.amount + 1, isSaleProduct: false }
@@ -52,11 +52,12 @@ function ProductCard({
             {
               ...product,
               amount: 1,
-              price: (price - (price / 100) * percent).toFixed(2),
+              price: +(price - (price / 100) * percent).toFixed(2),
+              isSaleProduct: true,
             },
           ];
         }
-        return [...prev, { ...product, amount: 1 }];
+        return [...prev, { ...product, amount: 1, isSaleProduct: false }];
       }
     });
   }

@@ -84,7 +84,7 @@ function Login() {
             setProducts(data),
             setTotalFilter((prev) => prev + 1),
             setTotalProducts((prev) => prev + 1),
-            //  setProductsFilter(data),
+            setProductsFilter(data),
             setMinMax(data),
             setValue([calMin(data), calMax(data)])
           )
@@ -101,8 +101,14 @@ function Login() {
   const [anchorEl, setAnchorEl] = useState(null);
   const menuId = "primary-search-account-menu";
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const { ifManager, setIfManager, setUpdateProduct, openUser, setOpenUser } =
-    useContext(CartContext);
+  const {
+    ifManager,
+    setIfManager,
+    setUpdateProduct,
+    openUser,
+    setOpenUser,
+    userContent,
+  } = useContext(CartContext);
   const [category, setCategory] = useState("");
 
   const handleChange = (event) => {
@@ -375,7 +381,7 @@ function Login() {
             </div>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Bali Express
+            {userContent}
           </Typography>
           {ifManager ? (
             <div className="loginOutIn">

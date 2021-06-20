@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { createRef, useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -56,9 +56,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+  let textInputName = createRef();
+  let textInputLname = createRef();
+  let textInputPhone = createRef();
+  let textInputEmail = createRef();
+  let textInputPassword = createRef();
   const classes = useStyles();
   const { isSignUp, setIsSignUp, setOpenUser } = useContext(CartContext);
 
+  function signUpUser() {
+    const userObj = {
+      name: textInputName.current.value,
+      lastName: textInputLname.current.value,
+      phone: textInputPhone.current.value,
+      mail: textInputEmail.current.value,
+      adress: textInputName.current.value,
+      password: textInputPassword.current.value,
+    };
+    console.log(userObj);
+
+    fetch("/api/customer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userObj),
+    });
+    setIsSignUp(false);
+  }
   const handleClose = () => {
     setIsSignUp(false);
   };
@@ -90,6 +115,7 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  inputRef={textInputName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -101,6 +127,7 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
+                  inputRef={textInputLname}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -112,6 +139,7 @@ export default function SignUp() {
                   label="Phone"
                   name="Phone"
                   autoComplete="Phone"
+                  inputRef={textInputPhone}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -123,6 +151,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  inputRef={textInputEmail}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -135,6 +164,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  inputRef={textInputPassword}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -147,7 +177,8 @@ export default function SignUp() {
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              onClick={signUpUser}
+              //  type="submit"
               fullWidth
               variant="contained"
               color="primary"

@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartContext from "./CartContext";
 import "./Cart.css";
-import { Button, makeStyles, TextField } from "@material-ui/core";
+import { Button, makeStyles, Modal, TextField } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Fade from "react-reveal/Fade";
 import Payment from "./Payment";
+import Backdrop from "@material-ui/core/Backdrop";
+import Invoicing from "./Invoicing";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -13,13 +15,45 @@ const useStyles = makeStyles((theme) => ({
   taxtFilde: {
     border: "none",
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 function Cart() {
-  const { setItems, setProducts, items, isCart, percent, modal, setModal } =
-    useContext(CartContext);
+  const {
+    setItems,
+    setProducts,
+    items,
+    isCart,
+    percent,
+    modal,
+    setModal,
+    userContentId,
+  } = useContext(CartContext);
+  let total = 0;
+  const [open, setOpen] = useState(false);
+  const [numOrder, setNumOrder] = useState("");
+  const [idOrder, setIdOrder] = useState("");
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const classes = useStyles();
+  let result;
   function amountChange(val, e) {
     setItems((prev) => {
       const index = prev.findIndex((x) => x._id === val._id);
@@ -55,6 +89,64 @@ function Cart() {
         item._id === el._id ? { ...item, amount: 0 } : item
       );
     });
+  }
+
+  function totalSavings() {
+    items.map((el) => {
+      if (el.isSaleProduct) {
+        total += ((el.price / (100 - percent)) * 100 - el.price) * el.amount;
+      }
+    });
+    return total.toFixed(2);
+  }
+
+  function paymentClick() {
+    result = Math.random();
+    result *= 1000000;
+    result = Math.round(result);
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = yyyy + "-" + dd + "-" + mm;
+
+    const addOrder = {
+      numberOrder: result,
+      //2012-04-23T18:25:43.511Z
+      date: today,
+      cost: items.reduce((total, curr) => total + curr.price * curr.amount, 0),
+      ifPay: true,
+      customer: userContentId,
+    };
+
+    fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addOrder),
+    }).then(
+      fetch(`/api/order/${userContentId}`)
+        .then((res) => res.json())
+        .then(
+          (data) => (
+            setIdOrder(data),
+            fetch(`/api/customer/${userContentId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                orders: data[data.length - 1]._id,
+              }),
+            })
+          )
+        )
+    );
+    setOpen(true);
+    setNumOrder(result);
   }
 
   return (
@@ -159,42 +251,26 @@ function Cart() {
             </div> */}
                   <div className="totals-item">
                     <label>Savings</label>
-                    <div style={{ float: "right" }}>
-                      $
-                      {(
-                        items.reduce(
-                          (total, curr) => total + curr.price * curr.amount,
-                          0
-                        ) -
-                        items.reduce(
-                          (total, curr) =>
-                            total +
-                            (curr.price - (curr.price / 100) * percent) *
-                              curr.amount,
-                          0
-                        )
-                      ).toFixed(2)}
-                    </div>
+                    <div style={{ float: "right" }}>${totalSavings()}</div>
                   </div>
                   <div className="totals-item totals-item-total">
                     <label>Grand Total</label>
                     <div className="totals-value" id="cart-total">
-                      {items
-                        .reduce(
-                          (total, curr) =>
-                            total +
-                            (curr.price - (curr.price / 100) * percent) *
-                              curr.amount,
-                          0
-                        )
-                        .toFixed(2)}
+                      {items.reduce(
+                        (total, curr) => total + curr.price * curr.amount,
+                        0
+                      )}
                     </div>
                   </div>
                 </div>
                 <div
                   style={{ borderBottom: "3px solid #eee", display: "grid" }}
                 >
-                  <button style={{ marginBottom: "15px" }} className="checkout">
+                  <button
+                    onClick={paymentClick}
+                    style={{ marginBottom: "15px" }}
+                    className="checkout"
+                  >
                     payment
                   </button>
                   <button
@@ -205,6 +281,28 @@ function Cart() {
                     add new cart
                   </button>
                 </div>
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                  <Fade in={open}>
+                    <div className={classes.paper}>
+                      <h2 id="transition-modal-title">order Confirmation</h2>
+                      <p id="transition-modal-description">
+                        Order N.{numOrder} done successfully
+                      </p>
+                      {<Invoicing numOrder={numOrder} />}
+                    </div>
+                  </Fade>
+                </Modal>
 
                 {modal && <Payment />}
               </div>

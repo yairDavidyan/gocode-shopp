@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { createRef, useContext, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -73,10 +73,33 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide({ close }) {
   const classes = useStyles();
-  const { setOpenUser, setIsSignUp } = useContext(CartContext);
+  const inputTextEmail = createRef();
+  const inputTextPassword = createRef();
+  const { setOpenUser, setIsSignUp, setUserContent, setUserContentId } =
+    useContext(CartContext);
+  let name, lastName, id;
   function openSignUp() {
     close();
     setIsSignUp(true);
+  }
+  function signInUser() {
+    fetch("/api/customer")
+      .then((res) => res.json())
+      .then((user) => {
+        user.map((el) => {
+          if (
+            el.mail === inputTextEmail.current.value &&
+            el.password === inputTextPassword.current.value
+          ) {
+            name = el.name;
+            lastName = el.lastName;
+            id = el._id;
+          }
+        });
+        setUserContent(`welcom to ${name} ${lastName}`);
+        setUserContentId(id);
+        setOpenUser(false);
+      });
   }
 
   return (
@@ -103,6 +126,7 @@ export default function SignInSide({ close }) {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                inputRef={inputTextEmail}
               />
               <TextField
                 variant="outlined"
@@ -114,17 +138,19 @@ export default function SignInSide({ close }) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                inputRef={inputTextPassword}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
               <Button
-                type="submit"
+                //type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={signInUser}
               >
                 Sign In
               </Button>

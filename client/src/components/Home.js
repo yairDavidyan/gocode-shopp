@@ -47,6 +47,8 @@ function Home() {
   const [message, setMessage] = useState("");
   const [openUser, setOpenUser] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [userContent, setUserContent] = useState("Hello Guest");
+  const [userContentId, setUserContentId] = useState("");
 
   const calMin = (data) => {
     return data.reduce(
@@ -102,6 +104,7 @@ function Home() {
       .then((response) => response.json())
       .then(
         (data) => (
+          console.log("data", data),
           setProducts(data),
           setTotalFilter(data.length),
           setTotalProducts(data.length),
@@ -148,6 +151,10 @@ function Home() {
   return (
     <CartContext.Provider
       value={{
+        userContentId,
+        setUserContentId,
+        userContent,
+        setUserContent,
         choice,
         setMinMax,
         isCart,
