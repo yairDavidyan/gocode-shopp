@@ -469,7 +469,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10%",
   },
   paper: {
-    width: "100%",
+    width: "105%",
     marginBottom: theme.spacing(2),
   },
   table: {
@@ -485,6 +485,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  td: {
+    padding: "6px",
   },
 }));
 
@@ -583,6 +586,8 @@ function UpdateProduct() {
                   const labelId = `enhanced-table-checkbox-${index}`;
                   return (
                     <TableRow
+                      style={{ padding: "6px" }}
+                      className={classes.td}
                       hover
                       onClick={(event) => handleClick(event, product._id)}
                       role="checkbox"
@@ -591,13 +596,14 @@ function UpdateProduct() {
                       key={product._id}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell style={{ padding: "6px" }} padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
                           inputProps={{ "aria-labelledby": labelId }}
                         />
                       </TableCell>
                       <TableCell
+                        style={{ padding: "0px" }}
                         component="th"
                         id={labelId}
                         scope="row"
@@ -605,13 +611,21 @@ function UpdateProduct() {
                       >
                         {product._id}
                       </TableCell>
-                      <TableCell align="right">{product.price}</TableCell>
-                      <TableCell align="right">{product.title}</TableCell>
-                      <TableCell align="right">{product.category}</TableCell>
-                      <TableCell align="right">
+                      <TableCell style={{ padding: "0px" }} align="right">
+                        {product.price}
+                      </TableCell>
+                      <TableCell style={{ padding: "0px" }} align="right">
+                        {product.title}
+                      </TableCell>
+                      <TableCell style={{ padding: "0px" }} align="right">
+                        {product.category}
+                      </TableCell>
+                      <TableCell style={{ padding: "0px" }} align="right">
                         <div
                           style={{
-                            width: "120px",
+                            padding: "6px",
+
+                            width: "80px",
                             overflow: "hidden",
                             height: "60px",
                           }}
@@ -619,10 +633,14 @@ function UpdateProduct() {
                           {product.description}
                         </div>
                       </TableCell>
-                      <TableCell align="right">
-                        <div>
+                      <TableCell style={{ padding: "6px" }} align="right">
+                        <div style={{ padding: "6px" }}>
                           <img
-                            style={{ width: "70px", height: "60px" }}
+                            style={{
+                              width: "70px",
+                              height: "60px",
+                              padding: "6px",
+                            }}
                             src={product.image}
                             alt={product.title}
                           />
@@ -633,13 +651,14 @@ function UpdateProduct() {
                 })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell style={{ padding: "6px" }} colSpan={6} />
                 </TableRow>
               )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
+          style={{ padding: "6px" }}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={products.length}
@@ -650,6 +669,7 @@ function UpdateProduct() {
         />
       </Paper>
       <FormControlLabel
+        style={{ padding: "6px" }}
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />

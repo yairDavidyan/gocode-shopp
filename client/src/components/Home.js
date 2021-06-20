@@ -11,17 +11,10 @@ import SliderImage from "./SliderImage";
 import homeImage from "../images/homeImage.jpg";
 import SliderFilter from "./SliderFilter";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import {
-  Badge,
-  Button,
-  IconButton,
-  makeStyles,
-  withStyles,
-} from "@material-ui/core";
+import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
-import SignUp from "./SignUp";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -104,7 +97,6 @@ function Home() {
       .then((response) => response.json())
       .then(
         (data) => (
-          console.log("data", data),
           setProducts(data),
           setTotalFilter(data.length),
           setTotalProducts(data.length),

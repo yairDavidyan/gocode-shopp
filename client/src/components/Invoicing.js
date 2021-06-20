@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Invoicing() {
-  const { numOrder, userContentId } = useContext(CartContext);
+function Invoicing({ numOrder }) {
+  const { userContentId, items } = useContext(CartContext);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [userDetails, setUserDetails] = React.useState({});
@@ -39,6 +39,7 @@ function Invoicing() {
       .then((res) => res.json())
       .then((data) => setUserDetails(data));
   };
+  console.log(userDetails);
 
   const handleClose = () => {
     setOpen(false);
@@ -72,7 +73,7 @@ function Invoicing() {
               <table style={{ width: "100%" }}>
                 <tr>
                   <td style={{ width: "75px" }}>
-                    <div class="logotype">Copmany</div>
+                    <div class="logotype">Bali Express</div>
                   </td>
                   <td style={{ width: "300px" }}>
                     <div
@@ -95,11 +96,10 @@ function Invoicing() {
               </table>
               <br />
               <br />
-              <h3>Your contact details</h3>
+              <h3>פרטי ההזמנה שלך</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation.
+                תודה שהזמנת אצלנו ,ההזמנה תאסף בימים הקרובים ותישלח לכתובת
+                המעודכנת במערכת , באם יש בעיה ניתן לפנות למוקד בטלפון או בצ'אט
               </p>
               <br />
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -119,7 +119,7 @@ function Invoicing() {
                     <br />
                   </td>
                   <td style={{ background: "#eee", padding: "20px" }}>
-                    <strong>Order-nr:</strong> {numOrder}
+                    <strong>Order-nr:</strong> {numOrder !== "" && numOrder}
                     <br />
                     <strong>E-mail:</strong> {userDetails.mail}
                     <br />
@@ -202,58 +202,59 @@ function Invoicing() {
                   <td style={{ width: "40%" }} class="column-header">
                     Article
                   </td>
-                  <td style={{ width: "20%" }} class="column-header">
-                    Options
+                  <td style={{ width: "40%" }} class="column-header">
+                    Category
                   </td>
                   <td style={{ width: "20%" }} class="column-header">
                     Price
                   </td>
                   <td style={{ width: "20%" }} class="column-header">
+                    Amount
+                  </td>
+                  <td style={{ width: "20%" }} class="column-header">
                     Total
                   </td>
                 </tr>
-                <tr>
-                  <td class="row1">
-                    <span style={{ color: "#777", fontSize: "11px" }}>
-                      #64000L
-                    </span>
-                    <br />
-                    Softstyle Lady Fit
-                  </td>
-                  <td class="row1">Black | Large</td>
-                  <td class="row1">
-                    4 <span style={{ color: "#777" }}>X</span> 25 SEK
-                  </td>
-                  <td class="row1">100 SEK</td>
-                </tr>
-                <tr>
-                  <td class="row1">
-                    <span style={{ color: "#777", fontSize: "11px" }}>
-                      #64000L
-                    </span>
-                    <br />
-                    Softstyle Lady Fit
-                  </td>
-                  <td class="row1">Black | Large</td>
-                  <td class="row1">
-                    4 <span style={{ color: "#777" }}>X</span> 25 SEK
-                  </td>
-                  <td class="row1">100 SEK</td>
-                </tr>
-                <tr>
-                  <td class="row1">
-                    <span style={{ color: "#777", fontSize: "11px" }}>
-                      #64000L
-                    </span>
-                    <br />
-                    Softstyle Lady Fit
-                  </td>
-                  <td class="row1">Black | Large</td>
-                  <td class="row1">
-                    4 <span style={{ color: "#777" }}>X</span> 25 SEK
-                  </td>
-                  <td class="row1">100 SEK</td>
-                </tr>
+                {items.length > 0 &&
+                  items.map((el) => (
+                    <tr>
+                      <td class="row1">
+                        <span style={{ color: "#777", fontSize: "11px" }}>
+                          #64000L
+                        </span>
+                        <br />
+                        {el.title}
+                      </td>
+                      <td class="row1">
+                        <span style={{ color: "#777", fontSize: "11px" }}>
+                          #64000L
+                        </span>
+                        <br />
+                        {el.category}
+                      </td>
+                      <td class="row1">
+                        <span style={{ color: "#777", fontSize: "11px" }}>
+                          #64000L
+                        </span>
+                        <br />
+                        {el.price}
+                      </td>
+                      <td class="row1">
+                        <span style={{ color: "#777", fontSize: "11px" }}>
+                          #64000L
+                        </span>
+                        <br />
+                        {el.amount}
+                      </td>
+                      <td class="row1">
+                        <span style={{ color: "#777", fontSize: "11px" }}>
+                          #64000L
+                        </span>
+                        <br />
+                        {el.price * el.amount}
+                      </td>
+                    </tr>
+                  ))}
               </table>
               <br />
               <table

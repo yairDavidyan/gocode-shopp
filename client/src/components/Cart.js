@@ -42,7 +42,6 @@ function Cart() {
   let total = 0;
   const [open, setOpen] = useState(false);
   const [numOrder, setNumOrder] = useState("");
-  const [idOrder, setIdOrder] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -108,6 +107,7 @@ function Cart() {
     var dd = String(today.getDate()).padStart(2, "0");
     var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
+    setNumOrder(result);
 
     today = yyyy + "-" + dd + "-" + mm;
 
@@ -130,20 +130,17 @@ function Cart() {
       .then(
         fetch(`/api/order/${userContentId}`)
           .then((res) => res.json())
-          .then(
-            (data) => (
-              setIdOrder(data),
-              fetch(`/api/customer/${userContentId}`, {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                },
+          .then((data) =>
+            fetch(`/api/customer/${userContentId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
 
-                body: JSON.stringify({
-                  orders: data && data.map((el) => el._id),
-                }),
-              })
-            )
+              body: JSON.stringify({
+                orders: data && data.map((el) => el._id),
+              }),
+            })
           )
       )
       .then(
@@ -152,7 +149,6 @@ function Cart() {
           .then((data) => console.log("data: ", data))
       );
     setOpen(true);
-    setNumOrder(result);
   }
 
   return (
