@@ -153,6 +153,12 @@ app.delete("/api/product/:id", (req, res) => {
 //***************************************************************** */
 
 //db custumer
+app.get("/api/customer", (req, res) => {
+  console.log("yes");
+  Customer.find({})
+    .populate("orders")
+    .then((customer) => res.send(customer));
+});
 
 app.post("/api/customer", (req, res) => {
   Customer.insertMany([
@@ -172,18 +178,13 @@ app.post("/api/customer", (req, res) => {
 
 app.get("/api/customer/:id", (req, res) => {
   const { id } = req.params;
+
   Customer.findById(id)
     .then((customer) => res.send(customer))
     .catch((err) => {
       res.status(404);
       res.send(err);
     });
-});
-
-app.get("/api/customer", (req, res) => {
-  Customer.find({})
-    .populate("orders")
-    .then((customer) => res.send(customer));
 });
 
 //dalete customer

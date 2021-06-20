@@ -1,4 +1,4 @@
-import { Badge, makeStyles, Slider, withStyles } from "@material-ui/core";
+import { makeStyles, Slider } from "@material-ui/core";
 import { useContext } from "react";
 import CartContext from "./CartContext";
 import "./sliderFilter.css";

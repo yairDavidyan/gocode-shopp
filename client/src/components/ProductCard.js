@@ -134,14 +134,14 @@ function ProductCard({
               )}
             <div className="plusMinus" style={{ display: "flex" }}>
               <button className="plus-button" onClick={deleteProduct}>
-                <img style={{ height: "70%" }} src={minusLogo}></img>
+                <img style={{ height: "70%" }} alt={"-"} src={minusLogo}></img>
               </button>
               <h3 style={{ marginTop: "23px" }}>{amount}</h3>
               <button
                 className="plus-button"
                 onClick={() => addProduct(product.category)}
               >
-                <img style={{ height: "70%" }} src={addLogo}></img>
+                <img style={{ height: "70%" }} alt={"-"} src={addLogo}></img>
               </button>
             </div>
           </div>

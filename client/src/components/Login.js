@@ -24,21 +24,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import {
-  Fade,
-  FormControl,
-  Grid,
-  IconButton,
-  InputLabel,
-  makeStyles,
-  Menu,
-  Modal,
-  Select,
-} from "@material-ui/core";
+import { Fade, IconButton, makeStyles, Menu, Modal } from "@material-ui/core";
 import SignInSide from "./SignInSide";
 import SignUp from "./SignUp";
 import Backdrop from "@material-ui/core/Backdrop";
-import ProductCard from "./ProductCard";
 
 function Login() {
   const {
@@ -47,7 +36,7 @@ function Login() {
     isSignUp,
     categories,
     setProducts,
-    products,
+
     setTotalFilter,
     setProductsFilter,
     setMinMax,
@@ -128,10 +117,7 @@ function Login() {
     root: {
       flexGrow: 1,
     },
-    // modal: {
-    //   top: "800px",
-    //   left: "900px",
-    // },
+
     menuButton: {
       marginRight: theme.spacing(2),
     },

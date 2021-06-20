@@ -3,10 +3,9 @@ import { useState, useEffect, useContext } from "react";
 import CartContext from "./CartContext";
 
 function Timer() {
-  const { setIsSale, isSale, setPercent, date, setDate, percent } =
+  const { setIsSale, isSale, setPercent, date, percent } =
     useContext(CartContext);
   const calculateTimeLeft = () => {
-    let year = new Date().getFullYear();
     let difference = +new Date(date) - +new Date();
 
     let timeLeft = {};
@@ -26,7 +25,6 @@ function Timer() {
     return timeLeft;
   };
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [year] = useState(new Date().getFullYear());
   const timerComponents = [];
 
   Object.keys(timeLeft).forEach((interval) => {

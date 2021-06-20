@@ -22,7 +22,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import CartContext from "./CartContext";
 import EditIcon from "@material-ui/icons/Edit";
-import { DataGrid } from "@material-ui/data-grid";
 import { Button, CardMedia, Fade, Modal, TextField } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
 
@@ -85,7 +84,6 @@ function EnhancedTableHead(props) {
     numSelected,
     rowCount,
     onRequestSort,
-    selected,
   } = props;
 
   const createSortHandler = (property) => (event) => {
@@ -491,7 +489,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UpdateProduct() {
-  const { products, setProducts } = useContext(CartContext);
+  const { products } = useContext(CartContext);
 
   const classes = useStyles();
   const [order, setOrder] = useState("asc");

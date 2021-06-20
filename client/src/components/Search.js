@@ -17,9 +17,7 @@ function Search() {
       marginLeft: theme.spacing(1),
       flex: 1,
     },
-    iconButton: {
-      padding: 10,
-    },
+
     divider: {
       height: 28,
       margin: 4,
@@ -27,6 +25,7 @@ function Search() {
     iconButton: {
       marginRight: "3px",
       padding: "2px",
+      // padding: 10,
     },
   }));
   const classes = useStyles();

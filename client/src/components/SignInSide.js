@@ -1,7 +1,6 @@
-import React, { createRef, useContext, useState } from "react";
+import React, { createRef, useContext } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -15,8 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CartContext from "./CartContext";
 import IconButton from "@material-ui/core/IconButton";
-import SignUp from "./SignUp";
-import { Modal } from "@material-ui/core";
 
 function Copyright() {
   return (
@@ -174,7 +171,6 @@ export default function SignInSide({ close }) {
                 <Copyright />
               </Box>
               <IconButton
-                color="secondary"
                 aria-label="add an alarm"
                 onClick={() => setOpenUser(false)}
                 variant="contained"

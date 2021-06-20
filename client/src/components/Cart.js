@@ -43,7 +43,6 @@ function Cart() {
   const [open, setOpen] = useState(false);
   const [numOrder, setNumOrder] = useState("");
   const [idOrder, setIdOrder] = useState("");
-  console.log(idOrder);
 
   const handleOpen = () => {
     setOpen(true);
@@ -127,25 +126,31 @@ function Cart() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(addOrder),
-    }).then(
-      fetch(`/api/order/${userContentId}`)
-        .then((res) => res.json())
-        .then(
-          (data) => (
-            setIdOrder(data),
-            fetch(`/api/customer/${userContentId}`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
+    })
+      .then(
+        fetch(`/api/order/${userContentId}`)
+          .then((res) => res.json())
+          .then(
+            (data) => (
+              setIdOrder(data),
+              fetch(`/api/customer/${userContentId}`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
 
-              body: JSON.stringify({
-                orders: data && data.map((el) => el._id),
-              }),
-            })
+                body: JSON.stringify({
+                  orders: data && data.map((el) => el._id),
+                }),
+              })
+            )
           )
-        )
-    );
+      )
+      .then(
+        fetch("/api/customer")
+          .then((res) => res.json())
+          .then((data) => console.log("data: ", data))
+      );
     setOpen(true);
     setNumOrder(result);
   }

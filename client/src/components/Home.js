@@ -115,23 +115,6 @@ function Home() {
       )
       .then(setShown(false));
   }, []);
-  // const product1 = {
-  //   title: "lbb",
-  //   price: 23232,
-  //   description: "blablalbl",
-  //   category: "gsdgadg",
-  //   image: "req.body.image",
-  //   amount: 8,
-  // };
-  // function addProduct() {
-  //   fetch("/api/product", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(product1),
-  //   });
-  // }
 
   console.log("pro:", products);
   console.log("iems:", items);
@@ -218,16 +201,8 @@ function Home() {
             ) : (
               <>
                 <Header />
-                {/* <Button
-                  onClick={addProduct}
-                  variant="contained"
-                  color="secondary"
-                >
-                  cleck me
-                </Button> */}
 
-                {/* <SliderImage /> */}
-                {/* {products.length > 0 && <EditProduct />} */}
+                <SliderImage />
                 <Timer />
 
                 {isShown ? (

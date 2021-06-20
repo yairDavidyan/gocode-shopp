@@ -1,5 +1,4 @@
 import "./payment.css";
-import Zoom from "react-reveal/Zoom";
 import Modal from "react-modal";
 import { useContext } from "react";
 import CartContext from "./CartContext";
