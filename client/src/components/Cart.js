@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme) => ({
 
     // background-image: url(/static/media/suc.a4016fa8.png);
 
-    backgroundSize: "48px",
-    backgroundImage: `url(${suc})`,
-    backgroundPosition: "center",
-    backgroundrepeat: "no-repeat",
-    backgroundPosition: "top",
-    float: "left",
-    backgroundRepeat: "no-repeat",
+    // backgroundSize: "48px",
+    // backgroundImage: `url(${suc})`,
+    // backgroundPosition: "center",
+    // backgroundrepeat: "no-repeat",
+    // backgroundPosition: "top",
+    // float: "left",
+    // backgroundRepeat: "no-repeat",
     backgroundColor: "#f7d12e",
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -120,7 +120,7 @@ function Cart() {
 
   function paymentClick() {
     if (userContent === "Hello Guest") {
-      setTextError("You are not logged in. Please log in to continue");
+      setTextError("You are not logged in - Please ");
       setErrorContent(true);
     } else if (items.length >= 1) {
       result = Math.random();

@@ -5,9 +5,6 @@ import CartContext from "./CartContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    position: "relative",
-    top: "33%",
     "& > * + *": {
       marginTop: theme.spacing(2),
     },
@@ -15,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function AlertError({ setErrorContent }) {
   const classes = useStyles();
-  const { textError, setTextError } = useContext(CartContext);
+  const { textError, setTextError, setOpenUser } = useContext(CartContext);
 
   return (
     <div className={classes.root}>
@@ -27,6 +24,15 @@ function AlertError({ setErrorContent }) {
       >
         <AlertTitle>Error</AlertTitle>
         <strong>{textError}</strong>
+        <a
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            setOpenUser(true);
+            setErrorContent(false);
+          }}
+        >
+          Log in
+        </a>
       </Alert>
     </div>
   );
