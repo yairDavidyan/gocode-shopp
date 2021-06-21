@@ -100,7 +100,7 @@ function ProductCard({
                 </div>
               </>
             )}
-          <Link to={`/api/product/${id}`}>
+          <Link to={`/product/${id}`}>
             <div className="productImage">
               <img src={image} alt={title} title={description} />
             </div>

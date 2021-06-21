@@ -21,19 +21,21 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     position: "relative",
-    left: "27%",
-    top: "14px",
+    left: "41%",
+    top: "7px",
   },
 }));
 
-function Invoicing({ numOrder }) {
-  const { userContentId, items } = useContext(CartContext);
+function Invoicing({ numOrder, setOpenConfirm }) {
+  const { userContentId, items, setItems, setProducts, products } =
+    useContext(CartContext);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [userDetails, setUserDetails] = React.useState({});
 
   const handleOpen = () => {
     setOpen(true);
+
     console.log(userContentId);
     fetch(`/api/customer/${userContentId}`)
       .then((res) => res.json())
@@ -43,6 +45,12 @@ function Invoicing({ numOrder }) {
 
   const handleClose = () => {
     setOpen(false);
+    setOpenConfirm(false);
+    setItems([]);
+
+    setProducts((prev) => {
+      return prev.map((item) => (item ? { ...item, amount: 0 } : item));
+    });
   };
   return (
     <>

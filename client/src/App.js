@@ -9,7 +9,7 @@ function App() {
       <Route path="/" exact>
         <Home />
       </Route>
-      <Route path="/api/product/:id">
+      <Route path="/product/:id">
         <Information />
       </Route>
     </Switch>

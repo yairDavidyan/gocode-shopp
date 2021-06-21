@@ -42,6 +42,7 @@ function Home() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [userContent, setUserContent] = useState("Hello Guest");
   const [userContentId, setUserContentId] = useState("");
+  const [textError, setTextError] = useState("");
 
   const calMin = (data) => {
     return data.reduce(
@@ -126,6 +127,8 @@ function Home() {
   return (
     <CartContext.Provider
       value={{
+        textError,
+        setTextError,
         userContentId,
         setUserContentId,
         userContent,
