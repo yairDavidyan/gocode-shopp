@@ -65,11 +65,12 @@ function Search() {
   }
   return (
     <>
-      {openError && <AlertError setErrorContent={setOpenError} />}
+      {/* {openError && <AlertError setErrorContent={setOpenError} />} */}
 
       <div className="search">
         <Paper component="form" className={classes.root}>
           <InputBase
+            type="search"
             onChange={serchProduct}
             inputRef={serchText}
             className={classes.input}
@@ -87,6 +88,9 @@ function Search() {
             <SearchIcon />
           </IconButton>
         </Paper>
+        {openError && (
+          <div style={{ color: "red", fontWeight: "bold" }}>not found</div>
+        )}
       </div>
     </>
   );

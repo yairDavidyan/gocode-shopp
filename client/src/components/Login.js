@@ -79,7 +79,6 @@ function Login() {
           )
         )
     );
-
     setOpen(false);
   }
 
@@ -97,6 +96,7 @@ function Login() {
     openUser,
     setOpenUser,
     userContent,
+    setUserContent,
   } = useContext(CartContext);
   const [category, setCategory] = useState("");
 
@@ -368,6 +368,7 @@ function Login() {
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             {userContent}
+            {/* <a onClick={() => setOpenUser(true)}> log in</a> */}
           </Typography>
           {ifManager ? (
             <div className="loginOutIn">
@@ -428,6 +429,7 @@ function Login() {
                 ))}
               </select>
               <TextField
+                type="url"
                 autoComplete="off"
                 inputRef={textInputUrl}
                 id="standard-basic1"
@@ -441,6 +443,7 @@ function Login() {
                 label="name"
               />
               <TextField
+                type="number"
                 inputRef={textInputPrice}
                 autoComplete="off"
                 id="standard-basic3"

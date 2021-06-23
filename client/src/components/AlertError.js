@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 function AlertError({ setErrorContent }) {
   const classes = useStyles();
-  const { textError, setTextError, setOpenUser } = useContext(CartContext);
+  const { textError, setTextError, setOpenUser, userContent } =
+    useContext(CartContext);
 
   return (
     <div className={classes.root}>
@@ -24,15 +25,17 @@ function AlertError({ setErrorContent }) {
       >
         <AlertTitle>Error</AlertTitle>
         <strong>{textError}</strong>
-        <a
-          style={{ cursor: "pointer" }}
-          onClick={() => {
-            setOpenUser(true);
-            setErrorContent(false);
-          }}
-        >
-          Log in
-        </a>
+        {userContent === "Hello Guest" && (
+          <a
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              setOpenUser(true);
+              setErrorContent(false);
+            }}
+          >
+            Log in
+          </a>
+        )}
       </Alert>
     </div>
   );

@@ -220,6 +220,7 @@ function Cart() {
           </Modal>
           <Fade bottom cascade>
             <div className="shopping-cart">
+              {errorContent && <AlertError setErrorContent={setErrorContent} />}
               <div className="titleCart">
                 <label className="labal1">Image</label>
                 <label className="labal1">Product</label>
@@ -229,10 +230,6 @@ function Cart() {
               </div>
               <Fade right cascade>
                 <div className="cardShop">
-                  {errorContent && (
-                    <AlertError setErrorContent={setErrorContent} />
-                  )}
-
                   {items.length !== 0 ? (
                     items.map((el) => (
                       <div className="product">
@@ -275,10 +272,10 @@ function Cart() {
                     ))
                   ) : (
                     <div class="container-fluid mt-100">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="card">
-                            <div class="card-body cart">
+                      <div class="row2">
+                        <div>
+                          <div>
+                            <div>
                               <div class="col-sm-12 empty-cart-cls text-center">
                                 <img
                                   src="https://i.imgur.com/dCdflKN.png"
