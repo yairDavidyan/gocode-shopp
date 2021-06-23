@@ -1,4 +1,4 @@
-import React, { createRef, useContext } from "react";
+import React, { createRef, useContext, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import CartContext from "./CartContext";
 import IconButton from "@material-ui/core/IconButton";
+import AlertError from "./AlertError";
 
 function Copyright() {
   return (
@@ -72,8 +73,15 @@ export default function SignInSide({ close }) {
   const classes = useStyles();
   const inputTextEmail = createRef();
   const inputTextPassword = createRef();
-  const { setOpenUser, setIsSignUp, setUserContent, setUserContentId } =
-    useContext(CartContext);
+  const [errorContent, setErrorContent] = useState(false);
+
+  const {
+    setOpenUser,
+    setIsSignUp,
+    setUserContent,
+    setUserContentId,
+    setTextError,
+  } = useContext(CartContext);
   let name, lastName, id;
   function openSignUp() {
     close();
@@ -93,9 +101,16 @@ export default function SignInSide({ close }) {
             id = el._id;
           }
         });
-        setUserContent(`welcom ${name} ${lastName}`);
-        setUserContentId(id);
-        setOpenUser(false);
+        console.log("name", name);
+
+        if (name !== undefined) {
+          setUserContent(`welcom ${name} ${lastName}`);
+          setUserContentId(id);
+          setOpenUser(false);
+        } else {
+          setErrorContent(true);
+          setTextError("user not found");
+        }
       });
   }
 
@@ -105,6 +120,8 @@ export default function SignInSide({ close }) {
         {/* <CssBaseline /> */}
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          {errorContent && <AlertError setErrorContent={setErrorContent} />}
+
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />

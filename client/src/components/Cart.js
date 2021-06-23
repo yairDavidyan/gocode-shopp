@@ -8,7 +8,6 @@ import Payment from "./Payment";
 import Backdrop from "@material-ui/core/Backdrop";
 import Invoicing from "./Invoicing";
 import AlertError from "./AlertError";
-import suc from "../images/suc.png"; // Import using relative path
 
 const useStyles = makeStyles((theme) => ({
   button: {
