@@ -137,10 +137,9 @@ function Cart() {
         numberOrder: result,
         //2012-04-23T18:25:43.511Z
         date: today,
-        cost: items.reduce(
-          (total, curr) => total + curr.price * curr.amount,
-          0
-        ),
+        cost: items
+          .reduce((total, curr) => total + curr.price * curr.amount, 0)
+          .toFixed(2),
         ifPay: true,
         customer: userContentId,
       };

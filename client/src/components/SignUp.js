@@ -69,7 +69,7 @@ export default function SignUp() {
       lastName: textInputLname.current.value,
       phone: textInputPhone.current.value,
       mail: textInputEmail.current.value,
-      adress: textInputName.current.value,
+      //adress: textInputName.current.value,
       password: textInputPassword.current.value,
     };
     console.log(userObj);

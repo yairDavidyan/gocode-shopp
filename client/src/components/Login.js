@@ -27,6 +27,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Fade, IconButton, makeStyles, Menu, Modal } from "@material-ui/core";
 import SignInSide from "./SignInSide";
 import SignUp from "./SignUp";
+import UsersDetails from "./UsersDetails";
 import Backdrop from "@material-ui/core/Backdrop";
 
 function Login() {
@@ -97,8 +98,11 @@ function Login() {
     setOpenUser,
     userContent,
     setUserContent,
+    setOpenUsersDetalies,
+    openUsersDetalies,
   } = useContext(CartContext);
   const [category, setCategory] = useState("");
+  const [color, setColor] = useState("rgb(255, 213, 79)");
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -140,7 +144,7 @@ function Login() {
       color: "black",
     },
     colorPrimary: {
-      backgroundColor: "rgb(255, 213, 79)",
+      backgroundColor: color,
     },
     modal: {
       display: "flex",
@@ -211,6 +215,8 @@ function Login() {
       setIfManager(true);
       setOpenManager(false);
       setListTipe(["update sale", "update product", "add product", "users"]);
+      setColor("rgb(205 205 205)");
+      setUserContent("Manager mode");
     }
   };
   const handleCloseManager = () => {
@@ -227,6 +233,8 @@ function Login() {
       setUpdateSale(false);
     } else if (text === "add product") {
       setOpen(true);
+    } else if (text === "users") {
+      setOpenUsersDetalies(true);
     }
   }
 

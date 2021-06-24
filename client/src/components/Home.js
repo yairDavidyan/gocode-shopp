@@ -15,6 +15,8 @@ import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
+import UsersDetails from "./UsersDetails";
+import { useLoggerFactory } from "@material-ui/data-grid";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -43,6 +45,7 @@ function Home() {
   const [userContent, setUserContent] = useState("Hello Guest");
   const [userContentId, setUserContentId] = useState("");
   const [textError, setTextError] = useState("");
+  const [openUsersDetalies, setOpenUsersDetalies] = useState(false);
 
   const calMin = (data) => {
     return data.reduce(
@@ -127,6 +130,8 @@ function Home() {
   return (
     <CartContext.Provider
       value={{
+        openUsersDetalies,
+        setOpenUsersDetalies,
         textError,
         setTextError,
         userContentId,
@@ -190,6 +195,8 @@ function Home() {
                 <div className="table-update">
                   {updateProduct && <UpdateProduct />}
                   {updateSale && <UpdateSale />}
+                  {openUsersDetalies && <UsersDetails />}
+
                   {snackBar && <Snackbars />}
                 </div>
               </div>
