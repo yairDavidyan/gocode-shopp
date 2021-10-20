@@ -18,7 +18,6 @@ function Header() {
         <div className="box box2">
           <Search />
         </div>
-        <div className="box box3"></div>
       </div>
     </>
   );

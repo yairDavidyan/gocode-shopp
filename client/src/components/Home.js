@@ -10,13 +10,11 @@ import CartContext from "./CartContext";
 import SliderImage from "./SliderImage";
 import homeImage from "../images/homeImage.jpg";
 import SliderFilter from "./SliderFilter";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
 import UsersDetails from "./UsersDetails";
-import { useLoggerFactory } from "@material-ui/data-grid";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -60,17 +58,6 @@ function Home() {
     );
   };
 
-  const StyledBadge = withStyles((theme) => ({
-    badge: {
-      right: 38,
-      top: -28,
-      border: `2px solid ${theme.palette.background.paper}`,
-      padding: "0 4px",
-      width: "4em",
-      height: "4em",
-      transform: "rotate(-0.1turn)",
-    },
-  }))(Badge);
   const useStyles = makeStyles({
     root: {
       width: "500px;",
@@ -204,7 +191,7 @@ function Home() {
               <>
                 <Header />
 
-                <SliderImage />
+                {/* <SliderImage /> */}
                 <Timer />
 
                 {isShown ? (
@@ -227,29 +214,6 @@ function Home() {
                               el.price <= value[1]
                           )}
                         />
-                        <div class="side">
-                          <IconButton
-                            onClick={() => setIsCart(!isCart)}
-                            aria-label="cart"
-                            className={classes.a}
-                          >
-                            <StyledBadge
-                              badgeContent={
-                                items &&
-                                items.reduce(
-                                  (total, curr) => total + curr.amount,
-                                  0
-                                )
-                              }
-                              color="secondary"
-                            >
-                              <ShoppingCartIcon
-                                fa-rotate-90
-                                className={classes.iconShoping}
-                              />
-                            </StyledBadge>
-                          </IconButton>
-                        </div>
                       </div>
                     </div>
                   </>

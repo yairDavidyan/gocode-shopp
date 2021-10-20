@@ -5,6 +5,9 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { Badge, withStyles } from "@material-ui/core";
+
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import AppBar from "@material-ui/core/AppBar";
@@ -49,6 +52,9 @@ function Login() {
   let textInputName = createRef();
   let textInputDes = createRef();
   let textInputUrl = createRef();
+  const StyledBadge = withStyles((theme) => ({
+    badge: {},
+  }))(Badge);
 
   function updateSaleFun() {
     const addProduct = {
@@ -91,6 +97,9 @@ function Login() {
   const menuId = "primary-search-account-menu";
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const {
+    setIsCart,
+    items,
+    isCart,
     ifManager,
     setIfManager,
     setUpdateProduct,
@@ -175,6 +184,9 @@ function Login() {
     setListTipe(["Inbox", "Starred", "Send email", "Drafts"]);
     setUpdateProduct(false);
     setUpdateSale(false);
+    setColor("rgb(255, 213, 79)");
+
+    setUserContent("Hello Guest");
   }
 
   const handleProfileMenuOpen = (event) => {
@@ -378,6 +390,20 @@ function Login() {
             {userContent}
             {/* <a onClick={() => setOpenUser(true)}> log in</a> */}
           </Typography>
+          <IconButton
+            onClick={() => setIsCart(!isCart)}
+            aria-label="cart"
+            className={classes.a}
+          >
+            <StyledBadge
+              badgeContent={
+                items && items.reduce((total, curr) => total + curr.amount, 0)
+              }
+              color="secondary"
+            >
+              <ShoppingCartIcon fa-rotate-90 className={classes.iconShoping} />
+            </StyledBadge>
+          </IconButton>
           {ifManager ? (
             <div className="loginOutIn">
               <IconButton

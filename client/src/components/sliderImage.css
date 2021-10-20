@@ -20,6 +20,14 @@
   z-index: 1;
   opacity: 0;
 }
+
+.boxSlider {
+  position: relative;
+  left: 18%;
+  width: 64%;
+  margin-top: 7%;
+}
+
 .slider__slide__text {
   position: relative;
   top: 11%;

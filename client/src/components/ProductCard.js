@@ -2,10 +2,12 @@ import "./productCard.css";
 import { useContext } from "react";
 import CartContext from "./CartContext";
 import { Link } from "react-router-dom";
-import addLogo from "../images/addLogo.png";
 import minusLogo from "../images/minusLogo.png";
 import Fade from "react-reveal/Fade";
-
+import { IconButton } from "@material-ui/core";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 function ProductCard({
   title,
   price,
@@ -133,16 +135,18 @@ function ProductCard({
                 </h6>
               )}
             <div className="plusMinus" style={{ display: "flex" }}>
-              <button className="plus-button" onClick={deleteProduct}>
-                <img style={{ height: "70%" }} alt={"-"} src={minusLogo}></img>
-              </button>
-              <h3 style={{ marginTop: "23px" }}>{amount}</h3>
-              <button
-                className="plus-button"
+              <IconButton color="secondary" onClick={deleteProduct}>
+                <RemoveIcon />
+              </IconButton>
+              <h3 style={{ marginTop: "16px" }}>{amount}</h3>
+
+              <IconButton
+                color="secondary"
+                aria-label="add to shopping cart"
                 onClick={() => addProduct(product.category)}
               >
-                <img style={{ height: "70%" }} alt={"-"} src={addLogo}></img>
-              </button>
+                <AddIcon />
+              </IconButton>
             </div>
           </div>
         </div>

@@ -20,10 +20,10 @@ function SliderFilter({ categories, changeDisplay }) {
   const handleChange = (even, newValue) => {
     setValue(newValue);
     // update filter number product
-    let select = document.querySelector(".selectCategory").value;
+    // let select = document.querySelector(".selectCategory").value;
     totalFilter = products.filter(
       (el) =>
-        (el.category === select || select === "all products") &&
+        (el.category === choice || choice === "all products") &&
         el.price >= newValue[0] &&
         el.price <= newValue[1]
     );
@@ -43,10 +43,9 @@ function SliderFilter({ categories, changeDisplay }) {
 
   function marks() {
     let arrMark = [];
-    minMax.length > 0 &&
-      minMax.map((item) => {
-        arrMark.push({ value: item.price });
-      });
+    minMax.map((item) => {
+      arrMark.push({ value: item.price });
+    });
     return arrMark;
   }
 
@@ -92,7 +91,7 @@ function SliderFilter({ categories, changeDisplay }) {
               </select>
             </div>
 
-            <div className="collection-sort">
+            {/* <div className="collection-sort">
               <label className="lableApp">Sort by:</label>
               <select>
                 <option value="/">Featured</option>
@@ -104,7 +103,7 @@ function SliderFilter({ categories, changeDisplay }) {
                 <option value="/">Date, new to old</option>
                 <option value="/">Date, old to new</option>
               </select>
-            </div>
+            </div> */}
           </div>
         </nav>
       </div>
