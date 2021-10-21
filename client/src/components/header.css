@@ -1,4 +1,4 @@
-.container {
+/* .container {
   margin-top: 12px;
   max-width: 100%;
   margin: 0 auto;
@@ -8,36 +8,18 @@
   gap: 1em;
   grid-auto-rows: minmax(100, auto);
   grid-auto-rows: 50px;
-}
+} */
 .HeaderH1 {
   position: relative;
-  margin-top: 12%;
-  height: 35%;
+  left: 25%;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  width: 255%;
-  margin-left: 50%;
+  width: 54%;
+  cursor: pointer;
 }
-.box1 {
-  grid-column: 1/2;
-  grid-row: 1/3;
-}
-.box2 {
-  grid-row: 2/3;
-  grid-column: 1/5;
-}
-@media screen and (min-width: 992px) {
-  .box1 {
-    grid-column: 1/2;
 
-    grid-row: 1/3;
-  }
-  .box2 {
-    /* grid-row: 2/3; */
-    grid-column: 2/5;
-  }
-  .HeaderH1 {
+@media screen and (min-width: 992px) {
+  /* .HeaderH1 {
     margin-top: 5%;
     height: 70%;
     background-repeat: no-repeat;
@@ -45,5 +27,5 @@
     background-position: center;
     width: 100%;
     margin-left: 0%;
-  }
+  } */
 }

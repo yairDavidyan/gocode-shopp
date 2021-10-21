@@ -8,7 +8,7 @@ import Home from "./components/Home";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Home />
   </BrowserRouter>,
   document.getElementById("root")
 );

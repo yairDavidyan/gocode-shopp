@@ -15,6 +15,8 @@ import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
 import UsersDetails from "./UsersDetails";
+import { Route, Switch } from "react-router";
+import Information from "../views/Information";
 
 function Home() {
   const [choice, setChoice] = useState("all products");
@@ -115,143 +117,152 @@ function Home() {
     setTotalFilter(productsFilter.length);
   }
   return (
-    <CartContext.Provider
-      value={{
-        openUsersDetalies,
-        setOpenUsersDetalies,
-        textError,
-        setTextError,
-        userContentId,
-        setUserContentId,
-        userContent,
-        setUserContent,
-        choice,
-        setMinMax,
-        isCart,
-        setIsCart,
-        totalFilter,
-        setTotalFilter,
-        setTotalProducts,
-        totalProducts,
-        productsFilter,
-        products,
-        items,
-        setProducts,
-        setItems,
-        setValue,
-        value,
-        setIsSale,
-        isSale,
-        percent,
-        setPercent,
-        modal,
-        setModal,
-        updateSale,
-        setUpdateSale,
-        date,
-        setDate,
-        changeDisplay,
-        saleCategory,
-        setSaleCategory,
-        ifManager,
-        setIfManager,
-        updateProduct,
-        setUpdateProduct,
-        snackBar,
-        setSnackBar,
-        message,
-        setMessage,
-        minMax,
-        calMax,
-        calMin,
-        openUser,
-        setOpenUser,
-        isSignUp,
-        setIsSignUp,
-        categories,
-        setProductsFilter,
-      }}
-    >
-      <div className="containerHome">
-        {isConect ? (
-          <>
-            <Login />
+    <Switch>
+      {/* <Home /> */}
 
-            {ifManager ? (
-              <div className="container-managment">
-                <div className="table-update">
-                  {updateProduct && <UpdateProduct />}
-                  {updateSale && <UpdateSale />}
-                  {openUsersDetalies && <UsersDetails />}
-
-                  {snackBar && <Snackbars />}
-                </div>
-              </div>
-            ) : (
+      <Route path="/" exact>
+        <CartContext.Provider
+          value={{
+            openUsersDetalies,
+            setOpenUsersDetalies,
+            textError,
+            setTextError,
+            userContentId,
+            setUserContentId,
+            userContent,
+            setUserContent,
+            choice,
+            setMinMax,
+            isCart,
+            setIsCart,
+            totalFilter,
+            setTotalFilter,
+            setTotalProducts,
+            totalProducts,
+            productsFilter,
+            products,
+            items,
+            setProducts,
+            setItems,
+            setValue,
+            value,
+            setIsSale,
+            isSale,
+            percent,
+            setPercent,
+            modal,
+            setModal,
+            updateSale,
+            setUpdateSale,
+            date,
+            setDate,
+            changeDisplay,
+            saleCategory,
+            setSaleCategory,
+            ifManager,
+            setIfManager,
+            updateProduct,
+            setUpdateProduct,
+            snackBar,
+            setSnackBar,
+            message,
+            setMessage,
+            minMax,
+            calMax,
+            calMin,
+            openUser,
+            setOpenUser,
+            isSignUp,
+            setIsSignUp,
+            categories,
+            setProductsFilter,
+          }}
+        >
+          <div className="containerHome">
+            {isConect ? (
               <>
-                <Header />
+                <Login />
 
-                {/* <SliderImage /> */}
-                <Timer />
+                {ifManager ? (
+                  <div className="container-managment">
+                    <div className="table-update">
+                      {updateProduct && <UpdateProduct />}
+                      {updateSale && <UpdateSale />}
+                      {openUsersDetalies && <UsersDetails />}
 
-                {isShown ? (
-                  <Load />
+                      {snackBar && <Snackbars />}
+                    </div>
+                  </div>
                 ) : (
                   <>
-                    <SliderFilter
-                      categories={categories}
-                      changeDisplay={changeDisplay}
-                    />
-                    <div className="divContainer">
-                      <Cart />
-                      <div className="content">
-                        <Products
-                          products={products.filter(
-                            (el) =>
-                              (el.category === choice ||
-                                choice === "all products") &&
-                              el.price >= value[0] &&
-                              el.price <= value[1]
-                          )}
+                    <Header />
+
+                    {/* <SliderImage /> */}
+                    <Timer />
+
+                    {isShown ? (
+                      <Load />
+                    ) : (
+                      <>
+                        <SliderFilter
+                          categories={categories}
+                          changeDisplay={changeDisplay}
                         />
-                      </div>
-                    </div>
+                        <div className="divContainer">
+                          <Cart />
+                          <div className="content">
+                            <Products
+                              products={products.filter(
+                                (el) =>
+                                  (el.category === choice ||
+                                    choice === "all products") &&
+                                  el.price >= value[0] &&
+                                  el.price <= value[1]
+                              )}
+                            />
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
               </>
-            )}
-          </>
-        ) : (
-          <div
-            style={{
-              height: "600px",
-              width: "1334px",
-              backgroundImage: `url(${homeImage})`,
-            }}
-          >
-            <div id="move">
-              <div id="cercle">
-                <p>welcome</p>
-              </div>
-              <div id="Bienvenue">
-                <h1>shopping online</h1>
-                <h3>
-                  <a
-                    className="enter"
-                    onClick={() => setIsConect(true)}
-                    href="#.html"
-                  >
-                    ENTRER
-                  </a>
-                </h3>
-              </div>
-            </div>
-            {/* <h1>welcom to Bali Express</h1>
+            ) : (
+              <div
+                style={{
+                  height: "600px",
+                  width: "1334px",
+                  backgroundImage: `url(${homeImage})`,
+                }}
+              >
+                <div id="move">
+                  <div id="cercle">
+                    <p>welcome</p>
+                  </div>
+                  <div id="Bienvenue">
+                    <h1>shopping online</h1>
+                    <h3>
+                      <a
+                        className="enter"
+                        onClick={() => setIsConect(true)}
+                        href="#.html"
+                      >
+                        ENTRER
+                      </a>
+                    </h3>
+                  </div>
+                </div>
+                {/* <h1>welcom to Bali Express</h1>
             <h3>shopping online</h3> */}
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </CartContext.Provider>
+        </CartContext.Provider>
+      </Route>
+      <Route path="/product/:id">
+        <Information />
+      </Route>
+    </Switch>
   );
 }
 export default Home;

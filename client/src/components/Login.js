@@ -176,6 +176,11 @@ function Login() {
       backgroundSize: "cover",
       backgroundPosition: "center",
     },
+    test: {
+      position: "fixed !important",
+      zIndex: "0 !important",
+      inset: "0px !important",
+    },
   }));
   const classes = useStyles();
 
@@ -253,7 +258,7 @@ function Login() {
   const isMenuOpen = Boolean(anchorEl);
   const renderMenu = (
     <Menu
-      className="menuLogin"
+      className={classes.test}
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}

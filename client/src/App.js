@@ -4,15 +4,6 @@ import Information from "./views/Information";
 import Home from "./components/Home";
 
 function App() {
-  return (
-    <Switch>
-      <Route path="/" exact>
-        <Home />
-      </Route>
-      <Route path="/product/:id">
-        <Information />
-      </Route>
-    </Switch>
-  );
+  return <></>;
 }
 export default App;

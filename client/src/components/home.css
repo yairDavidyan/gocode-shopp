@@ -1,11 +1,16 @@
-.divContainer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
 .containerHome {
   background-color: #00000014;
 }
+.loginMobile {
+}
+@media screen and (min-width: 992px) {
+  .divContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+}
+
 /* body {
   background-color: #c8e0eb;
   animation-name: couleurfond;
