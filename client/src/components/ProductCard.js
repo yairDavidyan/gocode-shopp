@@ -21,15 +21,15 @@ function ProductCard({
     useContext(CartContext);
 
   function addProduct(productCategory) {
-    setProducts((prev) => {
-      return prev.map((item) =>
+    setProducts((prev) =>
+      prev.map((item) =>
         item._id === product._id ? { ...item, amount: item.amount + 1 } : item
-      );
-    });
+      )
+    );
 
     setItems((prev) => {
       const isFound = prev.some((item) => item._id === product._id);
-      console.log(saleCategory);
+      // console.log(saleCategory);
       if (isFound) {
         return prev.map((item) =>
           item._id === product._id

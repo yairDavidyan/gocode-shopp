@@ -53,7 +53,7 @@ function UsersDetails() {
         if (ifPhone !== true) {
           setUserDetails([]);
           setUserOrder([]);
-          alert("dsaasa");
+          alert("not found");
         }
       });
   }

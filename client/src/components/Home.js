@@ -197,7 +197,7 @@ function Home() {
                   <>
                     <Header />
 
-                    {/* <SliderImage /> */}
+                    <SliderImage />
                     <Timer />
 
                     {isShown ? (
