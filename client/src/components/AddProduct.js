@@ -1,5 +1,4 @@
-import { Container } from "@material-ui/core";
-
+import Container from "@mui/material/Container";
 function AddProduct() {
   return <Container>fewfwefcwcwe</Container>;
 }

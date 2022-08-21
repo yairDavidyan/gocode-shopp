@@ -1,15 +1,15 @@
 import { useContext, useState } from "react";
 import CartContext from "./CartContext";
 import "./Cart.css";
-import { Button, makeStyles, Modal, TextField } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Fade from "react-reveal/Fade";
+import { Button, styled, Modal, TextField } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Fade from "@mui/material/Fade";
 import Payment from "./Payment";
-import Backdrop from "@material-ui/core/Backdrop";
+import Backdrop from "@mui/material/Backdrop";
 import Invoicing from "./Invoicing";
 import AlertError from "./AlertError";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   button: {
     marginTop: "50px",
   },

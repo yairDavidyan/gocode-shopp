@@ -10,7 +10,8 @@ import CartContext from "./CartContext";
 import SliderImage from "./SliderImage";
 import homeImage from "../images/homeImage.jpg";
 import SliderFilter from "./SliderFilter";
-import { Badge, IconButton, makeStyles, withStyles } from "@material-ui/core";
+
+import { Badge, IconButton, styled, withStyles } from "@mui/styles";
 import UpdateProduct from "./UpdateProduct";
 import UpdateSale from "./UpdateSale";
 import Snackbars from "./Snackbars";
@@ -60,7 +61,7 @@ function Home() {
     );
   };
 
-  const useStyles = makeStyles({
+  const useStyles = styled({
     root: {
       width: "500px;",
       color: "#f50057",

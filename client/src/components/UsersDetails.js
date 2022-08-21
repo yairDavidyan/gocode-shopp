@@ -1,15 +1,15 @@
 import { useState } from "react";
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import { styled } from "@mui/styles";
+import Modal from "@mui/material/Modal";
+import Backdrop from "@mui/material/Backdrop";
+import Fade from "@mui/material/Fade";
 import usersDetails from "./usersDetails.css";
-import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "@material-ui/core/IconButton";
-import TextField from "@material-ui/core/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+import TextField from "@mui/material/TextField";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   modal: {
     display: "flex",
     alignItems: "center",

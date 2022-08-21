@@ -1,7 +1,6 @@
 import "./header.css";
 import bali from "../images/bali.png";
 import Search from "./Search";
-import { Button } from "@material-ui/core";
 
 function Header() {
   return (
@@ -15,9 +14,7 @@ function Header() {
           alt={"logo"}
         ></img>
 
-        <div className="">
-          <Search />
-        </div>
+        <div className="">{/* <Search /> */}</div>
       </div>
     </>
   );

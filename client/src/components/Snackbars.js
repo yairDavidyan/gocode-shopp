@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import { styled } from "@mui/styles";
 import CartContext from "./CartContext";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     width: "100%",
     "& > * + *": {

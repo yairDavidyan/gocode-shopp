@@ -1,4 +1,4 @@
-import { makeStyles, Slider } from "@material-ui/core";
+import { styled, Slider } from "@mui/material";
 import { useContext } from "react";
 import CartContext from "./CartContext";
 import "./sliderFilter.css";
@@ -29,7 +29,7 @@ function SliderFilter({ categories, changeDisplay }) {
     );
     setTotalFilter(totalFilter.length);
   };
-  const useStyles = makeStyles({
+  const useStyles = styled({
     root: {
       color: "#f50057",
     },

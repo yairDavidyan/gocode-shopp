@@ -2,7 +2,7 @@ import "./payment.css";
 import Modal from "react-modal";
 import { useContext } from "react";
 import CartContext from "./CartContext";
-import CloseSharpIcon from "@material-ui/icons/CloseSharp";
+import CloseSharpIcon from "@mui/icons-material/CloseSharp";
 function Payment() {
   const { modal, setModal } = useContext(CartContext);
   return (

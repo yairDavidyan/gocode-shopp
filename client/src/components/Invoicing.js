@@ -1,12 +1,12 @@
-import { Button, Modal } from "@material-ui/core";
+import { Button, Modal } from "@mui/material/";
 import "./invoice.css";
 import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import { styled } from "@mui/styles";
+import Backdrop from "@mui/material/Backdrop";
+import Fade from "@mui/material/Fade";
 import CartContext from "./CartContext";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   modal: {
     display: "flex",
     alignItems: "baseline",

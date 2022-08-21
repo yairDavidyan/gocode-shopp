@@ -1,9 +1,13 @@
-import React, { useContext, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Alert, AlertTitle } from "@material-ui/lab";
+import React, { useContext } from "react";
+import { styled } from "@mui/styles";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+
+// or
+
 import CartContext from "./CartContext";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   root: {
     "& > * + *": {
       marginTop: theme.spacing(2),
